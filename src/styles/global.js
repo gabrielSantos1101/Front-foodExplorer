@@ -1,4 +1,4 @@
-import { createGlobalStyle } from 'styled-components';
+import { createGlobalStyle } from 'styled-components'
 
 export default createGlobalStyle`
 :root {
@@ -34,14 +34,17 @@ body {
       width: 100%;
     }
 }
-
-input:focus, textarea:focus {
-  outline: 1px solid ${({ theme }) => theme.DARK.D800};
+input, textarea {
+  border: none;
 }
 
-h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, a::selection, h6::selection,p::selection, span::selection, textarea::selection, input::selection {
-  color: ${({ theme }) => theme.COLORS.WHITE};
-  background-color: ${({ theme }) => theme.DARK.D600};
+input:focus, textarea:focus {
+  outline: 1px solid ${({ theme }) => theme.LIGHT.L400};
+}
+
+h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, a::selection, h6::selection,p::selection, span::selection, textarea::selection, input::selection, label::selection, button::selection, img::selection {
+  color: ${({ theme }) => theme.LIGHT.L100};
+  background-color: ${({ theme }) => theme.DARK.D900};
 }
 
 a {
