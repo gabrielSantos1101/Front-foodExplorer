@@ -1,10 +1,31 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import { ToastContainer } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
+import { ThemeProvider } from 'styled-components'
+import { SignIn } from './pages/SignIn'
+import GlobeStyle from './styles/global'
+import theme from './styles/theme'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <App />
+    <ThemeProvider theme={theme}>
+      <GlobeStyle />
+      <SignIn />
+     
+      <ToastContainer
+        position="top-right"
+        autoClose={4000}
+        limit={4}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+      />
+    </ThemeProvider>
   </React.StrictMode>,
 )
