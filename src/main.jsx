@@ -3,8 +3,7 @@ import ReactDOM from 'react-dom/client'
 import { ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { ThemeProvider } from 'styled-components'
-import { SignIn } from './pages/SignIn'
-import { SignUp } from './pages/SignUp'
+import { Routes } from './routes'
 import GlobeStyle from './styles/global'
 import theme from './styles/theme'
 
@@ -12,8 +11,7 @@ ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
       <GlobeStyle />
-      <SignUp />
-      <SignIn />
+      <Routes />
 
       <ToastContainer
         position="top-right"
