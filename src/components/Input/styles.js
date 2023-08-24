@@ -5,6 +5,7 @@ export const Wrap = styled.label`
   flex-direction: column;
   gap: 0.5rem;
   color: ${({ theme }) => theme.LIGHT.L100};
+  font-family: Roboto;
 
   & input {
     display: flex;
@@ -17,6 +18,6 @@ export const Wrap = styled.label`
 
     padding-inline: 0.875rem;
     border-radius: 0.5rem;
-    background-color: ${({ theme }) => theme.DARK.D900};
+    background-color: ${({ theme }) => theme.DARK.D800};
   }
 `
