@@ -1,15 +1,12 @@
-import logo from '../../assets/favicon.svg'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input/Input'
+import { Logo } from '../../components/Logo'
 import { Form, Wrapper } from './styles'
 
 export function SignIn() {
   return (
     <Wrapper>
-      <div>
-        <img src={logo} alt="Logo Food Explorer" />
-        <h1>food explorer</h1>
-      </div>
+      <Logo />
 
       <Form>
         <Input

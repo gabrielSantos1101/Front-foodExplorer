@@ -15,10 +15,14 @@ export default createGlobalStyle`
   }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box; 
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 90px;
 }
 
 body {
@@ -40,6 +44,18 @@ input, textarea {
 
 input:focus, textarea:focus {
   outline: 1px solid ${({ theme }) => theme.LIGHT.L400};
+}
+
+h1 {
+  font-size: 1.125rem;
+}
+
+p {
+  font-size: 12px;
+}
+
+fieldset {
+  border: none;
 }
 
 h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, a::selection, h6::selection,p::selection, span::selection, textarea::selection, input::selection, label::selection, button::selection, img::selection {

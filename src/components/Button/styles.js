@@ -1,6 +1,10 @@
 import { styled } from 'styled-components'
 
 export const Wrap = styled.button`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ${({ $hasicon }) => (!$hasicon ? '' : 'gap: 0.375rem;')};
   width: ${({ $istext }) => (!$istext ? '100%' : 'fit-content')};
 
   color: ${({ theme }) => theme.LIGHT.L100};

@@ -7,10 +7,16 @@ export const Wrap = styled.label`
   color: ${({ theme }) => theme.LIGHT.L100};
 
   & input {
-    background-color: ${({ theme }) => theme.DARK.D900};
-    padding: 0.75rem 0.875rem;
-    border-radius: 0.5rem;
+    display: flex;
+    align-items: center;
 
+    height: 3rem;
     width: 100%;
+
+    font-size: 1rem;
+
+    padding-inline: 0.875rem;
+    border-radius: 0.5rem;
+    background-color: ${({ theme }) => theme.DARK.D900};
   }
 `
