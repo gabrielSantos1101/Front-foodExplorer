@@ -2,7 +2,7 @@ import { Plus } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { Wrap } from './styles'
 
-export function Add({ onAddIngredient, enterPress, placeholder, ...rest }) {
+export function Add({ onAddIngredient, placeholder, ...rest }) {
   const [value, changeValue] = useState('')
 
   function autoresize(e) {
@@ -22,7 +22,7 @@ export function Add({ onAddIngredient, enterPress, placeholder, ...rest }) {
       <input
         style={{ width: Math.min(Math.max(value.length, 2), 4) + 'ch' }}
         type="text"
-        maxLength={40}
+        maxLength={36}
         placeholder={placeholder}
         value={value}
         onInput={(e) => autoresize(e)}
@@ -32,6 +32,7 @@ export function Add({ onAddIngredient, enterPress, placeholder, ...rest }) {
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
             onAddIngredient(value)
+            changeValue('')
           }
         }}
         {...rest}

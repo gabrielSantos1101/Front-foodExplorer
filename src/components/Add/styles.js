@@ -39,10 +39,6 @@ export const Wrap = styled.div`
     &:focus {
       outline: none;
     }
-
-    &::selection {
-      background-color: #163a4d;
-    }
   }
 
   &:focus {

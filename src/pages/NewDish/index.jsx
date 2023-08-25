@@ -4,6 +4,7 @@ import { useForm } from 'react-hook-form'
 import { Add } from '../../components/Add'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
+import { Select } from '../../components/Select'
 import { Tag } from '../../components/Tag'
 import { Textarea } from '../../components/Textarea'
 import { Wrapper } from './styles'
@@ -39,7 +40,13 @@ export function NewDish() {
 
   return (
     <Wrapper>
-      <Button title={'Voltar'} isText hasIcon icon={CaretLeft} />
+      <Button
+        title={'Voltar'}
+        isText
+        hasIcon
+        icon={CaretLeft}
+        className="back"
+      />
       <form onSubmit={handleSubmit((data) => console.log(data))}>
         <h1>Novo prato</h1>
         <label>
@@ -52,19 +59,9 @@ export function NewDish() {
           onChange={(e) => setName(e.target.value)}
           required
         />
-        <label>
+        <label className="select">
           Categoria
-          <select
-            onChange={(e) => {
-              setCategory(e.target.value)
-            }}
-            required
-          >
-            <option value={'selecionar'}>Selecionar</option>
-            <option value={'refeiço'}>Refeição</option>
-            <option value={'sobremesa'}>Sobremesa</option>
-            <option value={'bebida'}>Bebida</option>
-          </select>
+          <Select />
         </label>
         <fieldset>
           <h4>Ingredients</h4>

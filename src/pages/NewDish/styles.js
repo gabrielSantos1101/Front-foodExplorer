@@ -1,7 +1,7 @@
 import { styled } from 'styled-components'
 
 export const Wrapper = styled.div`
-  & button:first-child {
+  & .back {
     margin-top: 0.625rem;
     margin-left: 1.8rem;
     font-size: 1rem;
@@ -15,6 +15,14 @@ export const Wrapper = styled.div`
 
     & h1 {
       font-size: 1.8rem;
+    }
+
+    & label input,
+    textarea,
+    button {
+      &:hover {
+        background-color: ${({ theme }) => theme.DARK.D900};
+      }
     }
 
     & label:nth-child(2) {
@@ -38,27 +46,9 @@ export const Wrapper = styled.div`
       }
     }
 
-    & select {
-      all: unset;
-
+    & .select {
       display: flex;
-      align-items: center;
-
-      cursor: pointer;
-      box-sizing: border-box;
-
-      width: 100%;
-      height: 3rem;
-      padding-inline: 1rem;
-      margin-top: 1rem;
-
-      font-size: 0.875rem;
-      border-radius: 0.5rem;
-      background-color: ${({ theme }) => theme.DARK.D900};
-
-      &:focus {
-        outline: 1px solid ${({ theme }) => theme.LIGHT.L300};
-      }
+      flex-direction: column;
     }
 
     & fieldset {
