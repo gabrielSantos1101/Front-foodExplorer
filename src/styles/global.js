@@ -46,6 +46,16 @@ input:focus, textarea:focus {
   outline: 1px solid ${({ theme }) => theme.LIGHT.L400};
 }
 
+input[type=number]::-webkit-inner-spin-button { 
+    -webkit-appearance: none;
+    
+}
+input[type=number] { 
+   -moz-appearance: textfield;
+   appearance: textfield;
+
+}
+
 h1 {
   font-size: 1.125rem;
 }
@@ -58,9 +68,13 @@ fieldset {
   border: none;
 }
 
+button, input {
+  font-family: 'Poppins', sans-serif;
+}
+
 h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, a::selection, h6::selection,p::selection, span::selection, textarea::selection, input::selection, label::selection, button::selection, img::selection {
   color: ${({ theme }) => theme.LIGHT.L100};
-  background-color: ${({ theme }) => theme.DARK.D900};
+  background-color: #163a4d;
 }
 
 a {

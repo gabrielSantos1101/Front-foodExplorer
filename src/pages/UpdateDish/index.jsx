@@ -1,17 +1,19 @@
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 import { Add } from '../../components/Add'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
+import { Select } from '../../components/Select'
 import { Tag } from '../../components/Tag'
 import { Textarea } from '../../components/Textarea'
 import { Wrapper } from './styles'
 
 export function UpdateDish() {
   const [description, setDescription] = useState('Maracja batido')
-  const [category, setCategory] = useState('bebida')
+  const [category, setCategory] = useState('Bebida')
   const [price, setPrice] = useState('55')
-  const [name, setName] = useState('Sujo de maracuja')
+  const [name, setName] = useState('Suco de maracuja')
   const [image, setImage] = useState('')
   const [ingredients, setIngredients] = useState([
     'maracuja',
@@ -20,12 +22,9 @@ export function UpdateDish() {
     'leite',
   ])
 
-  function handleKeyUp(value) {
-    handleAddIngredient(value)
-  }
-
   function handleAddIngredient(newIngredient) {
     setIngredients((prev) => [...prev, newIngredient])
+    toast.success('Adicionado')
   }
 
   function handleRemove(value) {
@@ -34,9 +33,15 @@ export function UpdateDish() {
 
   return (
     <Wrapper>
-      <Button title={'Voltar'} isText hasIcon icon={CaretLeft} />
+      <Button
+        title={'Voltar'}
+        isText
+        hasIcon
+        icon={CaretLeft}
+        className="back"
+      />
       <form>
-        <h1>Novo prato</h1>
+        <h1>Editar prato</h1>
         <label>
           <UploadSimple /> Selecione uma imagem
           <input
@@ -52,20 +57,9 @@ export function UpdateDish() {
           value={name}
           required
         />
-        <label>
+        <label className="select">
           Categoria
-          <select
-            onChange={(e) => {
-              setCategory(e.target.value)
-            }}
-            value={category}
-            required
-          >
-            <option value={'selecionar'}>Selecionar</option>
-            <option value={'refeição'}>Refeição</option>
-            <option value={'sobremesa'}>Sobremesa</option>
-            <option value={'bebida'}>Bebida</option>
-          </select>
+          <Select categoryName={category} changeValue={setCategory} />
         </label>
         <fieldset>
           <h4>Ingredients</h4>
@@ -73,7 +67,6 @@ export function UpdateDish() {
             <Add
               placeholder={'Adicionar'}
               onAddIngredient={handleAddIngredient}
-              enterPress={handleKeyUp}
             />
             {ingredients.map((ingredient, index) => (
               <Tag
@@ -90,6 +83,7 @@ export function UpdateDish() {
           onChange={(e) => {
             setPrice(e.target.value)
           }}
+          type={'number'}
           value={price}
           required
         />
@@ -101,7 +95,10 @@ export function UpdateDish() {
           value={description}
           required
         />
-        <Button title={'Salvar'} />
+        <div className="buttons">
+          <Button title={'Excluir prato'} />
+          <Button title={'Salvar alterações'} type={'submit'} />
+        </div>
       </form>
     </Wrapper>
   )
