@@ -14,7 +14,7 @@ export function NewDish() {
     handleSubmit,
     formState: { errors },
   } = useForm()
-  const [description, setDescription] = useState('')
+  const [description, setDescription] = useState('teste')
   const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')
   const [name, setName] = useState('')
@@ -24,6 +24,10 @@ export function NewDish() {
     'Cenoura',
     'Pepino',
   ])
+
+  function handleKeyUp(value) {
+    handleAddIngredient(value)
+  }
 
   function handleAddIngredient(newIngredient) {
     setIngredients((prev) => [...prev, newIngredient])
@@ -54,10 +58,12 @@ export function NewDish() {
             onChange={(e) => {
               setCategory(e.target.value)
             }}
+            required
           >
-            <option>Refeição</option>
-            <option>Sobremesa</option>
-            <option>Bebida</option>
+            <option value={'selecionar'}>Selecionar</option>
+            <option value={'refeiço'}>Refeição</option>
+            <option value={'sobremesa'}>Sobremesa</option>
+            <option value={'bebida'}>Bebida</option>
           </select>
         </label>
         <fieldset>
@@ -66,6 +72,7 @@ export function NewDish() {
             <Add
               placeholder={'Adicionar'}
               onAddIngredient={handleAddIngredient}
+              enterPress={handleKeyUp}
             />
             {ingredients.map((ingredient, index) => (
               <Tag
@@ -87,7 +94,7 @@ export function NewDish() {
             'Fale brevemente sobre o prato, seus ingredientes e composição'
           }
           setValue={setDescription}
-          value={description}
+          required
         />
         <Button title={'Salvar'} />
       </form>

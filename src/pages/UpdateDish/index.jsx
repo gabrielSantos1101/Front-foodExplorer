@@ -8,16 +8,21 @@ import { Textarea } from '../../components/Textarea'
 import { Wrapper } from './styles'
 
 export function UpdateDish() {
-  const [description, setDescription] = useState('')
-  const [category, setCategory] = useState('')
-  const [price, setPrice] = useState('')
-  const [name, setName] = useState('')
+  const [description, setDescription] = useState('Maracja batido')
+  const [category, setCategory] = useState('bebida')
+  const [price, setPrice] = useState('55')
+  const [name, setName] = useState('Sujo de maracuja')
   const [image, setImage] = useState('')
   const [ingredients, setIngredients] = useState([
-    'Tomate',
-    'Cenoura',
-    'Pepino',
+    'maracuja',
+    'açucar',
+    'água',
+    'leite',
   ])
+
+  function handleKeyUp(value) {
+    handleAddIngredient(value)
+  }
 
   function handleAddIngredient(newIngredient) {
     setIngredients((prev) => [...prev, newIngredient])
@@ -34,12 +39,17 @@ export function UpdateDish() {
         <h1>Novo prato</h1>
         <label>
           <UploadSimple /> Selecione uma imagem
-          <input type="file" onChange={(e) => setImage(e.target.files[0])} />
+          <input
+            type="file"
+            onChange={(e) => setImage(e.target.files[0])}
+            required
+          />
         </label>
         <Input
           label={'Nome'}
           placeholder={'Salada César'}
           onChange={(e) => setName(e.target.value)}
+          value={name}
           required
         />
         <label>
@@ -48,10 +58,13 @@ export function UpdateDish() {
             onChange={(e) => {
               setCategory(e.target.value)
             }}
+            value={category}
+            required
           >
-            <option>Refeição</option>
-            <option>Sobremesa</option>
-            <option>Bebida</option>
+            <option value={'selecionar'}>Selecionar</option>
+            <option value={'refeição'}>Refeição</option>
+            <option value={'sobremesa'}>Sobremesa</option>
+            <option value={'bebida'}>Bebida</option>
           </select>
         </label>
         <fieldset>
@@ -60,6 +73,7 @@ export function UpdateDish() {
             <Add
               placeholder={'Adicionar'}
               onAddIngredient={handleAddIngredient}
+              enterPress={handleKeyUp}
             />
             {ingredients.map((ingredient, index) => (
               <Tag
@@ -73,7 +87,10 @@ export function UpdateDish() {
         <Input
           label={'Preço'}
           placeholder={'R$ 00,00'}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) => {
+            setPrice(e.target.value)
+          }}
+          value={price}
           required
         />
         <Textarea
@@ -82,6 +99,7 @@ export function UpdateDish() {
           }
           setValue={setDescription}
           value={description}
+          required
         />
         <Button title={'Salvar'} />
       </form>

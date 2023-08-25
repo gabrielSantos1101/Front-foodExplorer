@@ -2,13 +2,8 @@ import { Plus } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { Wrap } from './styles'
 
-export function Add({ onAddIngredient, onChange, placeholder, ...rest }) {
+export function Add({ onAddIngredient, enterPress, placeholder, ...rest }) {
   const [value, changeValue] = useState('')
-  function handleKeyUp(e) {
-    if (e.key === 'Enter') {
-      console.log('click')
-    }
-  }
 
   function autoresize(e) {
     e.target.style.width = `${e.target.scrollWidth}px`
@@ -34,7 +29,11 @@ export function Add({ onAddIngredient, onChange, placeholder, ...rest }) {
         onChange={(e) => {
           changeValue(e.target.value)
         }}
-        onKeyUp={handleKeyUp}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter') {
+            onAddIngredient(value)
+          }
+        }}
         {...rest}
       />
     </Wrap>
