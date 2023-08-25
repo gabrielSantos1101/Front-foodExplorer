@@ -1,10 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { Area } from './styles'
 
-export function Textarea({ placeholder, value = '', setDescValue, ...rest }) {
-  const [description, setDescription] = useState('')
-  setDescValue(description)
-
+export function Textarea({ placeholder, value, setValue, ...rest }) {
   function autoresize(e) {
     e.target.style.height = 'auto'
     e.target.style.height = `${e.target.scrollHeight}px`
@@ -13,8 +10,8 @@ export function Textarea({ placeholder, value = '', setDescValue, ...rest }) {
   return (
     <Area
       onInput={(e) => autoresize(e)}
-      value={description}
-      onChange={(e) => setDescription(e.target.value)}
+      value={value}
+      onChange={(e) => setValue(e.target.value)}
       placeholder={placeholder}
       {...rest}
     />

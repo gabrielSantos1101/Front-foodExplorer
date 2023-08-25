@@ -77,18 +77,28 @@ button:hover, a:hover {
     filter: brightness(0.9);
 }
 
-div::-webkit-scrollbar, textarea::-webkit-scrollbar, section::-webkit-scrollbar, ul::-webkit-scrollbar, p::-webkit-scrollbar{
+ textarea::-webkit-scrollbar, section::-webkit-scrollbar, ul::-webkit-scrollbar, p::-webkit-scrollbar{
   width: 1.25rem;
+  height: 1.25rem;
+}
+
+div::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
 div::-webkit-scrollbar-track, textarea::-webkit-scrollbar-track, section::-webkit-scrollbar-track, ul::-webkit-scrollbar-track, p::-webkit-scrollbar-track{
-  margin-block-start: 2.75rem;
+  margin-block-start: 1rem;
 }
 
-div::-webkit-scrollbar-thumb, textarea::-webkit-scrollbar-thumb, section::-webkit-scrollbar-thumb, ul::-webkit-scrollbar-thumb, p::-webkit-scrollbar-thumb{
+ textarea::-webkit-scrollbar-thumb, section::-webkit-scrollbar-thumb, ul::-webkit-scrollbar-thumb, p::-webkit-scrollbar-thumb{
   box-shadow: inset 0 0 1rem 1rem ${({ theme }) => theme.DARK.D800};
   border: solid 7px transparent;
-  border-radius: 2rem;
   background-clip: padding-box;
+}
+
+div::-webkit-scrollbar-thumb {
+  background-color: ${({ theme }) => theme.DARK.D800};
+  border-radius: 2rem;
 }
 `

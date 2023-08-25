@@ -10,7 +10,7 @@ export function AppRoutes() {
       <Route path="/" element={<DefaultLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/details" element={<Details />} />
-        <Route path="/newdish" element={<NewDish />} />
+        <Route path="/new" element={<NewDish />} />
       </Route>
     </Routes>
   )
