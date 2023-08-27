@@ -24,6 +24,14 @@ export function NewDish() {
   const [ingredients, setIngredients] = useState([])
 
   function handleAddIngredient(newIngredient) {
+    if (ingredients.includes(newIngredient)) {
+      toast.error('Ingrediente duplicado')
+      return
+    }
+    if (newIngredient === '') {
+      toast.error('Ingrediente vazio')
+      return
+    }
     setIngredients((prev) => [...prev, newIngredient])
     toast.success('Adicionado')
   }
@@ -44,13 +52,17 @@ export function NewDish() {
       <form>
         <h1>Editar prato</h1>
         <fieldset className="wrap">
-          <label>
-            <UploadSimple /> Selecione uma imagem
-            <input
-              type="file"
-              onChange={(e) => setImage(e.target.files[0])}
-              required
-            />
+          <label htmlFor="image">
+            Imagem do prato
+            <div>
+              <UploadSimple /> Selecione uma imagem
+              <input
+                id="image"
+                type="file"
+                onChange={(e) => setImage(e.target.files[0])}
+                required
+              />
+            </div>
           </label>
           <Input
             label={'Nome'}
@@ -64,32 +76,34 @@ export function NewDish() {
             <Select changeValue={setCategory} />
           </label>
         </fieldset>
-        <fieldset>
-          <h4>Ingredients</h4>
-          <section>
-            <Add
-              placeholder={'Adicionar'}
-              onAddIngredient={handleAddIngredient}
-            />
-            {ingredients.map((ingredient, index) => (
-              <Tag
-                key={String(index)}
-                title={ingredient}
-                onClick={() => handleRemove(ingredient)}
+        <fieldset className="wrap">
+          <div className="ingredients">
+            <h4>Ingredients</h4>
+            <section>
+              <Add
+                placeholder={'Adicionar'}
+                onAddIngredient={handleAddIngredient}
               />
-            ))}
-          </section>
+              {ingredients.map((ingredient, index) => (
+                <Tag
+                  key={String(index)}
+                  title={ingredient}
+                  onClick={() => handleRemove(ingredient)}
+                />
+              ))}
+            </section>
+          </div>
+          <Input
+            label={'Preço'}
+            placeholder={'R$ 00,00'}
+            onChange={(e) => {
+              setPrice(e.target.value)
+            }}
+            type={'number'}
+            value={price}
+            required
+          />
         </fieldset>
-        <Input
-          label={'Preço'}
-          placeholder={'R$ 00,00'}
-          onChange={(e) => {
-            setPrice(e.target.value)
-          }}
-          type={'number'}
-          value={price}
-          required
-        />
         <Textarea
           placeholder={
             'Fale brevemente sobre o prato, seus ingredientes e composição'
@@ -98,7 +112,9 @@ export function NewDish() {
           value={description}
           required
         />
-        <Button title={'Salvar prato'} type={'submit'} />
+        <div className="buttons">
+          <Button title={'Salvar'} type={'submit'} />
+        </div>
       </form>
     </Wrapper>
   )

@@ -1,9 +1,14 @@
 import { styled } from 'styled-components'
 
 export const Wrap = styled.div`
+  flex: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
   padding: 4rem;
 
   & button {

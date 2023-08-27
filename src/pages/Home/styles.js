@@ -1,6 +1,11 @@
 import { styled } from 'styled-components'
 
 export const Wrapper = styled.div`
+  flex: 1;
+  width: 100%;
+  max-width: 1440px;
+  margin-inline: auto;
+
   & hgroup {
     position: relative;
     overflow: hidden;

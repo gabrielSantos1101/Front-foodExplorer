@@ -36,4 +36,11 @@ export default {
     CAKE_100: '#065E7C',
     CAKE_200: '#82F3FF',
   },
+  SCREENS: {
+    SM: 'min-width: 576px',
+    MD: 'min-width: 768px',
+    LG: 'min-width: 1024px',
+    XL: 'min-width: 1280px',
+    XXL: 'min-width: 1536px',
+  },
 }
