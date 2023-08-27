@@ -17,7 +17,7 @@ export function Select({ changeValue, categoryName, ...rest }) {
       onValueChange={(e) => changeValue(e)}
     >
       <SelectTrigger>
-        <SelectPrimitive.Value placeholder="Selecione" value="Selecione" />
+        <SelectPrimitive.Value placeholder="Selecione" />
         <SelectIcon>
           <CaretLeft />
         </SelectIcon>

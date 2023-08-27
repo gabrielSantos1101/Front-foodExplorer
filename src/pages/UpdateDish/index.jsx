@@ -42,25 +42,27 @@ export function UpdateDish() {
       />
       <form>
         <h1>Editar prato</h1>
-        <label>
-          <UploadSimple /> Selecione uma imagem
-          <input
-            type="file"
-            onChange={(e) => setImage(e.target.files[0])}
+        <fieldset className="wrap">
+          <label>
+            <UploadSimple /> Selecione uma imagem
+            <input
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
+              required
+            />
+          </label>
+          <Input
+            label={'Nome'}
+            placeholder={'Salada César'}
+            onChange={(e) => setName(e.target.value)}
+            value={name}
             required
           />
-        </label>
-        <Input
-          label={'Nome'}
-          placeholder={'Salada César'}
-          onChange={(e) => setName(e.target.value)}
-          value={name}
-          required
-        />
-        <label className="select">
-          Categoria
-          <Select categoryName={category} changeValue={setCategory} />
-        </label>
+          <label className="select">
+            Categoria
+            <Select categoryName={category} changeValue={setCategory} />
+          </label>
+        </fieldset>
         <fieldset>
           <h4>Ingredients</h4>
           <section>

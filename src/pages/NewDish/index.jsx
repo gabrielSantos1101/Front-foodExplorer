@@ -1,6 +1,7 @@
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 import { Add } from '../../components/Add'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
@@ -15,23 +16,16 @@ export function NewDish() {
     handleSubmit,
     formState: { errors },
   } = useForm()
-  const [description, setDescription] = useState('teste')
+  const [description, setDescription] = useState('')
   const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
-  const [ingredients, setIngredients] = useState([
-    'Tomate',
-    'Cenoura',
-    'Pepino',
-  ])
-
-  function handleKeyUp(value) {
-    handleAddIngredient(value)
-  }
+  const [ingredients, setIngredients] = useState([])
 
   function handleAddIngredient(newIngredient) {
     setIngredients((prev) => [...prev, newIngredient])
+    toast.success('Adicionado')
   }
 
   function handleRemove(value) {
@@ -47,29 +41,35 @@ export function NewDish() {
         icon={CaretLeft}
         className="back"
       />
-      <form onSubmit={handleSubmit((data) => console.log(data))}>
-        <h1>Novo prato</h1>
-        <label>
-          <UploadSimple /> Selecione uma imagem
-          <input type="file" onChange={(e) => setImage(e.target.files[0])} />
-        </label>
-        <Input
-          label={'Nome'}
-          placeholder={'Salada César'}
-          onChange={(e) => setName(e.target.value)}
-          required
-        />
-        <label className="select">
-          Categoria
-          <Select />
-        </label>
+      <form>
+        <h1>Editar prato</h1>
+        <fieldset className="wrap">
+          <label>
+            <UploadSimple /> Selecione uma imagem
+            <input
+              type="file"
+              onChange={(e) => setImage(e.target.files[0])}
+              required
+            />
+          </label>
+          <Input
+            label={'Nome'}
+            placeholder={'Salada César'}
+            onChange={(e) => setName(e.target.value)}
+            value={name}
+            required
+          />
+          <label className="select">
+            Categoria
+            <Select changeValue={setCategory} />
+          </label>
+        </fieldset>
         <fieldset>
           <h4>Ingredients</h4>
           <section>
             <Add
               placeholder={'Adicionar'}
               onAddIngredient={handleAddIngredient}
-              enterPress={handleKeyUp}
             />
             {ingredients.map((ingredient, index) => (
               <Tag
@@ -83,7 +83,11 @@ export function NewDish() {
         <Input
           label={'Preço'}
           placeholder={'R$ 00,00'}
-          onChange={(e) => setPrice(e.target.value)}
+          onChange={(e) => {
+            setPrice(e.target.value)
+          }}
+          type={'number'}
+          value={price}
           required
         />
         <Textarea
@@ -91,9 +95,10 @@ export function NewDish() {
             'Fale brevemente sobre o prato, seus ingredientes e composição'
           }
           setValue={setDescription}
+          value={description}
           required
         />
-        <Button title={'Salvar'} />
+        <Button title={'Salvar prato'} type={'submit'} />
       </form>
     </Wrapper>
   )

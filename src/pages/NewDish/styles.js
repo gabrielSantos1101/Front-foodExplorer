@@ -25,30 +25,36 @@ export const Wrapper = styled.div`
       }
     }
 
-    & label:nth-child(2) {
-      display: flex;
-      align-items: center;
-      gap: 0.5rem;
-
-      font-size: 1rem;
-      padding: 12px 2rem;
-      border-radius: 0.5rem;
-
-      background: ${({ theme }) => theme.DARK.D800};
-
-      & svg {
-        font-size: 1.5rem;
-      }
-
-      & input {
-        width: 0;
-        height: 0;
-      }
-    }
-
-    & .select {
+    & .wrap {
       display: flex;
       flex-direction: column;
+      gap: inherit;
+
+      & label:first-child {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+
+        font-size: 1rem;
+        padding: 12px 2rem;
+        border-radius: 0.5rem;
+
+        background: ${({ theme }) => theme.DARK.D800};
+
+        & svg {
+          font-size: 1.5rem;
+        }
+
+        & input {
+          width: 0;
+          height: 0;
+        }
+      }
+
+      & .select {
+        display: flex;
+        flex-direction: column;
+      }
     }
 
     & fieldset {

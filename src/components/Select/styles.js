@@ -72,7 +72,7 @@ export const SelectItem = styled(SelectPrimitive.Item)`
   line-height: 1;
   border-radius: 0.1875rem;
 
-  padding: 0 2.1875rem 0 1.5625rem;
+  padding: 0.5rem 2.1875rem 0 1.5625rem;
 
   .SelectItem[data-disabled] {
     pointer-events: none;
