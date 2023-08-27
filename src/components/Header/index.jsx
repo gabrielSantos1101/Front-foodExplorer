@@ -1,18 +1,48 @@
 import { Receipt } from '@phosphor-icons/react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
+import { Button } from '../Button'
+import { Input } from '../Input'
 import { Logo } from '../Logo'
-import { Menu, Wrap } from './styles'
+import { Menu, OpenMenu, Wrap } from './styles'
 
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
+  const navigate = useNavigate()
   function handleMenuOpen(open) {
-    if (open) {
-      setMenuOpen(false)
-    }
+    setMenuOpen(!menuOpen)
+  }
+
+  function handleNavigate(path) {
+    navigate(path)
+    setMenuOpen(false)
+  }
+
+  function handleLogout() {
+    localStorage.removeItem('token')
+    navigate('/')
+    setMenuOpen(false)
   }
 
   return (
     <Wrap>
+      {menuOpen && (
+        <OpenMenu>
+          <h1>Menu</h1>
+          <Input
+            type="search"
+            placeholder={'Busque por pratos ou ingrediente'}
+            onChange={(e) => console.log(e.target.value)}
+          />
+
+          <div>
+            <Button title={'Novo prato'} isText />
+          </div>
+          <div>
+            <Button title={'Sair'} isText />
+          </div>
+        </OpenMenu>
+      )}
       <Menu>
         <label className="hamburger">
           <input

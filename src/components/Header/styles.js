@@ -25,8 +25,8 @@ export const Wrap = styled.header`
       display: grid;
       place-items: center;
 
-      width: 18px;
-      height: 18px;
+      width: 1.125rem;
+      height: 1.125rem;
 
       top: -3px;
       right: -3px;
@@ -37,9 +37,15 @@ export const Wrap = styled.header`
   }
 `
 
-export const Menu = styled.label`
+export const Menu = styled.div`
+  position: relative;
+  width: 3rem;
+  height: 3rem;
+
   .hamburger {
     cursor: pointer;
+    position: absolute;
+    z-index: 10;
   }
 
   .hamburger input {
@@ -74,5 +80,54 @@ export const Menu = styled.label`
   .hamburger input:checked + svg .line-top-bottom {
     stroke-dasharray: 20 300;
     stroke-dashoffset: -32.42;
+  }
+`
+
+export const OpenMenu = styled.div`
+  position: absolute;
+  top: 0;
+  z-index: 1;
+
+  display: inherit;
+  flex-direction: column;
+  gap: 2rem;
+  padding-inline: 1.75rem;
+
+  width: 100%;
+  height: 100%;
+
+  padding-top: 9.1875rem;
+
+  background: ${({ theme }) => theme.DARK.D400};
+
+  & h1 {
+    font-size: 1.3125rem;
+    position: absolute;
+    top: 35px;
+    left: 110px;
+  }
+
+  & div:has(> button) {
+    position: relative;
+    border-bottom: 2px solid ${({ theme }) => theme.DARK.D1000};
+    padding-bottom: 0.625rem;
+
+    & button {
+      font-size: 1.5rem;
+
+      &:hover {
+        color: ${({ theme }) => theme.COLORS.TOMATO_200};
+      }
+    }
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 6.9375rem;
+    background: ${({ theme }) => theme.DARK.D700};
   }
 `
