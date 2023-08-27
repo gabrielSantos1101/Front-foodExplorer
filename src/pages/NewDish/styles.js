@@ -22,6 +22,21 @@ export const Wrapper = styled.div`
       font-size: 1.8rem;
     }
 
+    & .preview {
+      display: grid;
+      place-items: center;
+
+      pointer-events: none;
+      background: none;
+
+      & img {
+        width: 12.5rem;
+        height: 12.5rem;
+        object-fit: cover;
+        border-radius: 99999px;
+      }
+    }
+
     & label input,
     textarea,
     button {
@@ -47,6 +62,7 @@ export const Wrapper = styled.div`
           display: flex;
           align-items: center;
           gap: 0.5rem;
+          margin-top: 0.5rem;
 
           font-size: 1rem;
           padding: 12px 2rem;
@@ -73,6 +89,7 @@ export const Wrapper = styled.div`
 
       & .select {
         display: flex;
+        gap: 0.5rem;
         flex-direction: column;
       }
 
@@ -88,7 +105,7 @@ export const Wrapper = styled.div`
       & h4 {
         font-size: 1rem;
         font-weight: 400;
-        margin-bottom: 1rem;
+        margin-bottom: 0.5rem;
       }
 
       & section {
@@ -116,18 +133,9 @@ export const Wrapper = styled.div`
 
       & button {
         margin: 0;
-      }
-
-      & button:first-child {
-        background: ${({ theme }) => theme.DARK.D800};
-
         &:hover {
-          background: ${({ theme }) => theme.DARK.D900};
+          background: ${({ theme }) => theme.COLORS.TOMATO_200};
         }
-      }
-
-      & button:last-child:hover {
-        background: ${({ theme }) => theme.COLORS.TOMATO_200};
       }
     }
   }

@@ -21,7 +21,15 @@ export function NewDish() {
   const [price, setPrice] = useState('')
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
+  const [imagePreview, setImagePreview] = useState([])
   const [ingredients, setIngredients] = useState([])
+
+  function changeImage(image) {
+    const previewURL = URL.createObjectURL(image)
+
+    setImagePreview(previewURL)
+    setImage(image)
+  }
 
   function handleAddIngredient(newIngredient) {
     if (ingredients.includes(newIngredient)) {
@@ -50,7 +58,10 @@ export function NewDish() {
         className="back"
       />
       <form>
-        <h1>Editar prato</h1>
+        <h1>Novo prato</h1>
+        <div className="preview">
+          {imagePreview.length > 0 && <img src={imagePreview} alt="" />}
+        </div>
         <fieldset className="wrap">
           <label htmlFor="image">
             Imagem do prato
@@ -59,7 +70,9 @@ export function NewDish() {
               <input
                 id="image"
                 type="file"
-                onChange={(e) => setImage(e.target.files[0])}
+                onChange={(e) => {
+                  changeImage(e.target.files[0])
+                }}
                 required
               />
             </div>

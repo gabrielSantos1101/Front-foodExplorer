@@ -22,6 +22,21 @@ export const Wrapper = styled.div`
       font-size: 1.8rem;
     }
 
+    & .preview {
+      display: grid;
+      place-items: center;
+
+      pointer-events: none;
+      background: none;
+
+      & img {
+        width: 12.5rem;
+        height: 12.5rem;
+        object-fit: cover;
+        border-radius: 99999px;
+      }
+    }
+
     & label input,
     textarea,
     button {

@@ -1,5 +1,6 @@
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
 import { useState } from 'react'
+import { useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Add } from '../../components/Add'
 import { Button } from '../../components/Button'
@@ -10,17 +11,26 @@ import { Textarea } from '../../components/Textarea'
 import { Wrapper } from './styles'
 
 export function UpdateDish() {
+  const params = useParams()
   const [description, setDescription] = useState('Maracja batido')
   const [category, setCategory] = useState('Bebida')
   const [price, setPrice] = useState('55')
   const [name, setName] = useState('Suco de maracuja')
   const [image, setImage] = useState('')
+  const [imagePreview, setImagePreview] = useState([])
   const [ingredients, setIngredients] = useState([
     'maracuja',
     'açucar',
     'água',
     'leite',
   ])
+
+  function changeImage(image) {
+    const previewURL = URL.createObjectURL(image)
+
+    setImagePreview(previewURL)
+    setImage(image)
+  }
 
   function handleAddIngredient(newIngredient) {
     if (ingredients.includes(newIngredient)) {
@@ -50,6 +60,9 @@ export function UpdateDish() {
       />
       <form>
         <h1>Editar prato</h1>
+        <div className="preview">
+          {imagePreview.length > 0 && <img src={imagePreview} alt="" />}
+        </div>
         <fieldset className="wrap">
           <label htmlFor="image">
             Imagem do prato
@@ -58,7 +71,9 @@ export function UpdateDish() {
               <input
                 id="image"
                 type="file"
-                onChange={(e) => setImage(e.target.files[0])}
+                onChange={(e) => {
+                  changeImage(e.target.files[0])
+                }}
                 required
               />
             </div>
