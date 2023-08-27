@@ -46,6 +46,8 @@ export const SelectContent = styled(SelectPrimitive.Content)`
     content: '>';
     width: 0.9375rem;
     height: 1.875rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 100;
 
     font-family: 'Poppins', sans-serif;
     font-weight: 100;
