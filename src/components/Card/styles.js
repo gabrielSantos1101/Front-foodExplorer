@@ -3,6 +3,7 @@ import { styled } from 'styled-components'
 export const Wrap = styled.article`
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
   align-items: center;
   gap: 0.75rem;
   position: relative;
@@ -54,7 +55,6 @@ export const Wrap = styled.article`
 export const Amount = styled.div`
   display: flex;
   flex-direction: column;
-  gap: 12px;
   align-items: center;
   width: 100%;
 
