@@ -13,8 +13,8 @@ export function Details() {
   }).format(20 * count)
 
   function handleMinusCount() {
-    if (count <= 1) {
-      setCount(1)
+    if (count === 1) {
+      return
     }
     setCount((prev) => prev - 1)
   }
