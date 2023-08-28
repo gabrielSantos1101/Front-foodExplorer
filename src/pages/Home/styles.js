@@ -52,4 +52,12 @@ export const Wrap = styled.div`
   width: 100%;
   margin-inline: auto;
   padding: 15px;
+
+  .splide__arrow svg {
+    fill: ${({ theme }) => theme.LIGHT.L100};
+  }
+
+  .splide__arrow:disabled {
+    display: none;
+  }
 `
