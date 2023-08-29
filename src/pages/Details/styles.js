@@ -7,9 +7,9 @@ export const Wrap = styled.div`
   align-items: center;
 
   width: 100%;
-  max-width: 1440px;
+  max-width: 90rem;
   margin-inline: auto;
-  padding: 4rem;
+  padding: 2.25rem 2.875rem;
 
   & button {
     font-size: 1.3125rem;
@@ -68,7 +68,7 @@ export const Amount = styled.div`
 
     & span {
       text-align: center;
-      min-width: 30px;
+      min-width: 1.875rem;
     }
   }
 `

@@ -1,11 +1,13 @@
 import { CaretLeft, Minus, Plus, Receipt } from '@phosphor-icons/react'
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 import dish from '../../assets/dish.webp'
 import { Button } from '../../components/Button'
 import { Tag } from '../../components/Tag'
 import { Amount, Wrap } from './styles'
 
 export function Details() {
+  const navigate = useNavigate()
   const [count, setCount] = useState(1)
   const price = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -25,7 +27,13 @@ export function Details() {
 
   return (
     <Wrap>
-      <Button title={'Voltar'} isText hasIcon icon={CaretLeft} />
+      <Button
+        title={'Voltar'}
+        isText
+        hasIcon
+        icon={CaretLeft}
+        onClick={() => navigate(-1)}
+      />
       <img src={dish} alt="Dish" />
       <h1>Salada Ravanello</h1>
       <p>Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.</p>

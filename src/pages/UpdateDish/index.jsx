@@ -1,6 +1,6 @@
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
 import { useState } from 'react'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Add } from '../../components/Add'
 import { Button } from '../../components/Button'
@@ -12,6 +12,7 @@ import { Wrapper } from './styles'
 
 export function UpdateDish() {
   const params = useParams()
+  const navigate = useNavigate()
   const [description, setDescription] = useState('Maracja batido')
   const [category, setCategory] = useState('Bebida')
   const [price, setPrice] = useState('55')
@@ -57,6 +58,7 @@ export function UpdateDish() {
         hasIcon
         icon={CaretLeft}
         className="back"
+        onClick={() => navigate(-1)}
       />
       <form>
         <h1>Editar prato</h1>
@@ -102,6 +104,7 @@ export function UpdateDish() {
                 <Tag
                   key={String(index)}
                   title={ingredient}
+                  hasIcon
                   onClick={() => handleRemove(ingredient)}
                 />
               ))}

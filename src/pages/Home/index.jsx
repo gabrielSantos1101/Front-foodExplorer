@@ -1,6 +1,6 @@
 // import { Splide, SplideSlide } from '@splidejs/react-splide'
 import { Splide, SplideSlide } from '@splidejs/react-splide'
-import '@splidejs/react-splide/css/Skyblue'
+import '@splidejs/react-splide/css/skyblue'
 import imageTeste from '../../assets/dish.webp'
 import macarons from '../../assets/macarons.webp'
 import { Card } from '../../components/Card'

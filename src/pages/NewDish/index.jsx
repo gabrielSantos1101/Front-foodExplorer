@@ -60,7 +60,9 @@ export function NewDish() {
       <form>
         <h1>Novo prato</h1>
         <div className="preview">
-          {imagePreview.length > 0 && <img src={imagePreview} alt="" />}
+          {imagePreview.length > 0 && (
+            <img src={imagePreview} alt="imagem do prato" />
+          )}
         </div>
         <fieldset className="wrap">
           <label htmlFor="image">

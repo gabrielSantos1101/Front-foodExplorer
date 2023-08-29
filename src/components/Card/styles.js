@@ -12,6 +12,8 @@ export const Wrap = styled.article`
 
   width: 100%;
   max-width: clamp(13.125rem, 10.7302rem + 8.9109vw, 18.75rem);
+  height: fit-content;
+  max-height: 28.75rem;
 
   padding: 1.5rem;
   border-radius: 0%.5rem;
@@ -20,6 +22,25 @@ export const Wrap = styled.article`
 
   & img {
     width: 60%;
+    transition: all 0.3s;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+    }
+  }
+
+  & svg:first-child:not(.stepper > svg) {
+    position: absolute;
+    right: 1rem;
+    top: 1rem;
+
+    cursor: pointer;
+    transition: all 0.3s;
+
+    &:hover {
+      transform: scale(1.1);
+      color: ${({ theme }) => theme.COLORS.CAKE_200};
+    }
   }
 
   & .texts {
@@ -32,10 +53,11 @@ export const Wrap = styled.article`
       white-space: nowrap;
       word-break: break-all;
       overflow: hidden;
+      cursor: pointer;
     }
 
     & p {
-      display: none;
+      display: ${({ $isAdmin }) => ($isAdmin ? '-webkit-box' : 'none')};
       word-break: break-all;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
@@ -44,8 +66,6 @@ export const Wrap = styled.article`
   }
 
   @media (${({ theme }) => theme.SCREENS.LG}) {
-    height: 27.625rem;
-
     & .texts p {
       display: -webkit-box;
     }
@@ -57,9 +77,16 @@ export const Amount = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  color: ${({ theme }) => theme.COLORS.CAKE_200};
+
+  & span {
+    font-size: clamp(1rem, 0.5743rem + 1.5842vw, 2rem);
+  }
 
   & button {
+    display: ${({ $isAdmin }) => ($isAdmin ? 'none' : 'initial')};
     background: ${({ theme }) => theme.COLORS.TOMATO_200};
+    margin-top: 1rem;
 
     &:hover {
       transform: scale(1.02);
@@ -67,12 +94,13 @@ export const Amount = styled.div`
   }
 
   & .stepper {
-    display: flex;
+    display: ${({ $isAdmin }) => ($isAdmin ? 'none' : 'flex')};
     justify-content: center;
     gap: 1rem;
     align-items: center;
 
     font-size: 1.375rem;
+    margin-top: 0.75rem;
 
     & svg {
       cursor: pointer;
@@ -92,11 +120,11 @@ export const Amount = styled.div`
 export const Heart = styled.label`
   display: block;
   position: absolute;
-  right: 16px;
-  top: 16px;
+  right: 1rem;
+  top: 1rem;
 
   cursor: pointer;
-  font-size: 20px;
+  font-size: 1.25rem;
   user-select: none;
   transition: 100ms;
 
