@@ -5,6 +5,7 @@ export const Wrapper = styled.div`
   width: 100%;
   max-width: 1440px;
   margin-inline: auto;
+  padding-bottom: 3.125rem;
 
   & hgroup {
     position: relative;
@@ -48,16 +49,36 @@ export const Wrapper = styled.div`
   }
 `
 export const Wrap = styled.div`
+  display: grid;
+  gap: 2.875rem;
   max-width: 90rem;
   width: 100%;
   margin-inline: auto;
-  padding: 15px;
+  padding: 0.9375rem;
 
-  .splide__arrow svg {
+  & section {
+    display: grid;
+    gap: 1rem;
+  }
+
+  & .splide__arrow {
+    width: 4.5%;
+    height: 100%;
+  }
+
+  & .splide__arrow--prev {
+    left: 0;
+  }
+
+  & .splide__arrow--next {
+    right: 0;
+  }
+
+  & .splide__arrow svg {
     fill: ${({ theme }) => theme.LIGHT.L100};
   }
 
-  .splide__arrow:disabled {
-    display: none;
+  & .splide__arrow:disabled {
+    /* opacity: 0; */
   }
 `
