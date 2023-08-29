@@ -59,26 +59,32 @@ export const Wrap = styled.div`
   & section {
     display: grid;
     gap: 1rem;
-  }
 
-  & .splide__arrow {
-    width: 4.5%;
-    height: 100%;
-  }
+    .splide__list {
+      gap: 1rem;
+    }
 
-  & .splide__arrow--prev {
-    left: 0;
-  }
+    .splide__slide {
+      width: 100%;
+      max-width: clamp(13.125rem, 10.7302rem + 8.9109vw, 18.75rem);
+    }
 
-  & .splide__arrow--next {
-    right: 0;
-  }
+    & .splide__arrow--prev {
+      left: 0;
+      height: 90%;
+    }
 
-  & .splide__arrow svg {
-    fill: ${({ theme }) => theme.LIGHT.L100};
-  }
+    & .splide__arrow--next {
+      right: 0;
+      height: 90%;
+    }
 
-  & .splide__arrow:disabled {
-    /* opacity: 0; */
+    & .splide__arrow svg {
+      fill: ${({ theme }) => theme.LIGHT.L100};
+    }
+
+    & .splide__arrow:disabled {
+      display: none;
+    }
   }
 `
