@@ -9,7 +9,7 @@ export const Wrap = styled.button`
 
   color: ${({ theme }) => theme.LIGHT.L100};
   background: ${({ theme, $istext }) =>
-    !$istext ? theme.COLORS.TOMATO_400 : 'none'};
+    !$istext ? theme.COLORS.TOMATO_200 : 'none'};
 
   transition: all 0.3s;
 

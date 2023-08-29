@@ -86,7 +86,7 @@ export const Menu = styled.div`
 export const OpenMenu = styled.div`
   position: absolute;
   top: 0;
-  z-index: 1;
+  z-index: 10;
 
   display: inherit;
   flex-direction: column;
