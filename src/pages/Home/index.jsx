@@ -1,6 +1,5 @@
-// import { Splide, SplideSlide } from '@splidejs/react-splide'
-import '@splidejs/react-splide/css/skyblue'
 import Splide from '@splidejs/splide'
+import '@splidejs/splide/css/skyblue'
 import { useEffect } from 'react'
 import imageTeste from '../../assets/dish.webp'
 import macarons from '../../assets/macarons.webp'
@@ -30,6 +29,7 @@ export function Home() {
     new Splide('.splide', {
       focus: 'center',
       pagination: false,
+      autoWidth: true,
     }).mount()
     new Splide('#splide2', {
       focus: 'center',

@@ -68,7 +68,7 @@ fieldset {
   border: none;
 }
 
-button, input {
+button, input, textarea {
   font-family: 'Poppins', sans-serif;
 }
 

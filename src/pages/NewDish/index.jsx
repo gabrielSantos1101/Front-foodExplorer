@@ -1,6 +1,7 @@
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useForm } from 'react-hook-form'
+import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Add } from '../../components/Add'
 import { Button } from '../../components/Button'
@@ -11,6 +12,7 @@ import { Textarea } from '../../components/Textarea'
 import { Wrapper } from './styles'
 
 export function NewDish() {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -56,6 +58,7 @@ export function NewDish() {
         hasIcon
         icon={CaretLeft}
         className="back"
+        onClick={() => navigate(-1)}
       />
       <form>
         <h1>Novo prato</h1>
@@ -103,6 +106,7 @@ export function NewDish() {
                 <Tag
                   key={String(index)}
                   title={ingredient}
+                  hasIcon
                   onClick={() => handleRemove(ingredient)}
                 />
               ))}

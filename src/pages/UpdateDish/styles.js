@@ -64,7 +64,7 @@ export const Wrapper = styled.div`
           gap: 0.5rem;
 
           font-size: 1rem;
-          padding: 12px 2rem;
+          padding: 0.75rem 2rem;
           border-radius: 0.5rem;
 
           background: ${({ theme }) => theme.DARK.D800};
