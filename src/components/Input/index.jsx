@@ -9,10 +9,10 @@ export function Input({
   ...rest
 }) {
   return (
-    <Wrap>
+    <Wrap {...rest}>
       {label}
       {Icon && <Icon />}
-      <input type={type} placeholder={placeholder} value={value} {...rest} />
+      <input type={type} placeholder={placeholder} value={value} />
     </Wrap>
   )
 }

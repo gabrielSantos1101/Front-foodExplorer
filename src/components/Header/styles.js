@@ -3,14 +3,15 @@ import { styled } from 'styled-components'
 export const Wrap = styled.header`
   display: flex;
   justify-content: space-evenly;
+  gap: 1rem;
   align-items: center;
 
   width: 100%;
 
   background-color: ${({ theme }) => theme.DARK.D700};
-  padding-block: 1.75rem;
+  padding: 1.75rem clamp(0rem, -1.703rem + 6.3366vw, 4rem);
 
-  & div {
+  div {
     margin-bottom: 0;
   }
 
@@ -28,23 +29,36 @@ export const Wrap = styled.header`
       width: 1.125rem;
       height: 1.125rem;
 
-      top: -3px;
-      right: -3px;
+      top: -0.1875rem;
+      right: -0.1875rem;
 
       background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
       border-radius: 999999px;
     }
   }
+
+  .search {
+    display: none;
+  }
+
+  @media (${({ theme }) => theme.SCREENS.LG}) {
+    .search {
+      display: initial;
+      flex: 1;
+      max-width: 56.25rem;
+    }
+  }
 `
 
 export const Menu = styled.div`
-  position: relative;
+  ${({ $menuOpne }) => (!$menuOpne ? 'position: relative' : '')};
   width: 3rem;
   height: 3rem;
 
   .hamburger {
     cursor: pointer;
     position: absolute;
+    ${({ $menuOpne }) => $menuOpne && 'left: 2rem'};
     z-index: 10;
   }
 
@@ -81,6 +95,10 @@ export const Menu = styled.div`
     stroke-dasharray: 20 300;
     stroke-dashoffset: -32.42;
   }
+
+  @media (${({ theme }) => theme.SCREENS.LG}) {
+    display: none;
+  }
 `
 
 export const OpenMenu = styled.div`
@@ -103,8 +121,8 @@ export const OpenMenu = styled.div`
   & h1 {
     font-size: 1.3125rem;
     position: absolute;
-    top: 35px;
-    left: 110px;
+    top: 2.1875rem;
+    left: 6rem;
   }
 
   & div:has(> button) {
@@ -127,7 +145,7 @@ export const OpenMenu = styled.div`
     top: 0;
     left: 0;
     width: 100%;
-    height: 6.9375rem;
+    height: 6.5rem;
     background: ${({ theme }) => theme.DARK.D700};
   }
 `

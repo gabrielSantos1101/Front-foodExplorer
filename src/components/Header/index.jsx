@@ -34,7 +34,6 @@ export function Header() {
             placeholder={'Busque por pratos ou ingrediente'}
             onChange={(e) => console.log(e.target.value)}
           />
-
           <div>
             <Button title={'Novo prato'} isText />
           </div>
@@ -43,7 +42,7 @@ export function Header() {
           </div>
         </OpenMenu>
       )}
-      <Menu>
+      <Menu $menuOpne={menuOpen}>
         <label className="hamburger">
           <input
             type="checkbox"
@@ -59,6 +58,12 @@ export function Header() {
         </label>
       </Menu>
       <Logo />
+      <Input
+        className="search"
+        type="search"
+        placeholder={'Busque por pratos ou ingrediente'}
+        onChange={(e) => console.log(e.target.value)}
+      />
       <button className="order">
         <span>10</span>
         <Receipt size={32} />
