@@ -6,23 +6,6 @@ import macarons from '../../assets/macarons.webp'
 import { Card } from '../../components/Card'
 import { Wrap, Wrapper } from './styles'
 
-// gambiarra para o slide funcionar hehehe
-// talvez um dia de as flores florecerem no coração do criar do lib ele atualize a versão react  e eu altere
-// setTimeout(() => {
-// new Splide('.splide', {
-//   focus: 'center',
-//   pagination: false,
-// }).mount()
-// new Splide('#splide2', {
-//   focus: 'center',
-//   pagination: false,
-// }).mount()
-// new Splide('#splide3', {
-//   focus: 'center',
-//   pagination: false,
-// }).mount()
-// }, 1)
-
 export function Home() {
   // garante que o slider não vai gibar porque a lib não atualizou a versão do react obs:"eu não usaria isso em produção ta 😁"
   useEffect(() => {

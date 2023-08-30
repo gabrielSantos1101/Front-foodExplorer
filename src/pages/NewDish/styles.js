@@ -178,12 +178,6 @@ export const Wrapper = styled.div`
       .buttons {
         width: 30%;
         justify-self: flex-end;
-
-        & button {
-          &:hover {
-            background: lime;
-          }
-        }
       }
     }
   }
