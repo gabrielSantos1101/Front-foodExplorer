@@ -17,23 +17,26 @@ export const Wrap = styled.div`
   }
 
   & img {
-    width: 16.5rem;
-    height: 16.5rem;
+    width: clamp(16.5rem, 13.1473rem + 12.4752vw, 24.375rem);
+    height: clamp(16.5rem, 13.1473rem + 12.4752vw, 24.375rem);
 
     margin-top: 1rem;
     border-radius: 99999px;
     pointer-events: none;
   }
 
+  & div:has(h1) {
+    text-align: center;
+  }
+
   & h1 {
-    font-size: 1.5rem;
+    font-size: clamp(1.5rem, 1.0743rem + 1.5842vw, 2.5rem);
 
     margin-top: 1rem;
   }
 
   & p {
-    text-align: center;
-    font-size: 1rem;
+    font-size: clamp(1rem, 0.7871rem + 0.7921vw, 1.5rem);
     margin-top: 1.5rem;
   }
 
@@ -45,6 +48,15 @@ export const Wrap = styled.div`
 
     width: 100%;
     padding: 1rem;
+  }
+
+  @media (${({ theme }) => theme.SCREENS.MD}) {
+    flex-direction: row;
+    gap: 3.125rem;
+
+    & div:has(h1) {
+      text-align: left;
+    }
   }
 `
 export const Amount = styled.div`
@@ -69,6 +81,13 @@ export const Amount = styled.div`
     & span {
       text-align: center;
       min-width: 1.875rem;
+    }
+  }
+
+  @media (${({ theme }) => theme.SCREENS.MD}) {
+    & button {
+      width: fit-content;
+      padding-inline: 2rem;
     }
   }
 `

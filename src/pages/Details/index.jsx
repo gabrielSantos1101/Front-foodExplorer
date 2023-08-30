@@ -35,26 +35,28 @@ export function Details() {
         onClick={() => navigate(-1)}
       />
       <img src={dish} alt="Dish" />
-      <h1>Salada Ravanello</h1>
-      <p>Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.</p>
-
-      <section>
-        <Tag title={'alface'} />
-        <Tag title={'cebola'} />
-        <Tag title={'pão naan'} />
-        <Tag title={'pepino'} />
-        <Tag title={'rabanete'} />
-        <Tag title={'tomate'} />
-      </section>
-
-      <Amount>
-        <div className="stepper">
-          <Minus onClick={() => handleMinusCount()} />
-          <span>{count}</span>
-          <Plus onClick={() => handlePlusCount()} />
-        </div>
-        <Button title={`pedir ${price}`} hasIcon icon={Receipt} />
-      </Amount>
+      <div>
+        <h1>Salada Ravanello</h1>
+        <p>
+          Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
+        </p>
+        <section>
+          <Tag title={'alface'} />
+          <Tag title={'cebola'} />
+          <Tag title={'pão naan'} />
+          <Tag title={'pepino'} />
+          <Tag title={'rabanete'} />
+          <Tag title={'tomate'} />
+        </section>
+        <Amount>
+          <div className="stepper">
+            <Minus onClick={() => handleMinusCount()} />
+            <span>{count}</span>
+            <Plus onClick={() => handlePlusCount()} />
+          </div>
+          <Button title={`pedir ${price}`} hasIcon icon={Receipt} />
+        </Amount>
+      </div>
     </Wrap>
   )
 }
