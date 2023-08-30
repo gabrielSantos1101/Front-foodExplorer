@@ -37,9 +37,9 @@ export function Card({
 
   return (
     <Wrap $isAdmin={isAdmin}>
-      {isAdmin ? (
+      {!isAdmin ? (
         <Heart>
-          <input type="checkbox" />
+          <input type="checkbox" onChange={handleMenuOpen} />
           <div className="checkmark">
             <svg viewBox="0 0 256 256">
               <rect fill="none" height="256" width="256"></rect>
@@ -53,7 +53,10 @@ export function Card({
           </div>
         </Heart>
       ) : (
-        <Pencil onClick={() => navigate(`/update/${id}`)} />
+        <Pencil
+          onClick={() => navigate(`/update/${id}`)}
+          className="cardIcon"
+        />
       )}
       <img
         src={image}

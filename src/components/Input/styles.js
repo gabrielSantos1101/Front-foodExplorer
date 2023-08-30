@@ -5,7 +5,6 @@ export const Wrap = styled.label`
   flex-direction: column;
   gap: 0.5rem;
   color: ${({ theme }) => theme.LIGHT.L100};
-  font-family: Roboto;
 
   & input {
     display: flex;

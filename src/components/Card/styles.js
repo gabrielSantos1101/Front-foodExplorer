@@ -13,7 +13,7 @@ export const Wrap = styled.article`
   width: 100%;
   max-width: clamp(13.125rem, 10.7302rem + 8.9109vw, 18.75rem);
   height: fit-content;
-  max-height: 28.75rem;
+  max-height: 30.75rem;
 
   padding: 1.5rem;
   border-radius: 0%.5rem;
@@ -29,7 +29,7 @@ export const Wrap = styled.article`
     }
   }
 
-  & svg:first-child:not(.stepper > svg) {
+  & .cardIcon {
     position: absolute;
     right: 1rem;
     top: 1rem;
@@ -112,7 +112,11 @@ export const Amount = styled.div`
 
     & span {
       text-align: center;
-      min-width: 30px;
+      min-width: 1.875rem;
+
+      @media (${({ theme }) => theme.SCREENS.SM}) {
+        min-width: 50px;
+      }
     }
   }
 `
