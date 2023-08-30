@@ -52,6 +52,7 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
+                    date={'2023-08-29'}
                     isAdmin={isAdmin}
                     id={1}
                   />

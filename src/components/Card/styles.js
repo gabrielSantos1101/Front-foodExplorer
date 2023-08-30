@@ -20,6 +20,25 @@ export const Wrap = styled.article`
 
   background: ${({ theme }) => theme.DARK.D200};
 
+  & .isNew {
+    position: absolute;
+    left: 0;
+    top: 0.625rem;
+
+    color: #ffc700;
+    font-weight: 600;
+
+    transform: rotate(-45deg);
+
+    animation: 700ms blink linear infinite alternate;
+  }
+
+  @keyframes blink {
+    100% {
+      scale: 0.9;
+    }
+  }
+
   & img {
     width: 60%;
     transition: all 0.3s;

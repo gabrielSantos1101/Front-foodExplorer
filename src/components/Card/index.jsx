@@ -9,6 +9,7 @@ export function Card({
   description,
   price,
   image,
+  date,
   isAdmin = false,
   id,
 }) {
@@ -19,6 +20,14 @@ export function Card({
     style: 'currency',
     currency: 'BRL',
   }).format(price * count)
+
+  const today = new Date()
+  const createdDate = new Date(date)
+
+  const diferencaEmMilissegundos = Math.abs(today - createdDate)
+  const differenceInDays = Math.floor(
+    diferencaEmMilissegundos / (1000 * 60 * 60 * 24),
+  )
 
   function handleMenuOpen(open) {
     setLike(!like)
@@ -58,6 +67,7 @@ export function Card({
           className="cardIcon"
         />
       )}
+      {differenceInDays <= 7 && <span className="isNew">NOVO</span>}
       <img
         src={image}
         alt="imagem macarons caindo junto de algumas frutas vermelhas"
