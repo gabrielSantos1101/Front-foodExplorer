@@ -61,7 +61,7 @@ h1 {
 }
 
 p {
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 
 fieldset {

@@ -78,6 +78,10 @@ export const Amount = styled.div`
 
     font-size: 1.375rem;
 
+    & svg {
+      cursor: pointer;
+    }
+
     & span {
       text-align: center;
       min-width: 1.875rem;

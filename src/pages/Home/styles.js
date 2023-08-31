@@ -14,22 +14,37 @@ export const Wrapper = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-end;
-    height: 9.375rem;
-    overflow-y: hidden;
+    height: clamp(9.375rem, 5.5433rem + 14.2574vw, 18.375rem);
 
     margin-top: 0.5rem;
 
     & img {
       position: absolute;
-      width: 12.5rem;
+      width: clamp(12.5rem, 6.0606rem + 23.9604vw, 27.625rem);
+
       top: 0;
-      left: 0.3125rem;
+      left: clamp(0rem, 0.8515rem + -3.1683vw, -2rem);
+
+      @media (${({ theme }) => theme.SCREENS.MD}) {
+        left: clamp(-2rem, -1.1485rem + -3.1683vw, -4rem);
+      }
     }
     & .texts {
-      width: 13.4375rem;
-
       margin-top: 1.875rem;
-      margin-right: 1.25rem;
+      margin-right: clamp(1.25rem, -0.8787rem + 7.9208vw, 6.25rem);
+
+      & h1 {
+        font-size: clamp(1.125rem, 0.5396rem + 2.1782vw, 2.8rem);
+      }
+
+      & p {
+        width: clamp(13rem, 11.297rem + 6.3366vw, 17rem);
+        font-size: clamp(0.75rem, 0.6436rem + 0.396vw, 1rem);
+
+        @media (${({ theme }) => theme.SCREENS.MD}) {
+          width: unset;
+        }
+      }
     }
 
     &::before {
@@ -72,11 +87,21 @@ export const Wrap = styled.div`
     & .splide__arrow--prev {
       left: 0;
       height: 90%;
+      background: linear-gradient(
+        90deg,
+        rgba(0, 10, 15, 0.8) 0%,
+        rgba(0, 10, 15, 0) 100%
+      );
     }
 
     & .splide__arrow--next {
       right: 0;
       height: 90%;
+      background: linear-gradient(
+        -90deg,
+        rgba(0, 10, 15, 0.8) 0%,
+        rgba(0, 10, 15, 0) 100%
+      );
     }
 
     & .splide__arrow svg {

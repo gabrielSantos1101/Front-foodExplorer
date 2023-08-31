@@ -2,14 +2,14 @@ import { styled } from 'styled-components'
 
 export const Wrap = styled.header`
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
   gap: 1rem;
   align-items: center;
 
   width: 100%;
 
   background-color: ${({ theme }) => theme.DARK.D700};
-  padding: 1.75rem clamp(0rem, -1.703rem + 6.3366vw, 4rem);
+  padding: 1.75rem clamp(2rem, -1.703rem + 6.3366vw, 4rem);
 
   div {
     margin-bottom: 0;
@@ -42,6 +42,7 @@ export const Wrap = styled.header`
   }
 
   @media (${({ theme }) => theme.SCREENS.LG}) {
+    justify-content: space-evenly;
     .search {
       display: initial;
       flex: 1;
@@ -104,6 +105,7 @@ export const Menu = styled.div`
 export const OpenMenu = styled.div`
   position: absolute;
   top: 0;
+  left: 0;
   z-index: 10;
 
   display: inherit;

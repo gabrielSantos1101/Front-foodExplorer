@@ -1,3 +1,4 @@
+import { CaretRight } from '@phosphor-icons/react'
 import Splide from '@splidejs/splide'
 import '@splidejs/splide/css/skyblue'
 import { useEffect } from 'react'
@@ -42,6 +43,14 @@ export function Home() {
         <div className="carrossel1">
           <h2>Refeições</h2>
           <section className="splide" aria-label="Refeicoes">
+            <div className="splide__arrows">
+              <button className="splide__arrow splide__arrow--prev">
+                <CaretRight />
+              </button>
+              <button className="splide__arrow splide__arrow--next">
+                <CaretRight />
+              </button>
+            </div>
             <div className="splide__track">
               <ul className="splide__list">
                 <li className="splide__slide">
@@ -149,6 +158,14 @@ export function Home() {
         <div className="carrossel2">
           <h2>Sobremesas</h2>
           <section className="splide" id="splide2" aria-label="Sobremesas">
+            <div className="splide__arrows">
+              <button className="splide__arrow splide__arrow--prev">
+                <CaretRight />
+              </button>
+              <button className="splide__arrow splide__arrow--next">
+                <CaretRight />
+              </button>
+            </div>
             <div className="splide__track">
               <ul className="splide__list">
                 <li className="splide__slide">
@@ -255,6 +272,14 @@ export function Home() {
         <div className="carrosel3">
           <h2>Bebidas</h2>
           <section className="splide" id="splide3" aria-label="Bebidas">
+            <div className="splide__arrows">
+              <button className="splide__arrow splide__arrow--prev">
+                <CaretRight />
+              </button>
+              <button className="splide__arrow splide__arrow--next">
+                <CaretRight />
+              </button>
+            </div>
             <div className="splide__track">
               <ul className="splide__list">
                 <li className="splide__slide">
