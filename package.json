@@ -13,6 +13,7 @@
     "@phosphor-icons/react": "^2.0.10",
     "@radix-ui/react-select": "^1.2.2",
     "@splidejs/splide": "^4.1.4",
+    "axios": "^1.5.0",
     "jwt-decode": "^3.1.2",
     "postcss": "^8.4.28",
     "react": "^18.2.0",
