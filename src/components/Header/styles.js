@@ -37,15 +37,15 @@ export const Wrap = styled.header`
     }
   }
 
-  .search {
+  & label:has(.search) {
     display: none;
+    flex: 1;
   }
 
   @media (${({ theme }) => theme.SCREENS.LG}) {
     justify-content: space-evenly;
-    .search {
+    label:has(.search) {
       display: initial;
-      flex: 1;
       max-width: 56.25rem;
     }
   }

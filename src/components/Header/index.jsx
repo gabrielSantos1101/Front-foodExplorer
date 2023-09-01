@@ -1,15 +1,16 @@
 import { Receipt } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+
 import { Button } from '../Button'
 import { Input } from '../Input'
 import { Logo } from '../Logo'
 import { Menu, OpenMenu, Wrap } from './styles'
 
-export function Header() {
+export function Header({ count }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
-  function handleMenuOpen(open) {
+  function handleMenuOpen() {
     setMenuOpen(!menuOpen)
   }
 
@@ -65,7 +66,7 @@ export function Header() {
         onChange={(e) => console.log(e.target.value)}
       />
       <button className="order">
-        <span>10</span>
+        {count && <span>{count}</span>}
         <Receipt size={32} />
       </button>
     </Wrap>
