@@ -2,6 +2,7 @@ import { Receipt } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
+import { useAuth } from '../../hooks/auth'
 import { Button } from '../Button'
 import { Input } from '../Input'
 import { Logo } from '../Logo'
@@ -10,19 +11,21 @@ import { Menu, OpenMenu, Wrap } from './styles'
 export function Header({ count }) {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
+  const { signOut } = useAuth()
+
   function handleMenuOpen() {
     setMenuOpen(!menuOpen)
   }
 
   function handleNavigate(path) {
-    navigate(path)
     setMenuOpen(false)
+    navigate(path)
   }
 
   function handleLogout() {
-    localStorage.removeItem('token')
-    navigate('/')
+    signOut()
     setMenuOpen(false)
+    navigate('/')
   }
 
   return (
@@ -36,10 +39,14 @@ export function Header({ count }) {
             onChange={(e) => console.log(e.target.value)}
           />
           <div>
-            <Button title={'Novo prato'} isText />
+            <Button
+              title={'Novo prato'}
+              isText
+              onClick={() => handleNavigate('/new')}
+            />
           </div>
           <div>
-            <Button title={'Sair'} isText />
+            <Button title={'Sair'} isText onClick={handleLogout} />
           </div>
         </OpenMenu>
       )}
@@ -48,6 +55,7 @@ export function Header({ count }) {
           <input
             type="checkbox"
             onChange={(e) => handleMenuOpen(e.target.checked)}
+            checked={menuOpen}
           />
           <svg viewBox="0 0 32 32">
             <path

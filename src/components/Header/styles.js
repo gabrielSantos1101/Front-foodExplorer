@@ -136,8 +136,18 @@ export const OpenMenu = styled.div`
       font-size: 1.5rem;
 
       &:hover {
-        color: ${({ theme }) => theme.COLORS.TOMATO_200};
+        color: ${({ theme }) => theme.COLORS.CAKE_200};
       }
+    }
+  }
+
+  & div:last-child:has(> button) {
+    position: relative;
+    border-bottom: 2px solid ${({ theme }) => theme.DARK.D1000};
+    padding-bottom: 0.625rem;
+
+    & button:hover {
+      color: #ff2335;
     }
   }
 
