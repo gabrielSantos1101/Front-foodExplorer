@@ -1,21 +1,16 @@
 import { Minus, Pencil, Plus } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useAuth } from '../../hooks/auth'
 import { Button } from '../Button'
 import { Amount, Heart, Wrap } from './styles'
 
-export function Card({
-  title,
-  description,
-  price,
-  image,
-  date,
-  isAdmin = false,
-  id,
-}) {
+export function Card({ title, description, price, image, date, id }) {
   const [like, setLike] = useState(false)
   const navigate = useNavigate()
   const [count, setCount] = useState(1)
+  const { isAdmin } = useAuth()
+
   const formatedPrice = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
