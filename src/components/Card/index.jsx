@@ -24,7 +24,7 @@ export function Card({ title, description, price, image, date, id }) {
     diferencaEmMilissegundos / (1000 * 60 * 60 * 24),
   )
 
-  function handleMenuOpen(open) {
+  function handleSetLike() {
     setLike(!like)
   }
 
@@ -43,7 +43,7 @@ export function Card({ title, description, price, image, date, id }) {
     <Wrap $isAdmin={isAdmin}>
       {!isAdmin ? (
         <Heart>
-          <input type="checkbox" onChange={handleMenuOpen} />
+          <input type="checkbox" onChange={handleSetLike} />
           <div className="checkmark">
             <svg viewBox="0 0 256 256">
               <rect fill="none" height="256" width="256"></rect>
@@ -69,7 +69,9 @@ export function Card({ title, description, price, image, date, id }) {
         onClick={() => navigate(`/dish/${id}`)}
       />
       <div className="texts">
-        <h2 onClick={() => navigate(`/dish/${id}`)}>{title}</h2>
+        <h2 onClick={() => navigate(`/dish/${id}`)} title={title}>
+          {title}
+        </h2>
         <p>{description}</p>
       </div>
 

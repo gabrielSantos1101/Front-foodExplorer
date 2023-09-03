@@ -40,7 +40,10 @@ export const Wrap = styled.article`
   }
 
   & img {
-    width: 60%;
+    width: clamp(6.25rem, 4.9196rem + 4.9505vw, 9.375rem);
+    height: clamp(6.25rem, 4.9196rem + 4.9505vw, 9.375rem);
+    border-radius: 99999999px;
+    object-fit: cover;
     transition: all 0.3s;
     cursor: pointer;
     &:hover {
@@ -81,6 +84,7 @@ export const Wrap = styled.article`
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;
       overflow: hidden;
+      height: 3.375rem;
     }
   }
 
