@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 export const Wrapper = styled.div`
   flex: 1;
   width: 100%;
-  max-width: 1440px;
+  max-width: 90rem;
   margin-inline: auto;
   padding-bottom: 3.125rem;
 
@@ -63,8 +63,9 @@ export const Wrapper = styled.div`
     }
   }
 `
+
 export const Wrap = styled.div`
-  display: grid;
+  /* display: grid;
   gap: 2.875rem;
   max-width: 90rem;
   width: 100%;
@@ -111,5 +112,5 @@ export const Wrap = styled.div`
     & .splide__arrow:disabled {
       display: none;
     }
-  }
+  } */
 `
