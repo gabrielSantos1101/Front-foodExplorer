@@ -17,8 +17,10 @@ export const Wrap = styled.div`
   }
 
   & img {
+    position: relative;
     width: clamp(16.5rem, 13.1473rem + 12.4752vw, 24.375rem);
     height: clamp(16.5rem, 13.1473rem + 12.4752vw, 24.375rem);
+    object-fit: cover;
 
     margin-top: 1rem;
     border-radius: 99999px;
@@ -56,6 +58,12 @@ export const Wrap = styled.div`
 
     & div:has(h1) {
       text-align: left;
+    }
+  }
+
+  @keyframes pulse {
+    50% {
+      opacity: 0.5;
     }
   }
 `

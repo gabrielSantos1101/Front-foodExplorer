@@ -1,18 +1,23 @@
 import { CaretLeft, Minus, Plus, Receipt } from '@phosphor-icons/react'
-import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import dish from '../../assets/dish.webp'
+import { useEffect, useState } from 'react'
+import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '../../components/Button'
+import { Loader } from '../../components/Loader'
 import { Tag } from '../../components/Tag'
+import { api } from '../../services/api'
 import { Amount, Wrap } from './styles'
 
 export function Details() {
   const navigate = useNavigate()
+  const dish = useParams()
+  const [data, setData] = useState({})
   const [count, setCount] = useState(1)
-  const price = new Intl.NumberFormat('pt-BR', {
+  const [price, setPrice] = useState(0)
+
+  const FormatedPrice = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
-  }).format(20 * count)
+  }).format(price * count)
 
   function handleMinusCount() {
     if (count === 1) {
@@ -25,6 +30,27 @@ export function Details() {
     setCount((prev) => prev + 1)
   }
 
+  useEffect(() => {
+    async function getDish() {
+      try {
+        const response = await api.get(`/dishes/${dish.id}`)
+        setData(response.data)
+        setPrice(response.data.dish.price)
+      } catch (err) {
+        console.error(err)
+      }
+    }
+
+    getDish()
+  }, [dish])
+
+  if (!data.dish) {
+    return (
+      <>
+        <Loader />
+      </>
+    )
+  }
   return (
     <Wrap>
       <Button
@@ -34,19 +60,14 @@ export function Details() {
         icon={CaretLeft}
         onClick={() => navigate(-1)}
       />
-      <img src={dish} alt="Dish" />
+      <img src={`${data.dish.image}`} alt="Dish" />
       <div>
-        <h1>Salada Ravanello</h1>
-        <p>
-          Rabanetes, folhas verdes e molho agridoce salpicados com gergelim.
-        </p>
+        <h1>{data.dish.name}</h1>
+        <p>{data.dish.description}</p>
         <section>
-          <Tag title={'alface'} />
-          <Tag title={'cebola'} />
-          <Tag title={'pão naan'} />
-          <Tag title={'pepino'} />
-          <Tag title={'rabanete'} />
-          <Tag title={'tomate'} />
+          {data.ingredients.map((ingredient) => (
+            <Tag key={ingredient.id} title={ingredient.name} />
+          ))}
         </section>
         <Amount>
           <div className="stepper">
@@ -54,7 +75,7 @@ export function Details() {
             <span>{count}</span>
             <Plus onClick={() => handlePlusCount()} />
           </div>
-          <Button title={`pedir ${price}`} hasIcon icon={Receipt} />
+          <Button title={`pedir ${FormatedPrice}`} hasIcon icon={Receipt} />
         </Amount>
       </div>
     </Wrap>

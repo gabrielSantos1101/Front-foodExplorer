@@ -1,28 +1,56 @@
 import { CaretRight } from '@phosphor-icons/react'
 import Splide from '@splidejs/splide'
 import '@splidejs/splide/css/skyblue'
-import { useEffect } from 'react'
-import imageTeste from '../../assets/dish.webp'
+import { useEffect, useState } from 'react'
 import macarons from '../../assets/macarons.webp'
 import { Card } from '../../components/Card'
+import { api } from '../../services/api'
 import { Wrap, Wrapper } from './styles'
 
 export function Home() {
-  // garante que o slider não vai gibar porque a lib não atualizou a versão do react obs:"eu não usaria isso em produção ta 😁"
+  const [data, setData] = useState({})
+  const [categories, setCategories] = useState([])
+  const [meals, setMeals] = useState([])
+  const [deserts, setDesserts] = useState([])
+  const [drinks, setDrinks] = useState([])
+  // garante que o slider não vai bugar porque a lib não atualizou a versão do react obs:"talvez eu não usaria isso em produção ta 😁"
   useEffect(() => {
-    new Splide('.splide', {
-      focus: 'center',
+    new Splide('#splide1', {
+      focus: 'left',
       pagination: false,
       autoWidth: true,
     }).mount()
     new Splide('#splide2', {
-      focus: 'center',
+      focus: 'left',
       pagination: false,
     }).mount()
     new Splide('#splide3', {
-      focus: 'center',
+      focus: 'left',
       pagination: false,
     }).mount()
+  }, [])
+
+  useEffect(() => {
+    async function getDishs() {
+      try {
+        const response = await api.get('/dishes')
+        setData(response.data)
+
+        setCategories(await response.data.map((item) => item.category))
+        setMeals(
+          await response.data.filter((item) => item.category === 'Refeição'),
+        )
+        setDesserts(
+          await response.data.filter((item) => item.category === 'Sobremesa'),
+        )
+        setDrinks(
+          await response.data.filter((item) => item.category === 'Bebida'),
+        )
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    getDishs()
   }, [])
 
   return (
@@ -40,7 +68,7 @@ export function Home() {
       <Wrap>
         <div className="carrossel1">
           <h2>Refeições</h2>
-          <section className="splide" aria-label="Refeicoes">
+          <section className="splide" id="splide1" aria-label="Refeicoes">
             <div className="splide__arrows">
               <button className="splide__arrow splide__arrow--prev">
                 <CaretRight />
@@ -51,95 +79,19 @@ export function Home() {
             </div>
             <div className="splide__track">
               <ul className="splide__list">
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    date={'2023-08-29'}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
+                {meals.map((dish) => (
+                  <li key={dish.id} className="splide__slide">
+                    <Card
+                      key={dish.id}
+                      title={dish.name}
+                      description={dish.description}
+                      price={dish.price}
+                      image={dish.image}
+                      id={dish.id}
+                      date={dish.created_at}
+                    />
+                  </li>
+                ))}
               </ul>
             </div>
           </section>
@@ -158,94 +110,19 @@ export function Home() {
             </div>
             <div className="splide__track">
               <ul className="splide__list">
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
+                {deserts.map((dish) => (
+                  <li key={dish.id} className="splide__slide">
+                    <Card
+                      key={dish.id}
+                      title={dish.name}
+                      description={dish.description}
+                      price={dish.price}
+                      image={dish.image}
+                      id={dish.id}
+                      date={dish.created_at}
+                    />
+                  </li>
+                ))}
               </ul>
             </div>
           </section>
@@ -264,94 +141,19 @@ export function Home() {
             </div>
             <div className="splide__track">
               <ul className="splide__list">
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
-                <li className="splide__slide">
-                  <Card
-                    title={'salada'}
-                    description={
-                      'Salada com folhas verdes e molho agridoce salpicados com gergelim.Salada com folhas verdes e molho agridoce salpicados com gergelim.'
-                    }
-                    price={20.5}
-                    image={imageTeste}
-                    id={1}
-                  />
-                </li>
+                {drinks.map((dish) => (
+                  <li key={dish.id} className="splide__slide">
+                    <Card
+                      key={dish.id}
+                      title={dish.name}
+                      description={dish.description}
+                      price={dish.price}
+                      image={dish.image}
+                      id={dish.id}
+                      date={dish.created_at}
+                    />
+                  </li>
+                ))}
               </ul>
             </div>
           </section>
