@@ -25,8 +25,6 @@ export function Home() {
     }).mount()
   }, [])
 
-  const isAdmin = false
-
   return (
     <Wrapper>
       <hgroup>
@@ -62,7 +60,6 @@ export function Home() {
                     price={20.5}
                     image={imageTeste}
                     date={'2023-08-29'}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -74,7 +71,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -86,7 +82,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -98,7 +93,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -110,7 +104,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -122,7 +115,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -134,7 +126,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -146,7 +137,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -176,7 +166,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -188,7 +177,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -200,7 +188,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -212,7 +199,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -224,7 +210,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -236,7 +221,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -248,7 +232,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -260,7 +243,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -290,7 +272,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -302,7 +283,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -314,7 +294,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -326,7 +305,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -338,7 +316,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -350,7 +327,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -362,7 +338,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
@@ -374,7 +349,6 @@ export function Home() {
                     }
                     price={20.5}
                     image={imageTeste}
-                    isAdmin={isAdmin}
                     id={1}
                   />
                 </li>
