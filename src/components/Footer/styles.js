@@ -3,10 +3,10 @@ import { styled } from 'styled-components'
 export const Wrap = styled.div`
   display: flex;
   align-items: center;
-  justify-content: space-around;
+  justify-content: space-between;
+  padding: 1.75rem clamp(2rem, -1.703rem + 6.3366vw, 4rem);
   font-size: 0.75rem;
   background: ${({ theme }) => theme.DARK.D600};
-  padding: 1.5rem 0.75rem;
 
   & div {
     margin-bottom: 0;

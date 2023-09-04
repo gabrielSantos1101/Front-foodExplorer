@@ -65,15 +65,6 @@ export function NewDish() {
           error: 'Erro ao criar Prato',
         },
       )
-
-      // await api.post('/dishes', {
-      //   description,
-      //   category,
-      //   price,
-      //   name,
-      //   ingredients,
-      //   image: response.data.url,
-      // })
     } catch (err) {
       console.error(err)
     }

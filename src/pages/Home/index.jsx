@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react'
 import macarons from '../../assets/macarons.webp'
 import { Section } from '../../components/Section'
 import { api } from '../../services/api'
-import { Wrap, Wrapper } from './styles'
+import { Wrapper } from './styles'
 
 export function Home() {
   const [categories, setCategories] = useState([])
@@ -75,32 +75,31 @@ export function Home() {
           <p>Sinta o cuidado do preparo com ingredientes selecionados.</p>
         </div>
       </hgroup>
-      <Wrap>
-        {meals && (
-          <Section
-            key={categories[0]}
-            title={categories[0]}
-            data={meals}
-            id="1"
-          />
-        )}
-        {desserts && (
-          <Section
-            key={categories[1]}
-            title={categories[1]}
-            data={desserts}
-            id="2"
-          />
-        )}
-        {drinks && (
-          <Section
-            key={categories[2]}
-            title={categories[2]}
-            data={drinks}
-            id="3"
-          />
-        )}
-      </Wrap>
+
+      {meals && (
+        <Section
+          key={categories[0]}
+          title={categories[0]}
+          data={meals}
+          id="1"
+        />
+      )}
+      {desserts && (
+        <Section
+          key={categories[1]}
+          title={categories[1]}
+          data={desserts}
+          id="2"
+        />
+      )}
+      {drinks && (
+        <Section
+          key={categories[2]}
+          title={categories[2]}
+          data={drinks}
+          id="3"
+        />
+      )}
     </Wrapper>
   )
 }

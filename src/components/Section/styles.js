@@ -2,7 +2,7 @@ import { styled } from 'styled-components'
 
 export const Wrap = styled.div`
   display: grid;
-  gap: 2.875rem;
+  gap: 1.5rem;
   max-width: 90rem;
   width: 100%;
   margin-inline: auto;
