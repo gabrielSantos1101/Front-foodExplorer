@@ -16,6 +16,7 @@ export function AuthProvider({ children }) {
       const { token, user } = response.data
       localStorage.setItem('name', JSON.stringify(user.name))
 
+      api.defaults.headers.Authorization = `Bearer ${token}`
       localStorage.setItem('token', token)
 
       setData({ token })
@@ -65,6 +66,7 @@ export function AuthProvider({ children }) {
 
   useEffect(() => {
     const token = localStorage.getItem('token')
+    api.defaults.headers.Authorization = `Bearer ${token}`
 
     if (token) {
       const { isAdmin } = jwtDecode(localStorage.getItem('token'))
