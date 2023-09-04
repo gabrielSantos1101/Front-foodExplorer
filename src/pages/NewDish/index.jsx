@@ -1,6 +1,5 @@
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
 import { useState } from 'react'
-import { useForm } from 'react-hook-form'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Add } from '../../components/Add'
@@ -9,15 +8,11 @@ import { Input } from '../../components/Input'
 import { Select } from '../../components/Select'
 import { Tag } from '../../components/Tag'
 import { Textarea } from '../../components/Textarea'
+import { api, imageApi } from '../../services/api'
 import { Wrapper } from './styles'
 
 export function NewDish() {
   const navigate = useNavigate()
-  const {
-    register,
-    handleSubmit,
-    formState: { errors },
-  } = useForm()
   const [description, setDescription] = useState('')
   const [category, setCategory] = useState('')
   const [price, setPrice] = useState('')
@@ -33,6 +28,57 @@ export function NewDish() {
     setImage(image)
   }
 
+  async function handleSubmit() {
+    if (
+      !description ||
+      !category ||
+      !price ||
+      !name ||
+      !image ||
+      ingredients.length === 0
+    ) {
+      toast.info('preencha todos os campos')
+      return
+    }
+    const formData = new FormData()
+    formData.append('photo', image)
+    try {
+      await toast.promise(
+        imageApi.post('', formData).then((res) =>
+          api.post('/dishes', {
+            description,
+            category,
+            price,
+            name,
+            ingredients,
+            image: res.data.url,
+          }),
+        ),
+        {
+          pending: 'Enviando dados...',
+          success: {
+            render() {
+              navigate('/')
+              return 'Prato criado com sucesso 😎'
+            },
+          },
+          error: 'Erro ao criar Prato',
+        },
+      )
+
+      // await api.post('/dishes', {
+      //   description,
+      //   category,
+      //   price,
+      //   name,
+      //   ingredients,
+      //   image: response.data.url,
+      // })
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   function handleAddIngredient(newIngredient) {
     if (ingredients.includes(newIngredient)) {
       toast.error('Ingrediente duplicado')
@@ -43,7 +89,6 @@ export function NewDish() {
       return
     }
     setIngredients((prev) => [...prev, newIngredient])
-    toast.success('Adicionado')
   }
 
   function handleRemove(value) {
@@ -60,7 +105,7 @@ export function NewDish() {
         className="back"
         onClick={() => navigate(-1)}
       />
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         <h1>Novo prato</h1>
         <div className="preview">
           {imagePreview.length > 0 && (
@@ -132,7 +177,7 @@ export function NewDish() {
           required
         />
         <div className="buttons">
-          <Button title={'Salvar'} type={'submit'} />
+          <Button title={'Salvar'} type={'submit'} onClick={handleSubmit} />
         </div>
       </form>
     </Wrapper>

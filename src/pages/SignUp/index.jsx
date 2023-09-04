@@ -22,7 +22,7 @@ export function SignUp() {
     }
     if (name && email && password) {
       await toast.promise(signUp({ name, email, password }), {
-        loading: 'Criando usuário...',
+        pending: 'Criando usuário...',
         success: {
           render() {
             navigate('/')

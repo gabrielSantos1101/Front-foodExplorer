@@ -1,30 +1,28 @@
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Add } from '../../components/Add'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
+import { Loader } from '../../components/Loader'
 import { Select } from '../../components/Select'
 import { Tag } from '../../components/Tag'
 import { Textarea } from '../../components/Textarea'
+import { api } from '../../services/api'
 import { Wrapper } from './styles'
 
 export function UpdateDish() {
   const params = useParams()
   const navigate = useNavigate()
-  const [description, setDescription] = useState('Maracja batido')
-  const [category, setCategory] = useState('Bebida')
-  const [price, setPrice] = useState('55')
-  const [name, setName] = useState('Suco de maracuja')
+  const [data, setData] = useState({})
+  const [description, setDescription] = useState('')
+  const [category, setCategory] = useState('')
+  const [price, setPrice] = useState('')
+  const [name, setName] = useState('')
   const [image, setImage] = useState('')
   const [imagePreview, setImagePreview] = useState([])
-  const [ingredients, setIngredients] = useState([
-    'maracuja',
-    'açucar',
-    'água',
-    'leite',
-  ])
+  const [ingredients, setIngredients] = useState([])
 
   function changeImage(image) {
     const previewURL = URL.createObjectURL(image)
@@ -50,6 +48,34 @@ export function UpdateDish() {
     setIngredients((prev) => prev.filter((item) => item !== value))
   }
 
+  useEffect(() => {
+    async function getDish() {
+      try {
+        const response = await api.get(`/dishes/${params.id}`)
+        console.log(response.data)
+        setData(response.data)
+        setCategory(response.data.dish.category)
+        setName(response.data.dish.name)
+        setDescription(response.data.dish.description)
+        setPrice(response.data.dish.price)
+        setImagePreview(response.data.dish.image)
+        setIngredients(
+          response.data.ingredients.map((item) => setIngredients(item.name)),
+        )
+      } catch (err) {
+        console.error(err)
+      }
+    }
+    getDish()
+  }, [params.id])
+
+  if (!data.dish) {
+    return (
+      <>
+        <Loader />
+      </>
+    )
+  }
   return (
     <Wrapper>
       <Button
@@ -63,7 +89,9 @@ export function UpdateDish() {
       <form>
         <h1>Editar prato</h1>
         <div className="preview">
-          {imagePreview.length > 0 && <img src={imagePreview} alt="" />}
+          {imagePreview.length > 0 && (
+            <img src={imagePreview} alt={`image de ${name}`} />
+          )}
         </div>
         <fieldset className="wrap">
           <label htmlFor="image">
