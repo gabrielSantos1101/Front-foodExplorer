@@ -5,7 +5,7 @@ export function CurrencyInput({
   placeholder,
   icon: Icon,
   label,
-  value,
+  onValueChange,
   ...rest
 }) {
   return (
@@ -15,7 +15,7 @@ export function CurrencyInput({
       <CurrencyFormat
         placeholder={placeholder}
         // value={value}
-        onValueChange={value}
+        onValueChange={onValueChange}
         intlConfig={{ locale: 'pt-BR', currency: 'BRL' }}
         minLength={1}
         allowNegativeValue={false}

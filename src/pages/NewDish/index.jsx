@@ -4,11 +4,13 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Add } from '../../components/Add'
 import { Button } from '../../components/Button'
+import { CurrencyInput } from '../../components/CurrencyInput'
 import { Input } from '../../components/Input'
 import { Select } from '../../components/Select'
 import { Tag } from '../../components/Tag'
 import { Textarea } from '../../components/Textarea'
 import { api, imageApi } from '../../services/api'
+import { handleBack } from '../../utils/handleBack'
 import { Wrapper } from './styles'
 
 export function NewDish() {
@@ -58,7 +60,7 @@ export function NewDish() {
           pending: 'Enviando dados...',
           success: {
             render() {
-              navigate('/')
+              handleBack(navigate)
               return 'Prato criado com sucesso 😎'
             },
           },
@@ -94,7 +96,7 @@ export function NewDish() {
         hasIcon
         icon={CaretLeft}
         className="back"
-        onClick={() => navigate(-1)}
+        onClick={() => handleBack(navigate)}
       />
       <form onSubmit={(e) => e.preventDefault()}>
         <h1>Novo prato</h1>
@@ -148,14 +150,10 @@ export function NewDish() {
               ))}
             </section>
           </div>
-          <Input
+          <CurrencyInput
             label={'Preço'}
             placeholder={'R$ 00,00'}
-            onChange={(e) => {
-              setPrice(e.target.value)
-            }}
-            type={'number'}
-            value={price}
+            onValueChange={(value, _, values) => setPrice(values.float)}
             required
           />
         </fieldset>

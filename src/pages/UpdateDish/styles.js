@@ -3,7 +3,7 @@ import { styled } from 'styled-components'
 export const Wrapper = styled.div`
   flex: 1;
   width: 100%;
-  max-width: 1440px;
+  max-width: 90rem;
   margin-inline: auto;
 
   & .back {
@@ -141,7 +141,7 @@ export const Wrapper = styled.div`
         }
       }
 
-      & button:last-child:hover {
+      & button[type='submit']:hover {
         background: ${({ theme }) => theme.COLORS.TOMATO_200};
       }
     }

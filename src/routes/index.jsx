@@ -5,6 +5,5 @@ import { AuthRoutes } from './auth.routes'
 
 export function Routes() {
   const { token } = useAuth()
-
   return <BrowserRouter>{token ? <AppRoutes /> : <AuthRoutes />}</BrowserRouter>
 }

@@ -3,13 +3,16 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Add } from '../../components/Add'
+import { AlertDialog } from '../../components/Alert'
 import { Button } from '../../components/Button'
+import { CurrencyInput } from '../../components/CurrencyInput'
 import { Input } from '../../components/Input'
 import { Loader } from '../../components/Loader'
 import { Select } from '../../components/Select'
 import { Tag } from '../../components/Tag'
 import { Textarea } from '../../components/Textarea'
-import { api } from '../../services/api'
+import { api, imageApi } from '../../services/api'
+import { handleBack } from '../../utils/handleBack'
 import { Wrapper } from './styles'
 
 export function UpdateDish() {
@@ -33,35 +36,100 @@ export function UpdateDish() {
 
   function handleAddIngredient(newIngredient) {
     if (ingredients.includes(newIngredient)) {
-      toast.error('Ingrediente duplicado')
+      toast.info('Ingrediente duplicado')
       return
     }
     if (newIngredient === '') {
-      toast.error('Ingrediente vazio')
+      toast.info('Ingrediente vazio')
       return
     }
     setIngredients((prev) => [...prev, newIngredient])
-    toast.success('Adicionado')
   }
 
   function handleRemove(value) {
     setIngredients((prev) => prev.filter((item) => item !== value))
   }
 
+  async function handleDelete() {
+    await api.delete(`/dishes/${params.id}`)
+    toast.success('Prato deletado 🫡')
+    handleBack(navigate)
+  }
+
+  async function handleSubmit() {
+    if (
+      !description ||
+      !category ||
+      !price ||
+      !name ||
+      ingredients.length === 0
+    ) {
+      toast.info('preencha todos os campos')
+      return
+    }
+    const formData = new FormData()
+    formData.append('photo', image)
+    try {
+      if (!formData.get('photo')) {
+        await toast.promise(
+          api.put(`/dishes/${params.id}`, {
+            description,
+            category,
+            price,
+            name,
+            ingredients,
+          }),
+          {
+            pending: 'Enviando dados...',
+            success: {
+              render() {
+                handleBack(navigate)
+                return 'Prato atualizado com sucesso 🙂'
+              },
+            },
+            error: 'Erro ao atualizar prato',
+          },
+        )
+      } else {
+        await toast.promise(
+          imageApi.post('', formData).then((res) =>
+            api.put(`/dishes/${params.id}`, {
+              description,
+              category,
+              price,
+              name,
+              ingredients,
+              image: res.data.url,
+            }),
+          ),
+          {
+            pending: 'Enviando dados...',
+            success: {
+              render() {
+                handleBack(navigate)
+                return 'Prato atualizado com sucesso 🙂'
+              },
+            },
+            error: 'Erro ao atualizar Prato',
+          },
+        )
+      }
+    } catch (err) {
+      console.error(err)
+    }
+  }
+
   useEffect(() => {
     async function getDish() {
       try {
         const response = await api.get(`/dishes/${params.id}`)
-        console.log(response.data)
         setData(response.data)
         setCategory(response.data.dish.category)
         setName(response.data.dish.name)
         setDescription(response.data.dish.description)
         setPrice(response.data.dish.price)
         setImagePreview(response.data.dish.image)
-        setIngredients(
-          response.data.ingredients.map((item) => setIngredients(item.name)),
-        )
+        setIngredients(response.data.ingredients.map((item) => item.name))
       } catch (err) {
         console.error(err)
       }
@@ -84,9 +152,9 @@ export function UpdateDish() {
         hasIcon
         icon={CaretLeft}
         className="back"
-        onClick={() => navigate(-1)}
+        onClick={() => handleBack(navigate)}
       />
-      <form>
+      <form onSubmit={(e) => e.preventDefault()}>
         <h1>Editar prato</h1>
         <div className="preview">
           {imagePreview.length > 0 && (
@@ -138,14 +206,11 @@ export function UpdateDish() {
               ))}
             </section>
           </div>
-          <Input
+          <CurrencyInput
             label={'Preço'}
             placeholder={'R$ 00,00'}
-            onChange={(e) => {
-              setPrice(e.target.value)
-            }}
-            type={'number'}
             value={price}
+            onValueChange={(value, _, values) => setPrice(values.float)}
             required
           />
         </fieldset>
@@ -158,8 +223,14 @@ export function UpdateDish() {
           required
         />
         <div className="buttons">
-          <Button title={'Excluir prato'} />
-          <Button title={'Salvar alterações'} type={'submit'} />
+          <AlertDialog onClick={handleDelete}>
+            <Button title={'Excluir prato'} className="button" />
+          </AlertDialog>
+          <Button
+            title={'Salvar alterações'}
+            type={'submit'}
+            onClick={handleSubmit}
+          />
         </div>
       </form>
     </Wrapper>
