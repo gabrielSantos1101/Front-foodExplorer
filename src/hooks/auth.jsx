@@ -19,7 +19,8 @@ export function AuthProvider({ children }) {
       api.defaults.headers.Authorization = `Bearer ${token}`
       localStorage.setItem('token', token)
 
-      setData({ token })
+      const { isAdmin } = jwtDecode(token)
+      setData({ token, isAdmin: !!Number(isAdmin) })
     } catch (err) {
       setLoading(false)
       console.error(err)
@@ -70,10 +71,10 @@ export function AuthProvider({ children }) {
     api.defaults.headers.Authorization = `Bearer ${token}`
 
     if (token) {
-      const { isAdmin } = jwtDecode(localStorage.getItem('token'))
-      setData({ token, isAdmin: !!isAdmin })
+      const { isAdmin } = jwtDecode(token)
+      setData({ token, isAdmin: !!Number(isAdmin) })
     }
-  }, [])
+  }, [loading])
 
   return (
     <AuthContext.Provider
@@ -82,8 +83,8 @@ export function AuthProvider({ children }) {
         signUp,
         signOut,
         loading,
-        isAdmin: data.isAdmin,
         token: data.token,
+        isAdmin: data.isAdmin,
         handleErrorFetchData,
       }}
     >
