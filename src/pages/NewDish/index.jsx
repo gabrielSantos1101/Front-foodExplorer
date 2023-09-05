@@ -9,6 +9,7 @@ import { Input } from '../../components/Input'
 import { Select } from '../../components/Select'
 import { Tag } from '../../components/Tag'
 import { Textarea } from '../../components/Textarea'
+import { useAuth } from '../../hooks/auth'
 import { api, imageApi } from '../../services/api'
 import { handleBack } from '../../utils/handleBack'
 import { Wrapper } from './styles'
@@ -22,12 +23,18 @@ export function NewDish() {
   const [image, setImage] = useState('')
   const [imagePreview, setImagePreview] = useState([])
   const [ingredients, setIngredients] = useState([])
+  const { isAdmin, handleErrorFetchData } = useAuth()
 
   function changeImage(image) {
     const previewURL = URL.createObjectURL(image)
 
     setImagePreview(previewURL)
     setImage(image)
+  }
+
+  if (!isAdmin) {
+    toast.info('Você não tem permissão')
+    navigate('/')
   }
 
   async function handleSubmit() {
@@ -69,6 +76,7 @@ export function NewDish() {
       )
     } catch (err) {
       console.error(err)
+      handleErrorFetchData(err)
     }
   }
 

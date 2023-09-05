@@ -11,11 +11,13 @@ import { Loader } from '../../components/Loader'
 import { Select } from '../../components/Select'
 import { Tag } from '../../components/Tag'
 import { Textarea } from '../../components/Textarea'
+import { useAuth } from '../../hooks/auth'
 import { api, imageApi } from '../../services/api'
 import { handleBack } from '../../utils/handleBack'
 import { Wrapper } from './styles'
 
 export function UpdateDish() {
+  const { handleErrorFetchData } = useAuth()
   const params = useParams()
   const navigate = useNavigate()
   const [data, setData] = useState({})
@@ -116,6 +118,7 @@ export function UpdateDish() {
       }
     } catch (err) {
       console.error(err)
+      handleErrorFetchData(err)
     }
   }
 

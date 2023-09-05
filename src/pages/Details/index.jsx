@@ -4,11 +4,13 @@ import { useNavigate, useParams } from 'react-router-dom'
 import { Button } from '../../components/Button'
 import { Loader } from '../../components/Loader'
 import { Tag } from '../../components/Tag'
+import { useAuth } from '../../hooks/auth'
 import { api } from '../../services/api'
 import { handleBack } from '../../utils/handleBack'
 import { Amount, Wrap } from './styles'
 
 export function Details() {
+  const { handleErrorFetchData } = useAuth()
   const navigate = useNavigate()
   const dish = useParams()
   const [data, setData] = useState({})
@@ -39,6 +41,7 @@ export function Details() {
         setPrice(response.data.dish.price)
       } catch (err) {
         console.error(err)
+        handleErrorFetchData(err)
       }
     }
 

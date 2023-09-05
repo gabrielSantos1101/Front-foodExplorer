@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
+import { Loader } from '../../components/Loader'
 import { Logo } from '../../components/Logo'
 import { useAuth } from '../../hooks/auth'
 import { Form, Wrapper } from './styles'
@@ -15,6 +16,9 @@ export function SignIn() {
   function handleSignIn() {
     signIn({ email, password })
   }
+
+  if (loading) return <Loader />
+
   return (
     <Wrapper>
       <Logo />

@@ -4,10 +4,12 @@ import '@splidejs/splide/css/skyblue'
 import { useEffect, useState } from 'react'
 import macarons from '../../assets/macarons.webp'
 import { Section } from '../../components/Section'
+import { useAuth } from '../../hooks/auth'
 import { api } from '../../services/api'
 import { Wrapper } from './styles'
 
 export function Home() {
+  const { handleErrorFetchData } = useAuth()
   const [categories, setCategories] = useState([])
   const [meals, setMeals] = useState([])
   const [desserts, setDesserts] = useState([])
@@ -58,6 +60,7 @@ export function Home() {
         )
       } catch (err) {
         console.error(err)
+        handleErrorFetchData(err)
       }
     }
     getDishs()
