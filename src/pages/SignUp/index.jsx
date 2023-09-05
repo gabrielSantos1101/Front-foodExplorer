@@ -6,6 +6,7 @@ import { Button } from '../../components/Button'
 import { Input } from '../../components/Input'
 import { Logo } from '../../components/Logo'
 import { useAuth } from '../../hooks/auth'
+import { handleBack } from '../../utils/handleBack'
 import { Form, Wrapper } from './styles'
 
 export function SignUp() {
@@ -25,7 +26,7 @@ export function SignUp() {
         pending: 'Criando usuário...',
         success: {
           render() {
-            navigate('/')
+            handleBack(navigate)
             return 'Usuário criado com sucesso!'
           },
         },
@@ -70,7 +71,7 @@ export function SignUp() {
           title="Já tenho uma conta"
           isText
           isCenter
-          onClick={() => navigate('/')}
+          onClick={() => handleBack(navigate)}
         />
       </div>
     </Wrapper>

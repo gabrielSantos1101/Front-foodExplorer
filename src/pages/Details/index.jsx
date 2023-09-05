@@ -5,6 +5,7 @@ import { Button } from '../../components/Button'
 import { Loader } from '../../components/Loader'
 import { Tag } from '../../components/Tag'
 import { api } from '../../services/api'
+import { handleBack } from '../../utils/handleBack'
 import { Amount, Wrap } from './styles'
 
 export function Details() {
@@ -58,7 +59,7 @@ export function Details() {
         isText
         hasIcon
         icon={CaretLeft}
-        onClick={() => navigate(-1)}
+        onClick={() => handleBack(navigate)}
       />
       <img src={`${data.dish.image}`} alt="Dish" />
       <div>
