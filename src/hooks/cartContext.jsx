@@ -1,44 +1,40 @@
-import { createContext, useContext, useState } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 
 const CartContext = createContext()
 
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState({
-    items: [],
-    total: 0,
-  })
+  const [cart, setCart] = useState([])
 
   function addItem(item) {
-    // console.log(item)
-    // setCart((prevCart) => ({
-    //   ...prevCart,
-    //   items: [...prevCart.items, item],
-    // }))
-    // console.log(cart)
+    const isItemInCart = cart.find((cartItem) => cartItem.id === item.id)
 
-    const existingItem = cart.items.find(
-      (existingItem) => existingItem.id === item.id,
-    )
-
-    if (existingItem) {
-      const prevCart = cart
-      cart.items = [
-        ...prevCart.items,
-        { ...existingItem, count: existingItem.count + 1 },
-      ]
+    if (isItemInCart) {
+      setCart(
+        cart.map((cartItem) =>
+          cartItem.id === item.id
+            ? { ...cartItem, count: cartItem.count + item.count }
+            : cartItem,
+        ),
+      )
     } else {
-      cart.items.push(item)
+      setCart([...cart, { ...item, count: item.count }])
     }
-
-    setCart(cart)
-    saveCart(cart)
   }
 
   function removeItem(id) {
-    setCart((prevCart) => ({
-      ...prevCart,
-      items: prevCart.items.filter((item) => item.id !== id),
-    }))
+    const isItemInCart = cart.find((cartItem) => cartItem.id === id)
+
+    if (isItemInCart.quantity === 1) {
+      setCart(cart.filter((cartItem) => cartItem.id !== id))
+    } else {
+      setCart(
+        cart.map((cartItem) =>
+          cartItem.id === id
+            ? { ...cartItem, count: cartItem.count - 1 }
+            : cartItem,
+        ),
+      )
+    }
   }
 
   function clearCart() {
@@ -48,30 +44,18 @@ export function CartProvider({ children }) {
     })
   }
 
-  function saveCart(cart) {
-    const prevCart = getCart()
-    if (prevCart === cart) {
-      return
+  useEffect(() => {
+    if (cart.length > 0) {
+      localStorage.setItem('cartItems', JSON.stringify(cart))
     }
+  }, [cart])
 
-    const cartJson = JSON.stringify(cart)
-    document.cookie = 'cart=' + cartJson
-  }
-
-  function getCart() {
-    const cookies = document.cookie
-    if (!cookies) {
-      return undefined
+  useEffect(() => {
+    const cartItems = localStorage.getItem('cartItems')
+    if (cartItems) {
+      setCart(JSON.parse(cartItems))
     }
-
-    const cartJson = cookies
-      .split(';')
-      .filter((cookie) => cookie.startsWith('cart'))[0]
-      .split('=')[1]
-    const cart = JSON.parse(cartJson)
-    console.log(cart)
-    return cart
-  }
+  }, [])
 
   return (
     <CartContext.Provider
@@ -80,8 +64,6 @@ export function CartProvider({ children }) {
         addItem,
         removeItem,
         clearCart,
-        saveCart,
-        getCart,
       }}
     >
       {children}
@@ -92,35 +74,4 @@ export function CartProvider({ children }) {
 export function useCart() {
   const context = useContext(CartContext)
   return context
-}
-
-function CartItem({ item }) {
-  const { cart, addItem, removeItem } = useCart()
-
-  const handleAdd = () => addItem(item)
-  const handleRemove = () => removeItem(item.id)
-
-  return (
-    <div>
-      <h3>{item.name}</h3>
-      <p>R$ {item.price}</p>
-      <button onClick={handleAdd}>Adicionar</button>
-      <button onClick={handleRemove}>Remover</button>
-    </div>
-  )
-}
-
-function CartList() {
-  const { cart, calculateTotal } = useCart()
-
-  return (
-    <ul>
-      {cart.items.map((item) => (
-        <li key={item.id}>
-          <CartItem item={item} />
-        </li>
-      ))}
-      <h3>Total: R$ {calculateTotal()}</h3>
-    </ul>
-  )
 }
