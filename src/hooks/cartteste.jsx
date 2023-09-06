@@ -42,7 +42,9 @@ export function CartProvider2({ children }) {
   }
 
   useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems))
+    if (cartItems.length > 0) {
+      localStorage.setItem('cartItems', JSON.stringify(cartItems))
+    }
   }, [cartItems])
 
   useEffect(() => {
