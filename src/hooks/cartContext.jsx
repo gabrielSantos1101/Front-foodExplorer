@@ -21,6 +21,10 @@ export function CartProvider({ children }) {
     }
   }
 
+  function getCartCount() {
+    return cart.reduce((acc, item) => acc + item.count, 0)
+  }
+
   function removeItem(id) {
     const isItemInCart = cart.find((cartItem) => cartItem.id === id)
 
@@ -64,6 +68,7 @@ export function CartProvider({ children }) {
         addItem,
         removeItem,
         clearCart,
+        getCartCount,
       }}
     >
       {children}
