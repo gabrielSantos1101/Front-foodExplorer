@@ -12,6 +12,7 @@
   "dependencies": {
     "@phosphor-icons/react": "^2.0.10",
     "@radix-ui/react-alert-dialog": "^1.0.4",
+    "@radix-ui/react-dropdown-menu": "^2.0.5",
     "@radix-ui/react-select": "^1.2.2",
     "@splidejs/splide": "^4.1.4",
     "axios": "^1.5.0",
