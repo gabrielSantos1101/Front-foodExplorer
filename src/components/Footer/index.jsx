@@ -5,7 +5,7 @@ export function Footer() {
   return (
     <Wrap>
       <Logo />
-      <h4>© 2023 - Todos os direitos reservados.</h4>
+      <h3>© 2023 - Todos os direitos reservados.</h3>
     </Wrap>
   )
 }

@@ -1,6 +1,13 @@
-{
+ {
     "routes": [
       { "handle": "filesystem" },
-      { "src": "/(.*)", "status": 404, "dest": "/" }
+      { "src": "/(.*)", "status": 404, "dest": "/" },
+      {
+        "src": "/(.*)",
+        "headers": {
+          "Cache-Control": "s-maxage=432000, stale-while-revalidate=86400"
+        },
+        "dest": "/index.html"
+      }
     ]
   }

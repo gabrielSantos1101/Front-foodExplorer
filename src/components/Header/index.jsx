@@ -87,8 +87,8 @@ export function Header() {
         />
       </label>
       <div className="sideMenu">
-        <button className="order">
-          {getCartCount && <span>{getCartCount()}</span>}
+        <button className="order" title="pedidos">
+          {!!getCartCount() && <span>{getCartCount()}</span>}
           <p>Pedidos</p>
           <Receipt size={32} />
         </button>

@@ -11,7 +11,7 @@ export const Wrap = styled.header`
   background-color: ${({ theme }) => theme.DARK.D700};
   padding: 1.75rem clamp(2rem, -1.703rem + 6.3366vw, 4rem);
 
-  div {
+  & div {
     margin-bottom: 0;
   }
 

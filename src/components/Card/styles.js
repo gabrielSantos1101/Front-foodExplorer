@@ -122,6 +122,8 @@ export const Amount = styled.div`
     justify-content: center;
     gap: 1rem;
     align-items: center;
+    position: relative;
+    z-index: 3;
 
     font-size: 1.375rem;
     margin-top: 0.75rem;

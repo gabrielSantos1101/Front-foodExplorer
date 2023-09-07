@@ -30,21 +30,23 @@ export function Card({ title, description, price, image, date, id }) {
     setLike(!like)
   }
 
-  function handleMinusCount() {
+  function handlePlusCount(e) {
+    e.preventDefault()
+    setCount((prev) => prev + 1)
+  }
+
+  function handleMinusCount(e) {
+    e.preventDefault()
     if (count === 1) {
       return
     }
     setCount((prev) => prev - 1)
   }
 
-  function handlePlusCount() {
-    setCount((prev) => prev + 1)
-  }
-
   return (
     <Wrap $isAdmin={isAdmin} to={`/dish/${id}`}>
       {!isAdmin ? (
-        <Heart>
+        <Heart onClick={(e) => e.stopPropagation()}>
           <input type="checkbox" onChange={handleSetLike} />
           <div className="checkmark">
             <svg viewBox="0 0 256 256">
@@ -71,12 +73,9 @@ export function Card({ title, description, price, image, date, id }) {
       <img
         src={image}
         alt="imagem macarons caindo junto de algumas frutas vermelhas"
-        onClick={() => navigate(`/dish/${id}`)}
       />
       <div className="texts">
-        <h2 onClick={() => navigate(`/dish/${id}`)} title={title}>
-          {title}
-        </h2>
+        <h2>{title}</h2>
         <p>{description}</p>
       </div>
 
@@ -84,13 +83,16 @@ export function Card({ title, description, price, image, date, id }) {
         <span>{formatedPrice}</span>
 
         <div className="stepper">
-          <Minus onClick={() => handleMinusCount()} />
+          <Minus onClick={(e) => handleMinusCount(e)} />
           <span>{count}</span>
-          <Plus onClick={() => handlePlusCount()} />
+          <Plus onClick={(e) => handlePlusCount(e)} />
         </div>
         <Button
           title={'Adicionar'}
-          onClick={() => addItem({ id, count, price, title, image })}
+          onClick={(e) => {
+            e.preventDefault()
+            addItem({ id, count, price, title, image })
+          }}
         />
       </Amount>
     </Wrap>
