@@ -5,6 +5,8 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ThemeProvider } from 'styled-components'
 
 import { AuthProvider } from './hooks/auth'
+import { CartProvider } from './hooks/cartContext'
+import { SearchProvider } from './hooks/search'
 import { Routes } from './routes'
 import GlobeStyle from './styles/global'
 import theme from './styles/theme'
@@ -14,7 +16,11 @@ ReactDOM.createRoot(document.getElementById('root')).render(
     <ThemeProvider theme={theme}>
       <GlobeStyle />
       <AuthProvider>
-        <Routes />
+        <SearchProvider>
+          <CartProvider>
+            <Routes />
+          </CartProvider>
+        </SearchProvider>
       </AuthProvider>
       <ToastContainer
         position="top-right"

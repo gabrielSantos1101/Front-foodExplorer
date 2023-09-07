@@ -1,19 +1,14 @@
 // import Splide from '@splidejs/splide'
 import { Splide } from '@splidejs/splide'
 import '@splidejs/splide/css/skyblue'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import macarons from '../../assets/macarons.webp'
 import { Section } from '../../components/Section'
-import { useAuth } from '../../hooks/auth'
-import { api } from '../../services/api'
+import { useSearch } from '../../hooks/search'
 import { Wrapper } from './styles'
 
 export function Home() {
-  const { handleErrorFetchData } = useAuth()
-  const [categories, setCategories] = useState([])
-  const [meals, setMeals] = useState([])
-  const [desserts, setDesserts] = useState([])
-  const [drinks, setDrinks] = useState([])
+  const { categories, meals, desserts, drinks } = useSearch()
 
   // garante que o slider não vai bugar porque a lib não atualizou a versão do react obs:"talvez eu não usaria isso em produção ta 😁"
   useEffect(() => {
@@ -33,38 +28,6 @@ export function Home() {
       autoWidth: true,
     }).mount()
   }, [meals, desserts, drinks])
-
-  useEffect(() => {
-    async function getDishs() {
-      try {
-        const response = await api.get('/dishes')
-
-        // setCategories(await response.data.map((item) => item.category))
-        setCategories(
-          response.data.reduce((acc, item) => {
-            if (!acc.includes(item.category)) {
-              acc.push(item.category)
-            }
-            return acc
-          }, []),
-        )
-
-        setMeals(
-          await response.data.filter((item) => item.category === 'Refeição'),
-        )
-        setDesserts(
-          await response.data.filter((item) => item.category === 'Sobremesa'),
-        )
-        setDrinks(
-          await response.data.filter((item) => item.category === 'Bebida'),
-        )
-      } catch (err) {
-        console.error(err)
-        handleErrorFetchData(err)
-      }
-    }
-    getDishs()
-  }, [])
 
   return (
     <Wrapper>

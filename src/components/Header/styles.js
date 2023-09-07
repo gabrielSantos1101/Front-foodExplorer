@@ -15,36 +15,87 @@ export const Wrap = styled.header`
     margin-bottom: 0;
   }
 
-  & .order {
-    position: relative;
+  & .sideMenu {
+    display: flex;
 
-    background: none;
-    border: none;
+    & .order {
+      display: flex;
+      flex-direction: row-reverse;
+      align-items: center;
+      position: relative;
 
-    & span {
-      position: absolute;
-      display: grid;
-      place-items: center;
+      background: none;
+      border: none;
 
-      width: 1.125rem;
-      height: 1.125rem;
+      & p {
+        display: none;
+      }
 
-      top: -0.1875rem;
-      right: -0.1875rem;
+      & span {
+        position: absolute;
+        display: grid;
+        place-items: center;
 
-      background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
-      border-radius: 999999px;
+        width: 1.125rem;
+        height: 1.125rem;
+
+        top: -0.1875rem;
+        right: -0.1875rem;
+
+        background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
+        border-radius: 999999px;
+      }
+    }
+
+    & .dropMenu {
+      display: none;
+    }
+
+    @media (${({ theme }) => theme.SCREENS.LG}) {
+      gap: 2rem;
+
+      & .order {
+        background: ${({ theme }) => theme.COLORS.TOMATO_100};
+        gap: 0.5rem;
+
+        flex: 1;
+        max-width: 13.5rem;
+
+        padding-inline: clamp(0.625rem, 0.0396rem + 2.1782vw, 2rem);
+        border-radius: 0.3125rem;
+
+        & p {
+          display: initial;
+        }
+      }
+
+      & .dropMenu {
+        display: initial;
+      }
     }
   }
 
-  & label:has(.search) {
+  & label:has(input[type='search']) {
+    position: relative;
     display: none;
     flex: 1;
+
+    & svg {
+      position: absolute;
+      top: 50%;
+      left: 0.7rem;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+
+    & input {
+      padding-left: 3rem;
+    }
   }
 
   @media (${({ theme }) => theme.SCREENS.LG}) {
     justify-content: space-evenly;
-    label:has(.search) {
+    label:has(input[type='search']) {
       display: initial;
       max-width: 56.25rem;
     }
@@ -119,6 +170,20 @@ export const OpenMenu = styled.div`
   padding-top: 9.1875rem;
 
   background: ${({ theme }) => theme.DARK.D400};
+
+  & label:has(input[type='search']) {
+    display: initial !important;
+    position: relative;
+    flex: unset;
+
+    & svg {
+      position: absolute;
+    }
+
+    & input {
+      padding-left: 3rem;
+    }
+  }
 
   & h1 {
     font-size: 1.3125rem;

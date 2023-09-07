@@ -1,17 +1,23 @@
-import { Receipt } from '@phosphor-icons/react'
+import { MagnifyingGlass, Receipt } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 
 import { useAuth } from '../../hooks/auth'
+import { useCart } from '../../hooks/cartContext'
+import { useSearch } from '../../hooks/search'
 import { Button } from '../Button'
+import { DropMenu } from '../DropMenu'
 import { Input } from '../Input'
 import { Logo } from '../Logo'
 import { Menu, OpenMenu, Wrap } from './styles'
 
-export function Header({ count }) {
+export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
   const { signOut } = useAuth()
+  const { setSearch } = useSearch()
+  const [count, setCount] = useState()
+  const { getCartCount } = useCart()
 
   function handleMenuOpen() {
     setMenuOpen(!menuOpen)
@@ -33,11 +39,15 @@ export function Header({ count }) {
       {menuOpen && (
         <OpenMenu>
           <h1>Menu</h1>
-          <Input
-            type="search"
-            placeholder={'Busque por pratos ou ingrediente'}
-            onChange={(e) => console.log(e.target.value)}
-          />
+          <label>
+            <MagnifyingGlass size={28} />
+
+            <Input
+              type="search"
+              placeholder={'Busque por pratos ou ingrediente'}
+              onChange={(e) => setSearch(e.target.value)}
+            />
+          </label>
           <div>
             <Button
               title={'Novo prato'}
@@ -67,16 +77,23 @@ export function Header({ count }) {
         </label>
       </Menu>
       <Logo />
-      <Input
-        className="search"
-        type="search"
-        placeholder={'Busque por pratos ou ingrediente'}
-        onChange={(e) => console.log(e.target.value)}
-      />
-      <button className="order">
-        {count && <span>{count}</span>}
-        <Receipt size={32} />
-      </button>
+      <label className="search">
+        <MagnifyingGlass size={28} />
+
+        <Input
+          type="search"
+          placeholder={'Busque por pratos ou ingrediente'}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+      </label>
+      <div className="sideMenu">
+        <button className="order">
+          <p>Pedidos</p>
+          {count && <span>{count}</span>}
+          <Receipt size={32} />
+        </button>
+        <DropMenu className="dropMenu" />
+      </div>
     </Wrap>
   )
 }
