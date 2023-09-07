@@ -1,8 +1,22 @@
 import { CaretRight } from '@phosphor-icons/react'
+import { Splide } from '@splidejs/splide'
+import '@splidejs/splide/css/skyblue'
+import { useEffect } from 'react'
 import { Card } from '../Card'
 import { Wrap } from './styles'
 
-export function Section({ title, data, id }) {
+export function Section({ title, data }) {
+  const id = crypto.randomUUID()
+
+  // garante que o slider não vai bugar porque a lib não atualizou a versão do react obs:"talvez eu não usaria isso em produção ta 😁"
+  useEffect(() => {
+    new Splide(`#splide${id}`, {
+      focus: 'left',
+      pagination: false,
+      autoWidth: true,
+    }).mount()
+  }, [data, id])
+
   return (
     <Wrap>
       <h2>{title}</h2>

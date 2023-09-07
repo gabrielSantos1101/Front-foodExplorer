@@ -1,9 +1,11 @@
 import { createContext, useContext, useEffect, useState } from 'react'
+import { useAuth } from './auth'
 
 const CartContext = createContext()
 
 export function CartProvider({ children }) {
   const [cart, setCart] = useState([])
+  const { token } = useAuth()
 
   function addItem(item) {
     const isItemInCart = cart.find((cartItem) => cartItem.id === item.id)
@@ -59,7 +61,7 @@ export function CartProvider({ children }) {
     if (cartItems) {
       setCart(JSON.parse(cartItems))
     }
-  }, [])
+  }, [token])
 
   return (
     <CartContext.Provider

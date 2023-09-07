@@ -44,6 +44,15 @@ export const Wrap = styled.header`
 
         background-color: ${({ theme }) => theme.COLORS.TOMATO_100};
         border-radius: 999999px;
+
+        @media (${({ theme }) => theme.SCREENS.LG}) {
+          position: relative;
+          right: unset;
+          top: 1px;
+          width: unset;
+          height: unset;
+          background: none;
+        }
       }
     }
 

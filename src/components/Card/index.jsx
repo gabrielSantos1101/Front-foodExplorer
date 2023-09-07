@@ -2,6 +2,7 @@ import { Minus, Pencil, Plus } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
+import { useCart } from '../../hooks/cartContext'
 import { Button } from '../Button'
 import { Amount, Heart, Wrap } from './styles'
 
@@ -10,6 +11,7 @@ export function Card({ title, description, price, image, date, id }) {
   const navigate = useNavigate()
   const [count, setCount] = useState(1)
   const { isAdmin } = useAuth()
+  const { addItem } = useCart()
 
   const formatedPrice = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -40,7 +42,7 @@ export function Card({ title, description, price, image, date, id }) {
   }
 
   return (
-    <Wrap $isAdmin={isAdmin}>
+    <Wrap $isAdmin={isAdmin} to={`/dish/${id}`}>
       {!isAdmin ? (
         <Heart>
           <input type="checkbox" onChange={handleSetLike} />
@@ -58,7 +60,10 @@ export function Card({ title, description, price, image, date, id }) {
         </Heart>
       ) : (
         <Pencil
-          onClick={() => navigate(`/update/${id}`)}
+          onClick={(e) => {
+            e.stopPropagation()
+            navigate(`/update/${id}`)
+          }}
           className="cardIcon"
         />
       )}
@@ -83,7 +88,10 @@ export function Card({ title, description, price, image, date, id }) {
           <span>{count}</span>
           <Plus onClick={() => handlePlusCount()} />
         </div>
-        <Button title={'Adicionar'} />
+        <Button
+          title={'Adicionar'}
+          onClick={() => addItem({ id, count, price, title, image })}
+        />
       </Amount>
     </Wrap>
   )

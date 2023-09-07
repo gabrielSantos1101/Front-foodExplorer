@@ -1,4 +1,10 @@
-import { createContext, useContext, useEffect, useState } from 'react'
+import {
+  createContext,
+  useContext,
+  useDeferredValue,
+  useEffect,
+  useState,
+} from 'react'
 import { api } from '../services/api'
 import { useAuth } from './auth'
 
@@ -11,12 +17,13 @@ export function SearchProvider({ children }) {
   const [drinks, setDrinks] = useState([])
   const [search, setSearch] = useState('')
   const { token, handleErrorFetchData } = useAuth()
+  const searchQuery = useDeferredValue(search)
 
   useEffect(() => {
     async function getDishs() {
       if (token) {
         try {
-          const response = await api.get(`/dishes?search=${search}`)
+          const response = await api.get(`/dishes?search=${searchQuery}`)
 
           setCategories(
             response.data.reduce((acc, item) => {
@@ -43,7 +50,7 @@ export function SearchProvider({ children }) {
       }
     }
     getDishs()
-  }, [search, token])
+  }, [searchQuery, token])
 
   return (
     <SearchContext.Provider

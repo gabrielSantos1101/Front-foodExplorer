@@ -88,8 +88,8 @@ export function Header() {
       </label>
       <div className="sideMenu">
         <button className="order">
+          {getCartCount && <span>{getCartCount()}</span>}
           <p>Pedidos</p>
-          {count && <span>{count}</span>}
           <Receipt size={32} />
         </button>
         <DropMenu className="dropMenu" />

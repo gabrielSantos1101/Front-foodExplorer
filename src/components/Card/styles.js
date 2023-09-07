@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom'
 import { styled } from 'styled-components'
 
-export const Wrap = styled.article`
+export const Wrap = styled(Link)`
   display: flex;
   flex-direction: column;
   justify-content: space-between;

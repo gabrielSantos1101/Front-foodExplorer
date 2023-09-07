@@ -4,7 +4,7 @@ export const Wrap = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 1.75rem clamp(2rem, -1.703rem + 6.3366vw, 4rem);
+  padding: 1.75rem clamp(2rem, -1.2782rem + 12.198vw, 9.7rem);
   font-size: 0.75rem;
   background: ${({ theme }) => theme.DARK.D600};
 
