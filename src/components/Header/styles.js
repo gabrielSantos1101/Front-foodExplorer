@@ -18,6 +18,14 @@ export const Wrap = styled.header`
   & .sideMenu {
     display: flex;
 
+    & svg {
+      cursor: pointer;
+
+      &:hover {
+        fill: ${({ theme }) => theme.COLORS.CAKE_200};
+      }
+    }
+
     & .order {
       display: flex;
       flex-direction: row-reverse;

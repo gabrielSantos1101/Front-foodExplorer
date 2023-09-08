@@ -1,10 +1,11 @@
-import { MagnifyingGlass, Receipt } from '@phosphor-icons/react'
+import { MagnifyingGlass, Receipt, SignIn } from '@phosphor-icons/react'
 import { useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 
 import { useAuth } from '../../hooks/auth'
 import { useCart } from '../../hooks/cartContext'
 import { useSearch } from '../../hooks/search'
+import { handleBack } from '../../utils/handleBack'
 import { Button } from '../Button'
 import { DropMenu } from '../DropMenu'
 import { Input } from '../Input'
@@ -14,6 +15,7 @@ import { Menu, OpenMenu, Wrap } from './styles'
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
+  const page = useLocation().pathname
   const { signOut, isAdmin, token } = useAuth()
   const { setSearch } = useSearch()
   const { getCartCount } = useCart()
@@ -38,53 +40,94 @@ export function Header() {
       {menuOpen && (
         <OpenMenu>
           <h1>Menu</h1>
-          <label>
-            <MagnifyingGlass size={28} />
+          {token && (
+            <label>
+              <MagnifyingGlass size={28} />
 
-            <Input
-              type="search"
-              placeholder={'Busque por pratos ou ingrediente'}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </label>
+              <Input
+                type="search"
+                placeholder={'Busque por pratos ou ingrediente'}
+                onChange={(e) => setSearch(e.target.value)}
+              />
+            </label>
+          )}
           {isAdmin && (
             <div>
               <Button
                 title={'Novo prato'}
                 isText
-                onClick={() => handleNavigate('/new')}
+                onClick={() => {
+                  handleNavigate('/new')
+                  handleMenuOpen()
+                }}
               />
             </div>
           )}
           {token ? (
             <>
-              <div>
-                <Button
-                  title={'Perfil'}
-                  isText
-                  onClick={() => navigate('/profile')}
-                />
-              </div>
-              <div>
-                <Button
-                  title={'Meus favoritos'}
-                  isText
-                  onClick={() => navigate('/favorites')}
-                />
-              </div>
-              <div>
-                <Button
-                  title={'Historico de pedidos'}
-                  isText
-                  onClick={() => navigate('/orders')}
-                />
-              </div>
+              {page !== '/profile' && (
+                <div>
+                  <Button
+                    title={'Perfil'}
+                    isText
+                    onClick={() => {
+                      navigate('/profile')
+                      handleMenuOpen()
+                    }}
+                  />
+                </div>
+              )}
+              {page !== '/' && (
+                <div>
+                  <Button
+                    title={'Home'}
+                    isText
+                    onClick={() => {
+                      handleBack(navigate)
+                      handleMenuOpen()
+                    }}
+                  />
+                </div>
+              )}
+              {page !== '/favorites' && (
+                <div>
+                  <Button
+                    title={'Meus favoritos'}
+                    isText
+                    onClick={() => {
+                      navigate('/favorites')
+                      handleMenuOpen()
+                    }}
+                  />
+                </div>
+              )}
+              {page !== '/orders' && (
+                <div>
+                  <Button
+                    title={'Historico de pedidos'}
+                    isText
+                    onClick={() => {
+                      navigate('/orders')
+                      handleMenuOpen()
+                    }}
+                  />
+                </div>
+              )}
               <div>
                 <Button title={'Sair'} isText onClick={handleLogout} />
               </div>
             </>
           ) : (
-            ''
+            <div>
+              <Button
+                title={'Login'}
+                isText
+                onClick={() => {
+                  navigate('/login')
+                  handleMenuOpen()
+                }}
+              />
+            </div>
           )}
         </OpenMenu>
       )}
@@ -115,12 +158,18 @@ export function Header() {
         />
       </label>
       <div className="sideMenu">
-        <button className="order" title="pedidos">
-          {!!getCartCount() && <span>{getCartCount()}</span>}
-          <p>Pedidos</p>
-          <Receipt size={32} />
-        </button>
-        <DropMenu className="dropMenu" />
+        {token ? (
+          <>
+            <button className="order" title="pedidos">
+              {!!getCartCount() && <span>{getCartCount()}</span>}
+              <p>Pedidos</p>
+              <Receipt size={32} />
+            </button>
+            <DropMenu className="dropMenu" />
+          </>
+        ) : (
+          <SignIn size={32} onClick={() => navigate('/login')} />
+        )}
       </div>
     </Wrap>
   )
