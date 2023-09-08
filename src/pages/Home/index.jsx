@@ -1,12 +1,51 @@
 // import Splide from '@splidejs/splide'
 import '@splidejs/splide/css/skyblue'
+import { useEffect, useState } from 'react'
 import macarons from '../../assets/macarons.webp'
 import { Section } from '../../components/Section'
+import { useAuth } from '../../hooks/auth'
 import { useSearch } from '../../hooks/search'
+import { api } from '../../services/api'
 import { Wrapper } from './styles'
 
 export function Home() {
-  const { categories, meals, desserts, drinks } = useSearch()
+  const [categories, setCategories] = useState([])
+  const [meals, setMeals] = useState([])
+  const [desserts, setDesserts] = useState([])
+  const [drinks, setDrinks] = useState([])
+  const { searchQuery } = useSearch()
+  const { token, handleErrorFetchData } = useAuth()
+
+  useEffect(() => {
+    async function getDishs() {
+      try {
+        const response = await api.get(`/dishes?search=${searchQuery}`)
+
+        setCategories(
+          response.data.reduce((acc, item) => {
+            if (!acc.includes(item.category)) {
+              acc.push(item.category)
+            }
+            return acc
+          }, []),
+        )
+
+        setMeals(
+          await response.data.filter((item) => item.category === 'Refeição'),
+        )
+        setDesserts(
+          await response.data.filter((item) => item.category === 'Sobremesa'),
+        )
+        setDrinks(
+          await response.data.filter((item) => item.category === 'Bebida'),
+        )
+      } catch (err) {
+        console.error(err)
+        handleErrorFetchData(err)
+      }
+    }
+    getDishs()
+  }, [searchQuery, token])
 
   return (
     <Wrapper>

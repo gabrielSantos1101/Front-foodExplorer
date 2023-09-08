@@ -2,6 +2,7 @@ import jwtDecode from 'jwt-decode'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { api } from '../services/api'
+import { handleBack } from '../utils/handleBack'
 
 export const AuthContext = createContext({})
 
@@ -9,7 +10,7 @@ export function AuthProvider({ children }) {
   const [data, setData] = useState({})
   const [loading, setLoading] = useState(false)
 
-  async function signIn({ email, password }) {
+  async function signIn({ email, password, navigate }) {
     setLoading(true)
     try {
       const response = await api.post('/session', { email, password })
@@ -41,6 +42,7 @@ export function AuthProvider({ children }) {
     }
     toast(`${getGreeting()}`)
     localStorage.removeItem('name')
+    handleBack(navigate)
   }
 
   async function signUp({ name, email, password }) {

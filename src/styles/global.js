@@ -22,7 +22,6 @@ export default createGlobalStyle`
 
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 90px;
 }
 
 body {
