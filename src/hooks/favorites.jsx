@@ -26,6 +26,7 @@ export function FavoritesProvider({ children }) {
   async function addFavorite(id) {
     try {
       await api.post(`/favorites/${id}`)
+      await getFavorites()
     } catch (err) {
       console.error(err)
       toast.error(err)
