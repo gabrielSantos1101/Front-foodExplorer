@@ -3,15 +3,15 @@ import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import {
-    DropdownMenuContent,
-    DropdownMenuItem,
-    DropdownMenuSeparator,
-    DropdownMenuTrigger,
-    Wrap,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator,
+  DropdownMenuTrigger,
+  Wrap,
 } from './styles'
 
 export function DropMenu({ ...rest }) {
-  const { signOut } = useAuth()
+  const { signOut, token } = useAuth()
   const navigate = useNavigate()
 
   return (
@@ -26,17 +26,33 @@ export function DropMenu({ ...rest }) {
         <DropdownMenuPrimitive.Portal>
           <DropdownMenuContent sideOffset={5}>
             <DropdownMenuItem onClick={() => navigate('/perfil')}>
-              perfil
+              Perfil
             </DropdownMenuItem>
 
             <DropdownMenuSeparator />
 
-            <DropdownMenuItem onClick={signOut}>
-              Sair
-              <span>
-                <SignOut />
-              </span>
-            </DropdownMenuItem>
+            {token ? (
+              <>
+                <DropdownMenuItem onClick={() => navigate('/favoritos')}>
+                  Favoritos
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={() => navigate('/orders')}>
+                  Historico
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem onClick={signOut}>
+                  Sair
+                  <span>
+                    <SignOut />
+                  </span>
+                </DropdownMenuItem>
+              </>
+            ) : (
+              <DropdownMenuItem onClick={() => navigate('/login')}>
+                Login
+              </DropdownMenuItem>
+            )}
 
             <DropdownMenuPrimitive.Arrow />
           </DropdownMenuContent>

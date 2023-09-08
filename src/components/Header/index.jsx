@@ -14,9 +14,8 @@ import { Menu, OpenMenu, Wrap } from './styles'
 export function Header() {
   const [menuOpen, setMenuOpen] = useState(false)
   const navigate = useNavigate()
-  const { signOut } = useAuth()
+  const { signOut, isAdmin, token } = useAuth()
   const { setSearch } = useSearch()
-  const [count, setCount] = useState()
   const { getCartCount } = useCart()
 
   function handleMenuOpen() {
@@ -48,16 +47,45 @@ export function Header() {
               onChange={(e) => setSearch(e.target.value)}
             />
           </label>
-          <div>
-            <Button
-              title={'Novo prato'}
-              isText
-              onClick={() => handleNavigate('/new')}
-            />
-          </div>
-          <div>
-            <Button title={'Sair'} isText onClick={handleLogout} />
-          </div>
+          {isAdmin && (
+            <div>
+              <Button
+                title={'Novo prato'}
+                isText
+                onClick={() => handleNavigate('/new')}
+              />
+            </div>
+          )}
+          {token ? (
+            <>
+              <div>
+                <Button
+                  title={'Perfil'}
+                  isText
+                  onClick={() => navigate('/profile')}
+                />
+              </div>
+              <div>
+                <Button
+                  title={'Meus favoritos'}
+                  isText
+                  onClick={() => navigate('/favorites')}
+                />
+              </div>
+              <div>
+                <Button
+                  title={'Historico de pedidos'}
+                  isText
+                  onClick={() => navigate('/orders')}
+                />
+              </div>
+              <div>
+                <Button title={'Sair'} isText onClick={handleLogout} />
+              </div>
+            </>
+          ) : (
+            ''
+          )}
         </OpenMenu>
       )}
       <Menu $menuOpne={menuOpen}>
