@@ -3,6 +3,7 @@ import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { useCart } from '../../hooks/cartContext'
+import { useFavorites } from '../../hooks/favorites'
 import { Button } from '../Button'
 import { Amount, Heart, Wrap } from './styles'
 
@@ -10,8 +11,9 @@ export function Card({ title, description, price, image, date, id }) {
   const [like, setLike] = useState(false)
   const navigate = useNavigate()
   const [count, setCount] = useState(1)
-  const { isAdmin } = useAuth()
+  const { isAdmin, token } = useAuth()
   const { addItem } = useCart()
+  const { removeFavorite, addFavorite } = useFavorites()
 
   const formatedPrice = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -28,6 +30,11 @@ export function Card({ title, description, price, image, date, id }) {
 
   function handleSetLike() {
     setLike(!like)
+    if (!like) {
+      addFavorite(id)
+      return
+    }
+    removeFavorite(id)
   }
 
   function handlePlusCount(e) {
@@ -43,9 +50,33 @@ export function Card({ title, description, price, image, date, id }) {
     setCount((prev) => prev - 1)
   }
 
+  // async function handleFavoriteAdd() {
+  //   try {
+  //     await api.post(`/favorites/${id}`)
+  //   } catch (err) {
+  //     toast.error(err)
+  //   }
+  // }
+
+  // async function handleFavoriteRemove() {
+  //   try {
+  //     await api.delete(`/favorites/${id}`)
+  //   } catch (err) {
+  //     toast.error(err)
+  //   }
+  // }
+
   return (
     <Wrap $isAdmin={isAdmin} to={`/dish/${id}`}>
-      {!isAdmin ? (
+      {isAdmin ? (
+        <Pencil
+          onClick={(e) => {
+            e.stopPropagation()
+            navigate(`/update/${id}`)
+          }}
+          className="cardIcon"
+        />
+      ) : token ? (
         <Heart onClick={(e) => e.stopPropagation()}>
           <input type="checkbox" onChange={handleSetLike} />
           <div className="checkmark">
@@ -61,13 +92,7 @@ export function Card({ title, description, price, image, date, id }) {
           </div>
         </Heart>
       ) : (
-        <Pencil
-          onClick={(e) => {
-            e.stopPropagation()
-            navigate(`/update/${id}`)
-          }}
-          className="cardIcon"
-        />
+        ''
       )}
       {differenceInDays <= 7 && <span className="isNew">NOVO</span>}
       <img
