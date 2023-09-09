@@ -18,7 +18,7 @@ export function AuthProvider({ children }) {
       localStorage.setItem('name', JSON.stringify(user.name))
 
       api.defaults.headers.Authorization = `Bearer ${token}`
-      localStorage.setItem('token', token)
+      document.cookie = 'token=' + token
 
       const { isAdmin } = jwtDecode(token)
       setData({ token, isAdmin: !!Number(isAdmin) })
@@ -54,7 +54,7 @@ export function AuthProvider({ children }) {
   }
 
   function signOut() {
-    localStorage.removeItem('token')
+    document.cookie = 'token=; expires=Thu, 01 Jan 1970 00:00:00 GMT'
     localStorage.removeItem('cartItems')
     setData({})
     toast.success('Volte sempre! 🫶')
@@ -70,7 +70,10 @@ export function AuthProvider({ children }) {
   }
 
   useEffect(() => {
-    const token = localStorage.getItem('token')
+    const token = document.cookie
+      .split(';')
+      .find((cookie) => cookie.startsWith('token='))
+      .slice(6)
     api.defaults.headers.Authorization = `Bearer ${token}`
 
     if (token) {
