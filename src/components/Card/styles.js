@@ -80,7 +80,8 @@ export const Wrap = styled(Link)`
     }
 
     & p {
-      display: ${({ $isAdmin }) => ($isAdmin ? '-webkit-box' : 'none')};
+      display: ${({ $isAdmin, $noToken }) =>
+        $isAdmin || !$noToken ? '-webkit-box' : 'none'};
       word-break: break-all;
       -webkit-line-clamp: 3;
       -webkit-box-orient: vertical;

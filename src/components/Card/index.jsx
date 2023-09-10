@@ -67,7 +67,7 @@ export function Card({ title, description, price, image, date, id }) {
   // }
 
   return (
-    <Wrap $isAdmin={isAdmin} to={`/dish/${id}`}>
+    <Wrap $isAdmin={isAdmin} to={`/dish/${id}`} $noToken={token}>
       {isAdmin ? (
         <Pencil
           onClick={(e) => {
@@ -107,18 +107,22 @@ export function Card({ title, description, price, image, date, id }) {
       <Amount $isAdmin={isAdmin}>
         <span>{formatedPrice}</span>
 
-        <div className="stepper">
-          <Minus onClick={(e) => handleMinusCount(e)} />
-          <span>{count}</span>
-          <Plus onClick={(e) => handlePlusCount(e)} />
-        </div>
-        <Button
-          title={'Adicionar'}
-          onClick={(e) => {
-            e.preventDefault()
-            addItem({ id, count, price, title, image })
-          }}
-        />
+        {token && (
+          <>
+            <div className="stepper">
+              <Minus onClick={(e) => handleMinusCount(e)} />
+              <span>{count}</span>
+              <Plus onClick={(e) => handlePlusCount(e)} />
+            </div>
+            <Button
+              title={'Adicionar'}
+              onClick={(e) => {
+                e.preventDefault()
+                addItem({ id, count, price, title, image })
+              }}
+            />
+          </>
+        )}
       </Amount>
     </Wrap>
   )

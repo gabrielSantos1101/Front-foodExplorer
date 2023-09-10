@@ -55,7 +55,7 @@ export function SignUp() {
             type={'email'}
             placeholder={'Exemplo: exemplo@exemplo.com.br'}
             label={'Email'}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value.toLowerCase())}
             required
           />
           <Input

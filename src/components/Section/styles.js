@@ -23,7 +23,8 @@ export const Wrap = styled.div`
 
     & .splide__arrow--prev {
       left: 0;
-      height: 90%;
+      top: 52%;
+      height: 95%;
       background: linear-gradient(
         90deg,
         rgba(0, 10, 15, 0.8) 0%,
@@ -33,7 +34,8 @@ export const Wrap = styled.div`
 
     & .splide__arrow--next {
       right: 0;
-      height: 90%;
+      top: 52%;
+      height: 95%;
       background: linear-gradient(
         -90deg,
         rgba(0, 10, 15, 0.8) 0%,

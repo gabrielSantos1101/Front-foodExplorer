@@ -15,11 +15,19 @@ export function Home() {
   const [drinks, setDrinks] = useState([])
   const { searchQuery } = useSearch()
   const { token, handleErrorFetchData } = useAuth()
+  const [favorites, setFavorites] = useState([])
 
   useEffect(() => {
     async function getDishs() {
       try {
         const response = await api.get(`/dishes?search=${searchQuery}`)
+        if (token) {
+          const favResponse = await api.get('/favorites')
+
+          setFavorites(
+            favResponse.data.filter((item) => item.id).map((item) => item.id),
+          )
+        }
 
         setCategories(
           response.data.reduce((acc, item) => {
@@ -41,7 +49,6 @@ export function Home() {
         )
       } catch (err) {
         console.error(err)
-        handleErrorFetchData(err)
       }
     }
     getDishs()
