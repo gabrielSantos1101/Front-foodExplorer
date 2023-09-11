@@ -163,7 +163,7 @@ export function Header() {
             <button className="order" title="pedidos">
               {!!getCartCount() && <span>{getCartCount()}</span>}
               <p>Pedidos</p>
-              <Receipt size={32} />
+              <Receipt />
             </button>
             <DropMenu className="dropMenu" />
           </>

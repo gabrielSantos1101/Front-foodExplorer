@@ -39,6 +39,10 @@ export const Wrap = styled.header`
         display: none;
       }
 
+      & svg {
+        font-size: 28px;
+      }
+
       & span {
         position: absolute;
         display: grid;
@@ -223,7 +227,7 @@ export const OpenMenu = styled.div`
     }
   }
 
-  & div:last-child:has(> button) {
+  & div:last-child:has(button) {
     position: relative;
     border-bottom: 2px solid ${({ theme }) => theme.DARK.D1000};
     padding-bottom: 0.625rem;

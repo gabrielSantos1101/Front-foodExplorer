@@ -1,6 +1,5 @@
 import { Minus, Pencil, Plus } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
-import 'react-loading-skeleton/dist/skeleton.css'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { useCart } from '../../hooks/cartContext'
@@ -87,6 +86,7 @@ export function Card({
         <Pencil
           onClick={(e) => {
             e.stopPropagation()
+            e.preventDefault()
             navigate(`/update/${id}`)
           }}
           className="cardIcon"
