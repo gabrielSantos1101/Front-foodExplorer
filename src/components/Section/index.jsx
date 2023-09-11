@@ -5,7 +5,7 @@ import { useEffect } from 'react'
 import { Card } from '../Card'
 import { Wrap } from './styles'
 
-export function Section({ title, data }) {
+export function Section({ title, favId, data }) {
   const id = crypto.randomUUID()
 
   // garante que o slider não vai bugar porque a lib não atualizou a versão do react obs:"talvez eu não usaria isso em produção ta 😁"
@@ -41,6 +41,7 @@ export function Section({ title, data }) {
                   image={dish.image}
                   id={dish.id}
                   date={dish.created_at}
+                  isFavorite={favId.includes(dish.id)}
                 />
               </li>
             ))}
