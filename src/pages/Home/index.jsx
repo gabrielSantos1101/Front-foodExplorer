@@ -2,6 +2,7 @@
 import '@splidejs/splide/css/skyblue'
 import { useEffect, useState } from 'react'
 import macarons from '../../assets/macarons.webp'
+import { LoadSection } from '../../components/LoadSection'
 import { Section } from '../../components/Section'
 import { useAuth } from '../../hooks/auth'
 import { useSearch } from '../../hooks/search'
@@ -14,19 +15,21 @@ export function Home() {
   const [desserts, setDesserts] = useState([])
   const [drinks, setDrinks] = useState([])
   const { searchQuery } = useSearch()
-  const { token, handleErrorFetchData } = useAuth()
+  const { token } = useAuth()
   const [favorites, setFavorites] = useState([])
 
   useEffect(() => {
     async function getDishs() {
       try {
         const response = await api.get(`/dishes?search=${searchQuery}`)
+
         if (token) {
           const favResponse = await api.get('/favorites')
 
-          setFavorites(
-            favResponse.data.filter((item) => item.id).map((item) => item.id),
-          )
+          if (favResponse.data.length) {
+            const favorites = favResponse.data.map((item) => item.id)
+            setFavorites(favorites)
+          }
         }
 
         setCategories(
@@ -67,19 +70,38 @@ export function Home() {
         </div>
       </hgroup>
 
-      {!!meals.length && (
-        <Section key={categories[0]} title={'Refeições'} data={meals} id="1" />
+      {meals.length ? (
+        <Section
+          key={categories[0]}
+          title={'Refeições'}
+          data={meals}
+          id="1"
+          favId={favorites}
+        />
+      ) : (
+        <LoadSection />
       )}
-      {!!desserts.length && (
+      {desserts.length ? (
         <Section
           key={categories[1]}
           title={'Sobremesas'}
           data={desserts}
           id="2"
+          favId={favorites}
         />
+      ) : (
+        <LoadSection />
       )}
-      {!!drinks.length && (
-        <Section key={categories[2]} title={'Bebidas'} data={drinks} id="3" />
+      {drinks.length ? (
+        <Section
+          key={categories[2]}
+          title={'Bebidas'}
+          data={drinks}
+          id="3"
+          favId={favorites}
+        />
+      ) : (
+        <LoadSection />
       )}
     </Wrapper>
   )

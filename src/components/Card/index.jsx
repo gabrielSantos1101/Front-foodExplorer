@@ -1,5 +1,6 @@
 import { Minus, Pencil, Plus } from '@phosphor-icons/react'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
+import 'react-loading-skeleton/dist/skeleton.css'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { useCart } from '../../hooks/cartContext'
@@ -7,8 +8,16 @@ import { useFavorites } from '../../hooks/favorites'
 import { Button } from '../Button'
 import { Amount, Heart, Wrap } from './styles'
 
-export function Card({ title, description, price, image, date, id }) {
-  const [like, setLike] = useState(false)
+export function Card({
+  title,
+  description,
+  price,
+  isFavorite,
+  image,
+  date,
+  id,
+}) {
+  const [like, setLike] = useState(isFavorite)
   const navigate = useNavigate()
   const [count, setCount] = useState(1)
   const { isAdmin, token } = useAuth()
@@ -50,6 +59,12 @@ export function Card({ title, description, price, image, date, id }) {
     setCount((prev) => prev - 1)
   }
 
+  useEffect(() => {
+    if (isFavorite) {
+      setLike(isFavorite)
+    }
+  }, [isFavorite])
+
   // async function handleFavoriteAdd() {
   //   try {
   //     await api.post(`/favorites/${id}`)
@@ -78,7 +93,7 @@ export function Card({ title, description, price, image, date, id }) {
         />
       ) : token ? (
         <Heart onClick={(e) => e.stopPropagation()}>
-          <input type="checkbox" onChange={handleSetLike} />
+          <input type="checkbox" onChange={handleSetLike} checked={like} />
           <div className="checkmark">
             <svg viewBox="0 0 256 256">
               <rect fill="none" height="256" width="256"></rect>
