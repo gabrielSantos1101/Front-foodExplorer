@@ -31,6 +31,7 @@ export function Add({ onAddIngredient, placeholder, ...rest }) {
         }}
         onKeyDown={(e) => {
           if (e.key === 'Enter') {
+            e.stopPropagation()
             onAddIngredient(value)
             changeValue('')
           }

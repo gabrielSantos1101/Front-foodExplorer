@@ -1,5 +1,3 @@
-// import Splide from '@splidejs/splide'
-import '@splidejs/splide/css/skyblue'
 import { useEffect, useState } from 'react'
 import macarons from '../../assets/macarons.webp'
 import { LoadSection } from '../../components/LoadSection'

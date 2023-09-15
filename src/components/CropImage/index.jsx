@@ -28,7 +28,7 @@ export function CropImage({ image, setImage, setOpenModal }) {
       );
 
       setImage(croppedImage);
-      toast.success('Comcluido')
+      toast.success('Concluído')
       setOpenModal(false)
     } catch (e) {
       console.error(e);

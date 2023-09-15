@@ -1,3 +1,5 @@
+// import { fetchFile } from '@ffmpeg/util'
+// import { getFFmpeg } from '../../utils/ffmpeg'
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -22,16 +24,43 @@ export function NewDish() {
   const [price, setPrice] = useState('')
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
+  const [testeImate, setTesteImate] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [imagePreview, setImagePreview] = useState([])
   const [ingredients, setIngredients] = useState([])
   const { isAdmin, handleErrorFetchData } = useAuth()
 
-  function changeImage(image) {
-    const previewURL = URL.createObjectURL(image)
+  // async function convertToImage(image) {
+  //   console.log('Convert started.')
+
+  //   const ffmpeg = await getFFmpeg()
+
+  //   await ffmpeg.writeFile('input.webp', await fetchFile(image))
+
+  //   ffmpeg.on('progress', (progress) => {
+  //     console.log('Convert progress: ' + Math.round(progress.progress * 100))
+  //   })
+
+  //   await ffmpeg.exec(['-i', 'input.png', 'output.webp'])
+
+  //   const data = await ffmpeg.readFile('output.webp')
+
+  //   const imageFileBlob = new Blob([data], { type: 'image/webp' })
+  //   const imageFile = new File([imageFileBlob], 'output.webp', {
+  //     type: 'image/webp',
+  //   })
+
+  //   console.log('Convert finished.')
+
+  //   return imageFile
+  // }
+
+  function changeImage(file) {
+    const previewURL = URL.createObjectURL(file)
+    // console.log(convertToImage(file))
 
     setImagePreview(previewURL)
-    setImage(image)
+    setImage(file)
   }
 
   if (!isAdmin) {
@@ -117,7 +146,7 @@ export function NewDish() {
         </div>
         {modalIsOpen && (
           <CropImage
-            image={imagePreview}
+            image={image}
             setImage={setImagePreview}
             setOpenModal={setModalIsOpen}
           />
@@ -132,6 +161,7 @@ export function NewDish() {
                 type="file"
                 onChange={(e) => {
                   changeImage(e.target.files[0])
+                  setModalIsOpen(true)
                 }}
                 required
               />
