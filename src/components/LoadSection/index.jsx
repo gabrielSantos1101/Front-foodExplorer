@@ -9,6 +9,8 @@ export function LoadSection() {
         <CardSkeleton />
         <CardSkeleton />
         <CardSkeleton />
+        <CardSkeleton />
+        <CardSkeleton />
       </section>
     </Wrap>
   )

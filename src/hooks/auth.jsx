@@ -2,7 +2,6 @@ import jwtDecode from 'jwt-decode'
 import { createContext, useContext, useEffect, useState } from 'react'
 import { toast } from 'react-toastify'
 import { api } from '../services/api'
-import { handleBack } from '../utils/handleBack'
 
 export const AuthContext = createContext({})
 
@@ -42,7 +41,7 @@ export function AuthProvider({ children }) {
     }
     toast(`${getGreeting()}`)
     localStorage.removeItem('name')
-    handleBack(navigate)
+    navigate('/')
   }
 
   async function signUp({ name, email, password }) {

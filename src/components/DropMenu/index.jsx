@@ -33,7 +33,7 @@ export function DropMenu({ ...rest }) {
 
             {token ? (
               <>
-                <DropdownMenuItem onClick={() => navigate('/favoritos')}>
+                <DropdownMenuItem onClick={() => navigate('/favorites')}>
                   Favoritos
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
