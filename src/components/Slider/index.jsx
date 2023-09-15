@@ -1,8 +1,8 @@
 import { SliderRange, SliderRoot, SliderThumb, SliderTrack } from './styles'
 
-export function Slider({ value = 50 }) {
+export function Slider({ value, setValue, ...rest }) {
   return (
-    <SliderRoot defaultValue={[value]} max={100} step={1}>
+    <SliderRoot {...rest} onValueChange={(e) => setValue(e)}>
       <SliderTrack>
         <SliderRange />
       </SliderTrack>
