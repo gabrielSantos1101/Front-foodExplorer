@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Add } from '../../components/Add'
 import { Button } from '../../components/Button'
+import { CropImage } from '../../components/CropImage'
 import { CurrencyInput } from '../../components/CurrencyInput'
 import { Input } from '../../components/Input'
 import { Select } from '../../components/Select'
@@ -21,6 +22,7 @@ export function NewDish() {
   const [price, setPrice] = useState('')
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
+  const [modalIsOpen, setModalIsOpen] = useState(false)
   const [imagePreview, setImagePreview] = useState([])
   const [ingredients, setIngredients] = useState([])
   const { isAdmin, handleErrorFetchData } = useAuth()
@@ -113,6 +115,13 @@ export function NewDish() {
             <img src={imagePreview} alt="imagem do prato" />
           )}
         </div>
+        {modalIsOpen && (
+          <CropImage
+            image={imagePreview}
+            setImage={setImagePreview}
+            setOpenModal={setModalIsOpen}
+          />
+        )}
         <fieldset className="wrap">
           <label htmlFor="image">
             Imagem do prato

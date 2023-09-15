@@ -11,8 +11,9 @@ export const Wrapper = styled.div`
 
 export const Wrap = styled.div`
   width: 100%;
-  max-width: 90rem;
+  max-width: minmax(30rem, 90rem);
   margin-top: 1rem;
+  margin-inline: auto;
 
   display: flex;
   flex-direction: column;
@@ -21,5 +22,6 @@ export const Wrap = styled.div`
   @media (${({ theme }) => theme.SCREENS.MD}) {
     flex-direction: row;
     flex-wrap: wrap;
+    margin-top: 2.5rem;
   }
 `

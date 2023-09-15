@@ -10,7 +10,7 @@ import { handleBack } from '../../utils/handleBack'
 import { Amount, Wrap } from './styles'
 
 export function Details() {
-  const { handleErrorFetchData } = useAuth()
+  const { handleErrorFetchData, token } = useAuth()
   const navigate = useNavigate()
   const dish = useParams()
   const [data, setData] = useState({})
@@ -73,14 +73,16 @@ export function Details() {
             <Tag key={ingredient.id} title={ingredient.name} />
           ))}
         </section>
-        <Amount>
-          <div className="stepper">
-            <Minus onClick={() => handleMinusCount()} />
-            <span>{count}</span>
-            <Plus onClick={() => handlePlusCount()} />
-          </div>
-          <Button title={`pedir ${FormatedPrice}`} hasIcon icon={Receipt} />
-        </Amount>
+        {token && (
+          <Amount>
+            <div className="stepper">
+              <Minus onClick={() => handleMinusCount()} />
+              <span>{count}</span>
+              <Plus onClick={() => handlePlusCount()} />
+            </div>
+            <Button title={`pedir ${FormatedPrice}`} hasIcon icon={Receipt} />
+          </Amount>
+        )}
       </div>
     </Wrap>
   )

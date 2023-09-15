@@ -4,9 +4,10 @@ import { Details } from '../pages/Details'
 import { Favorites } from '../pages/Favorites'
 import { Home } from '../pages/Home'
 import { NewDish } from '../pages/NewDish'
+import { SignIn } from '../pages/SignIn'
+import { SignUp } from '../pages/SignUp'
 import { UpdateDish } from '../pages/UpdateDish'
 import { DefaultLayout } from './Layouts'
-import { AuthRoutes } from './auth.routes'
 
 export function AppRoutes() {
   const { isAdmin, token } = useAuth()
@@ -20,7 +21,8 @@ export function AppRoutes() {
         {isAdmin && <Route path="/new" element={<NewDish />} />}
         {isAdmin && <Route path="/update/:id" element={<UpdateDish />} />}
       </Route>
-      {!token && <Route path="/login" element={<AuthRoutes />} />}
+      {!token && <Route path="/login" element={<SignIn />} />}
+      {!token && <Route path="/register" element={<SignUp />} />}
     </Routes>
   )
 }

@@ -26,7 +26,7 @@ export function SignUp() {
         pending: 'Criando usuário...',
         success: {
           render() {
-            handleBack(navigate)
+            navigate('/login')
             return 'Usuário criado com sucesso!'
           },
         },

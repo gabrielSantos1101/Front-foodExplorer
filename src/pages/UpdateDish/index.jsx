@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import { Add } from '../../components/Add'
 import { AlertDialog } from '../../components/Alert'
 import { Button } from '../../components/Button'
+import { CropImage } from '../../components/CropImage'
 import { CurrencyInput } from '../../components/CurrencyInput'
 import { Input } from '../../components/Input'
 import { Loader } from '../../components/Loader'
@@ -28,6 +29,7 @@ export function UpdateDish() {
   const [image, setImage] = useState('')
   const [imagePreview, setImagePreview] = useState([])
   const [ingredients, setIngredients] = useState([])
+  const [modalIsOpen, setModalIsOpen] = useState(false)
 
   function changeImage(image) {
     const previewURL = URL.createObjectURL(image)
@@ -157,6 +159,13 @@ export function UpdateDish() {
         className="back"
         onClick={() => handleBack(navigate)}
       />
+      {modalIsOpen && (
+        <CropImage
+          image={imagePreview}
+          setImage={setImagePreview}
+          setOpenModal={setModalIsOpen}
+        />
+      )}
       <form onSubmit={(e) => e.preventDefault()}>
         <h1>Editar prato</h1>
         <div className="preview">
@@ -174,6 +183,7 @@ export function UpdateDish() {
                 type="file"
                 onChange={(e) => {
                   changeImage(e.target.files[0])
+                  setModalIsOpen(true)
                 }}
                 required
               />
