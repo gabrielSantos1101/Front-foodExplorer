@@ -15,6 +15,11 @@ export const Wrap = styled.header`
     margin-bottom: 0;
   }
 
+  & .dummy {
+    width: 2rem;
+    height: 2rem;
+  }
+
   & .sideMenu {
     display: flex;
 
