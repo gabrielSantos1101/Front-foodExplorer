@@ -7,7 +7,7 @@ export const SliderRoot = styled(SliderPrimitive.Root)`
   align-items: center;
   user-select: none;
   touch-action: none;
-  width: 12.5rem;
+  /* width: clamp(13.75rem, 12.4994rem + 4.6535vw, 16.6875rem); */
   height: 1.25rem;
 `
 

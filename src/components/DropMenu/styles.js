@@ -9,14 +9,21 @@ export const Wrap = styled.div`
   .IconButton {
     font-family: inherit;
     border-radius: 100%;
-    height: 42px;
-    width: 42px;
+    width: 2.625rem;
+    aspect-ratio: 1/1;
     display: inline-flex;
     align-items: center;
     justify-content: center;
     color: ${({ theme }) => theme.LIGHT.L100};
     box-shadow: 0 2px 10px black;
     cursor: pointer;
+
+    & img {
+      width: 2.625rem;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      border-radius: 100%;
+    }
 
     &:hover {
       filter: brightness(1.2);

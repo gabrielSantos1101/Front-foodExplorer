@@ -18,9 +18,10 @@ export function AuthProvider({ children }) {
 
       api.defaults.headers.Authorization = `Bearer ${token}`
       localStorage.setItem('token', token)
+      localStorage.setItem('user', user.avatar)
 
       const { isAdmin } = jwtDecode(token)
-      setData({ token, isAdmin: !!Number(isAdmin) })
+      setData({ token, isAdmin: !!Number(isAdmin), user })
     } catch (err) {
       setLoading(false)
       console.error(err)
@@ -52,11 +53,12 @@ export function AuthProvider({ children }) {
     }
   }
 
-  function signOut() {
+  function signOut({ navigate }) {
     localStorage.removeItem('token')
     localStorage.removeItem('cartItems')
     setData({})
     toast.success('Volte sempre! 🫶')
+    navigate('/')
   }
 
   function handleErrorFetchData(error) {

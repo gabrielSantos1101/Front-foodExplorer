@@ -14,13 +14,18 @@ export function DropMenu({ ...rest }) {
   const { signOut, token } = useAuth()
   const navigate = useNavigate()
   const page = useLocation().pathname
+  const userAvatar = localStorage.getItem('user')
 
   return (
     <Wrap {...rest}>
       <DropdownMenuPrimitive.Root>
         <DropdownMenuTrigger asChild>
           <button className="IconButton" aria-label="Customise options">
-            <UserCircle />
+            {userAvatar ? (
+              <img src={userAvatar} alt="imagem de perfil" />
+            ) : (
+              <UserCircle />
+            )}
           </button>
         </DropdownMenuTrigger>
 
