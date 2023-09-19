@@ -6,6 +6,12 @@ export const Wrapper = styled.div`
 
   & h1 {
     font-size: clamp(1.375rem, 1.1089rem + 0.9901vw, 2rem);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+
+    &:hover {
+      transform: scale(1.01);
+    }
   }
 `
 

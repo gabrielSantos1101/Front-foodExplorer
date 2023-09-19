@@ -10,7 +10,7 @@ import { handleBack } from '../../utils/handleBack'
 import { Amount, Wrap } from './styles'
 
 export function Details() {
-  const { handleErrorFetchData, token } = useAuth()
+  const { handleErrorFetchData, token, isAdmin } = useAuth()
   const navigate = useNavigate()
   const dish = useParams()
   const [data, setData] = useState({})
@@ -73,7 +73,7 @@ export function Details() {
             <Tag key={ingredient.id} title={ingredient.name} />
           ))}
         </section>
-        {token && (
+        {token && !isAdmin && (
           <Amount>
             <div className="stepper">
               <Minus onClick={() => handleMinusCount()} />

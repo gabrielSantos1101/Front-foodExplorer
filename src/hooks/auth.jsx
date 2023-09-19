@@ -53,12 +53,11 @@ export function AuthProvider({ children }) {
     }
   }
 
-  function signOut({ navigate }) {
+  function signOut() {
     localStorage.removeItem('token')
     localStorage.removeItem('cartItems')
     setData({})
     toast.success('Volte sempre! 🫶')
-    navigate('/')
   }
 
   function handleErrorFetchData(error) {

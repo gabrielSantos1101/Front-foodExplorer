@@ -8,7 +8,6 @@ export const Wrapper = styled.div`
   max-width: 90rem;
   margin-inline: auto;
   padding: 2.5rem 2rem;
-  position: relative;
 
   & h1 {
     font-size: clamp(1.5rem, 1.2871rem + 0.7921vw, 2rem);
@@ -16,7 +15,7 @@ export const Wrapper = styled.div`
   }
 
   & .back {
-    position: absolute;
+    margin-top: -40px;
     top: 2rem;
     font-size: clamp(1rem, 0.7871rem + 0.7921vw, 1.5rem);
   }
@@ -138,7 +137,7 @@ export const Wrapper = styled.div`
         }
       }
 
-      & button {
+      & .submit {
         width: fit-content;
         padding-right: 1.5rem;
         justify-self: flex-end;

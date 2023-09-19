@@ -11,7 +11,7 @@ import {
 } from './styles'
 
 export function DropMenu({ ...rest }) {
-  const { signOut, token } = useAuth()
+  const { signOut, token, isAdmin } = useAuth()
   const navigate = useNavigate()
   const page = useLocation().pathname
   const userAvatar = localStorage.getItem('user')
@@ -21,7 +21,7 @@ export function DropMenu({ ...rest }) {
       <DropdownMenuPrimitive.Root>
         <DropdownMenuTrigger asChild>
           <button className="IconButton" aria-label="Customise options">
-            {userAvatar ? (
+            {!!userAvatar === true ? (
               <img src={userAvatar} alt="imagem de perfil" />
             ) : (
               <UserCircle />
@@ -31,12 +31,27 @@ export function DropMenu({ ...rest }) {
 
         <DropdownMenuPrimitive.Portal>
           <DropdownMenuContent sideOffset={5}>
-            {page !== '/profile' && (
+            {!isAdmin ? (
               <>
-                <DropdownMenuItem onClick={() => navigate('/profile')}>
-                  Perfil
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
+                {page !== '/profile' && (
+                  <>
+                    <DropdownMenuItem onClick={() => navigate('/profile')}>
+                      Perfil
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                  </>
+                )}
+              </>
+            ) : (
+              <>
+                {page !== '/new' && (
+                  <>
+                    <DropdownMenuItem onClick={() => navigate('/new')}>
+                      Novo
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                  </>
+                )}
               </>
             )}
 

@@ -46,6 +46,11 @@ export function Header() {
               <Input
                 type="search"
                 placeholder={'Busque por pratos ou ingrediente'}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter') {
+                    setMenuOpen()
+                  }
+                }}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </label>
@@ -64,7 +69,7 @@ export function Header() {
           )}
           {token ? (
             <>
-              {page !== '/profile' && (
+              {!isAdmin && page !== '/profile' && (
                 <div>
                   <Button
                     title={'Perfil'}
@@ -88,7 +93,7 @@ export function Header() {
                   />
                 </div>
               )}
-              {page !== '/favorites' && (
+              {!isAdmin && page !== '/favorites' && (
                 <div>
                   <Button
                     title={'Meus favoritos'}

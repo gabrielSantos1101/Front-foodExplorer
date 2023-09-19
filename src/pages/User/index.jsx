@@ -52,15 +52,16 @@ export function UserPage() {
         formData.append('photo', image)
 
         await toast.promise(
-          imageApi.put('', formData).then((res) =>
-            api.post('/user', {
+          imageApi.post('', formData).then((res) => {
+            api.put('/user', {
               name,
               email,
               password,
               address: jsonAddress,
-              image: res.data.url,
-            }),
-          ),
+              avatar: res.data.url,
+            })
+            localStorage.setItem('user', res.data.url)
+          }),
           {
             pending: 'Enviando dados...',
             success: {
@@ -130,6 +131,13 @@ export function UserPage() {
         className="back"
         onClick={() => handleBack(navigate)}
       />
+      {modalIsOpen && (
+        <CropImage
+          image={imagePreview}
+          setImage={setImagePreview}
+          setOpenModal={setModalIsOpen}
+        />
+      )}
       <form onSubmit={(e) => e.preventDefault()}>
         <fieldset>
           <div className="preview">
@@ -137,13 +145,6 @@ export function UserPage() {
               <img src={imagePreview} alt={`image de ${name}`} />
             )}
           </div>
-          {modalIsOpen && (
-            <CropImage
-              image={imagePreview}
-              setImage={setImagePreview}
-              setOpenModal={setModalIsOpen}
-            />
-          )}
           <label htmlFor="image">
             Imagem do perfil
             <div>
@@ -215,7 +216,11 @@ export function UserPage() {
               />
             </fieldset>
           </div>
-          <Button title={'Salvar alterações'} onClick={handleSubmit} />
+          <Button
+            className="submit"
+            title={'Salvar alterações'}
+            onClick={handleSubmit}
+          />
         </div>
       </form>
     </Wrapper>
