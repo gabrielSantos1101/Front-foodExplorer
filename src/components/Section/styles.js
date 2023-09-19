@@ -8,6 +8,11 @@ export const Wrap = styled.div`
   margin-inline: auto;
   padding: 0.9375rem;
 
+  & h2 span {
+    font-size: 1rem;
+    color: ${({ theme }) => theme.LIGHT.L500};
+  }
+
   & section {
     display: grid;
     gap: 1rem;

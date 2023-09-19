@@ -7,6 +7,7 @@ import { NewDish } from '../pages/NewDish'
 import { SignIn } from '../pages/SignIn'
 import { SignUp } from '../pages/SignUp'
 import { UpdateDish } from '../pages/UpdateDish'
+import { UserPage } from '../pages/User'
 import { DefaultLayout } from './Layouts'
 
 export function AppRoutes() {
@@ -18,6 +19,7 @@ export function AppRoutes() {
         <Route path="/" element={<Home />} />
         <Route path="/dish/:id" element={<Details />} />
         <Route path="/favorites" element={<Favorites />} />
+        <Route path="/profile" element={<UserPage />} />
         {isAdmin && <Route path="/new" element={<NewDish />} />}
         {isAdmin && <Route path="/update/:id" element={<UpdateDish />} />}
       </Route>

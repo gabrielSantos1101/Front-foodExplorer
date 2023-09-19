@@ -19,7 +19,10 @@ export function Section({ title, favId, data }) {
 
   return (
     <Wrap>
-      <h2>{title}</h2>
+      <h2>
+        {title} {!data.length && <span>/ Não encontrado</span>}
+      </h2>
+
       <section className="splide" id={`splide${id}`} aria-label="Refeicoes">
         <div className="splide__arrows">
           <button className="splide__arrow splide__arrow--prev">

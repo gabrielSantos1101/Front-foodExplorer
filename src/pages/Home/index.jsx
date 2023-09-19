@@ -15,6 +15,7 @@ export function Home() {
   const { searchQuery } = useSearch()
   const { token } = useAuth()
   const [favorites, setFavorites] = useState([])
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
     async function getDishs() {
@@ -50,6 +51,8 @@ export function Home() {
         )
       } catch (err) {
         console.error(err)
+      } finally {
+        setLoading(false)
       }
     }
     getDishs()
@@ -68,7 +71,7 @@ export function Home() {
         </div>
       </hgroup>
 
-      {meals.length ? (
+      {meals && !loading ? (
         <Section
           key={categories[0]}
           title={'Refeições'}
@@ -79,7 +82,7 @@ export function Home() {
       ) : (
         <LoadSection />
       )}
-      {desserts.length ? (
+      {desserts && !loading ? (
         <Section
           key={categories[1]}
           title={'Sobremesas'}
@@ -90,7 +93,7 @@ export function Home() {
       ) : (
         <LoadSection />
       )}
-      {drinks.length ? (
+      {drinks && !loading ? (
         <Section
           key={categories[2]}
           title={'Bebidas'}
