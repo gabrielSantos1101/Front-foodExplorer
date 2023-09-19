@@ -1,5 +1,4 @@
-// import { fetchFile } from '@ffmpeg/util'
-// import { getFFmpeg } from '../../utils/ffmpeg'
+import { fetchFile } from '@ffmpeg/util'
 import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -14,6 +13,7 @@ import { Tag } from '../../components/Tag'
 import { Textarea } from '../../components/Textarea'
 import { useAuth } from '../../hooks/auth'
 import { api, imageApi } from '../../services/api'
+import { getFFmpeg } from '../../utils/ffmpeg'
 import { handleBack } from '../../utils/handleBack'
 import { Wrapper } from './styles'
 
@@ -24,36 +24,35 @@ export function NewDish() {
   const [price, setPrice] = useState('')
   const [name, setName] = useState('')
   const [image, setImage] = useState('')
-  const [testeImate, setTesteImate] = useState('')
   const [modalIsOpen, setModalIsOpen] = useState(false)
   const [imagePreview, setImagePreview] = useState([])
   const [ingredients, setIngredients] = useState([])
   const { isAdmin, handleErrorFetchData } = useAuth()
 
-  // async function convertToImage(image) {
-  //   console.log('Convert started.')
+  async function convertToImage(image) {
+    console.log('Convert started.')
 
-  //   const ffmpeg = await getFFmpeg()
+    const ffmpeg = await getFFmpeg()
 
-  //   await ffmpeg.writeFile('input.webp', await fetchFile(image))
+    await ffmpeg.writeFile('input.png', await fetchFile(image))
 
-  //   ffmpeg.on('progress', (progress) => {
-  //     console.log('Convert progress: ' + Math.round(progress.progress * 100))
-  //   })
+    ffmpeg.on('progress', (progress) => {
+      console.log('Convert progress: ' + Math.round(progress.progress * 100))
+    })
 
-  //   await ffmpeg.exec(['-i', 'input.png', 'output.webp'])
+    await ffmpeg.exec(['-i', 'input.png', 'output.webp'])
 
-  //   const data = await ffmpeg.readFile('output.webp')
+    const data = await ffmpeg.readFile('output.webp')
 
-  //   const imageFileBlob = new Blob([data], { type: 'image/webp' })
-  //   const imageFile = new File([imageFileBlob], 'output.webp', {
-  //     type: 'image/webp',
-  //   })
+    const imageFileBlob = new Blob([data], { type: 'image/webp' })
+    const imageFile = new File([imageFileBlob], 'output.webp', {
+      type: 'image/webp',
+    })
 
-  //   console.log('Convert finished.')
+    console.log('Convert finished.')
 
-  //   return imageFile
-  // }
+    return imageFile
+  }
 
   function changeImage(file) {
     const previewURL = URL.createObjectURL(file)
@@ -61,6 +60,7 @@ export function NewDish() {
 
     setImagePreview(previewURL)
     setImage(file)
+    convertToImage(image)
   }
 
   if (!isAdmin) {
@@ -146,7 +146,7 @@ export function NewDish() {
         </div>
         {modalIsOpen && (
           <CropImage
-            image={image}
+            image={imagePreview}
             setImage={setImagePreview}
             setOpenModal={setModalIsOpen}
           />

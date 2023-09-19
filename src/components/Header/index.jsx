@@ -30,7 +30,7 @@ export function Header() {
   }
 
   function handleLogout() {
-    signOut()
+    signOut(navigate)
     setMenuOpen(false)
     navigate('/')
   }

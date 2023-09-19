@@ -50,12 +50,18 @@ export const Wrap = styled.div`
 
     & .sliders {
       display: flex;
+      gap: 2rem;
       justify-content: space-between;
+
+      & label {
+        flex: 1;
+      }
     }
 
     & .buttons {
       display: flex;
       gap: 2rem;
+      width: 100%;
 
       & button:last-child {
         background: ${({ theme }) => theme.DARK.D900};

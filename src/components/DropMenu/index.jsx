@@ -1,6 +1,6 @@
 import { SignOut, UserCircle } from '@phosphor-icons/react'
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import {
   DropdownMenuContent,
@@ -13,6 +13,7 @@ import {
 export function DropMenu({ ...rest }) {
   const { signOut, token } = useAuth()
   const navigate = useNavigate()
+  const page = useLocation().pathname
 
   return (
     <Wrap {...rest}>
@@ -25,22 +26,33 @@ export function DropMenu({ ...rest }) {
 
         <DropdownMenuPrimitive.Portal>
           <DropdownMenuContent sideOffset={5}>
-            <DropdownMenuItem onClick={() => navigate('/perfil')}>
-              Perfil
-            </DropdownMenuItem>
-
-            <DropdownMenuSeparator />
+            {page !== '/profile' && (
+              <>
+                <DropdownMenuItem onClick={() => navigate('/profile')}>
+                  Perfil
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+              </>
+            )}
 
             {token ? (
               <>
-                <DropdownMenuItem onClick={() => navigate('/favorites')}>
-                  Favoritos
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem onClick={() => navigate('/orders')}>
-                  Historico
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
+                {page !== '/favorites' && (
+                  <>
+                    <DropdownMenuItem onClick={() => navigate('/favorites')}>
+                      Favoritos
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                  </>
+                )}
+                {page !== '/orders' && (
+                  <>
+                    <DropdownMenuItem onClick={() => navigate('/orders')}>
+                      Historico
+                    </DropdownMenuItem>
+                    <DropdownMenuSeparator />
+                  </>
+                )}
                 <DropdownMenuItem onClick={signOut}>
                   Sair
                   <span>
