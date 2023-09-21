@@ -1,6 +1,7 @@
 import { Minus, Plus } from '@phosphor-icons/react'
 import { useCart } from '../../hooks/cartContext'
 import { useFavorites } from '../../hooks/favorites'
+import { PriceFormater } from '../../utils/PriceFormater'
 import { Button } from '../Button'
 import { Wrap } from './styles'
 
@@ -16,12 +17,15 @@ export function SimpleCard({ item, cartItem = false, ...rest }) {
       <img src={item.image} alt="imagem do prato" />
 
       <div>
-        <h3>{item.name}</h3>
+        <div className="texts">
+          <h3>{item.name}</h3>
+          <span>{PriceFormater(item.price)}</span>
+        </div>
         <div className="buttons">
           {cartItem ? (
             <>
               <Button isText hasIcon icon={Minus} onClick={handleRemove} />
-              <span>coount</span>
+              <span>{item.count}</span>
               <Button isText hasIcon icon={Plus} onClick={handleAdd} />
             </>
           ) : (

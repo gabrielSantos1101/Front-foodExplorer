@@ -7,7 +7,8 @@ export const Wrapper = styled.div`
   width: 100%;
   max-width: 90rem;
   margin-inline: auto;
-  padding: 2.5rem 2rem;
+  padding-inline: 2rem;
+  padding-bottom: 2rem;
 
   & h1 {
     font-size: clamp(1.5rem, 1.2871rem + 0.7921vw, 2rem);
@@ -15,7 +16,6 @@ export const Wrapper = styled.div`
   }
 
   & .back {
-    margin-top: -40px;
     top: 2rem;
     font-size: clamp(1rem, 0.7871rem + 0.7921vw, 1.5rem);
   }

@@ -71,9 +71,14 @@ button, input, textarea {
   font-family: 'Poppins', sans-serif;
 }
 
-h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, a::selection, h6::selection,p::selection, span::selection, textarea::selection, input::selection, label::selection, button::selection, img::selection {
+h1::selection, h2::selection, h3::selection, h4::selection, h5::selection, a::selection, h6::selection,p::selection, span::selection, strong::selection, textarea::selection, input::selection, label::selection, button::selection, img::selection {
   color: ${({ theme }) => theme.LIGHT.L100};
   background-color: #163a4d;
+}
+
+ul li {
+  text-decoration: none;
+  list-style: none;
 }
 
 a {

@@ -133,7 +133,7 @@ export function Card({
               title={'Adicionar'}
               onClick={(e) => {
                 e.preventDefault()
-                addItem({ id, count, price, title, image })
+                addItem({ id, count, price, name: title, image })
               }}
             />
           </>

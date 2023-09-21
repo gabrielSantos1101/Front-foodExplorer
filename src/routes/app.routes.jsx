@@ -8,6 +8,7 @@ import { SignIn } from '../pages/SignIn'
 import { SignUp } from '../pages/SignUp'
 import { UpdateDish } from '../pages/UpdateDish'
 import { UserPage } from '../pages/User'
+import { Orders } from '../pages/orders'
 import { DefaultLayout } from './Layouts'
 
 export function AppRoutes() {
@@ -22,6 +23,7 @@ export function AppRoutes() {
         <Route path="/profile" element={<UserPage />} />
         {isAdmin && <Route path="/new" element={<NewDish />} />}
         {isAdmin && <Route path="/update/:id" element={<UpdateDish />} />}
+        {token && <Route path="/orders" element={<Orders />} />}
       </Route>
       {!token && <Route path="/login" element={<SignIn />} />}
       {!token && <Route path="/register" element={<SignUp />} />}

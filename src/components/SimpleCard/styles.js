@@ -4,7 +4,7 @@ export const Wrap = styled.div`
   display: flex;
   gap: 1rem;
   font-size: 1.25rem;
-  max-width: 28.9375rem;
+  max-width: 17.5rem;
   width: 100%;
 
   text-overflow: ellipsis;
@@ -20,12 +20,24 @@ export const Wrap = styled.div`
     border-radius: 100%;
   }
 
-  & h3 {
-    display: -webkit-box;
-    word-break: break-all;
-    -webkit-line-clamp: 1;
-    -webkit-box-orient: horizontal;
-    overflow: hidden;
+  & .texts {
+    display: flex;
+
+    & h3 {
+      display: -webkit-box;
+      width: max-content;
+      word-break: break-all;
+      -webkit-line-clamp: 1;
+      -webkit-box-orient: horizontal;
+      overflow: hidden;
+      line-height: 135%;
+    }
+
+    & span {
+      font-size: 0.9rem;
+      color: ${({ theme }) => theme.LIGHT.L400};
+      margin-top: 0.25rem;
+    }
   }
 
   & div {

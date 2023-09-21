@@ -168,7 +168,11 @@ export function Header() {
       <div className="sideMenu">
         {token ? (
           <>
-            <button className="order" title="pedidos">
+            <button
+              className="order"
+              onClick={() => navigate('/orders')}
+              title="pedidos"
+            >
               {!!getCartCount() && <span>{getCartCount()}</span>}
               <p>Pedidos</p>
               <Receipt />

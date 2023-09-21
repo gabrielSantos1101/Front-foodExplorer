@@ -2,15 +2,7 @@ import { forwardRef } from 'react'
 import { Wrap } from './styles'
 
 export const Button = forwardRef(function Button(
-  {
-    title,
-    isText = false,
-    isCenter = false,
-    onClick,
-    hasIcon = false,
-    icon: Icon,
-    ...rest
-  },
+  { title, isText = false, isCenter = false, onClick, icon: Icon, ...rest },
   ref,
 ) {
   return (
@@ -18,11 +10,11 @@ export const Button = forwardRef(function Button(
       $istext={isText}
       $iscenter={isCenter}
       onClick={onClick}
-      $hasicon={hasIcon}
+      $hasicon={!!Icon}
       ref={ref}
       {...rest}
     >
-      {hasIcon && <Icon />}
+      {Icon && <Icon />}
       {title}
     </Wrap>
   )
