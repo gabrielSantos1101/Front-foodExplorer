@@ -7,17 +7,19 @@ export const Wrapper = styled.div`
 
   & main {
     display: flex;
+    flex-direction: column;
+
     height: 100%;
     width: 100%;
-    flex-direction: column;
+
     padding-inline: 2rem;
 
     & h1 {
-      color: ${({ theme }) => theme.LIGHT.L300};
+      width: fit-content;
       font-size: clamp(1.375rem, 1.1089rem + 0.9901vw, 2rem);
       font-weight: 500;
       line-height: 140%;
-      width: fit-content;
+      color: ${({ theme }) => theme.LIGHT.L300};
 
       margin-bottom: 1.25rem;
       cursor: pointer;
@@ -44,12 +46,12 @@ export const Wrapper = styled.div`
       }
 
       & strong {
-        margin-top: 1.25rem;
-        color: ${({ theme }) => theme.LIGHT.L300};
         font-size: clamp(1.3rem, 1.002rem + 1.1089vw, 2rem);
         font-weight: 500;
         line-height: 160%;
+        color: ${({ theme }) => theme.LIGHT.L300};
 
+        margin-top: 1.25rem;
         margin-bottom: 1.8rem;
       }
 
@@ -81,6 +83,9 @@ export const Wrapper = styled.div`
       max-width: 50rem;
       margin-inline: auto;
       margin-top: 2rem;
+
+      ${({ $proceededToPayment }) =>
+        $proceededToPayment ? 'display: block;' : 'display: none;'};
 
       & button:first-of-type:not(button + button) {
         font-size: 1rem;
@@ -151,9 +156,27 @@ export const Wrapper = styled.div`
       }
     }
 
-    @media (${({ theme }) => theme.SCREENS.XL}) {
+    @media (${({ theme }) => theme.SCREENS.LG}) {
       width: 100%;
+      flex-direction: row;
       padding-inline: 7.5rem;
+
+      & .order {
+        ul {
+          max-height: 52vh;
+          overflow-y: auto;
+          margin-right: 1.5rem;
+        }
+      }
+
+      & .payment {
+        display: block;
+        margin-top: 0;
+
+        & > button {
+          display: none;
+        }
+      }
     }
   }
 `

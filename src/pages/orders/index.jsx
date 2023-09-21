@@ -77,75 +77,73 @@ export function Orders() {
               </div>
             )}
 
-            {proceededToPayment && (
-              <div className="payment">
-                <Button
-                  isText
-                  title="Voltar"
-                  icon={CaretLeft}
-                  onClick={() => setProceededToPayment(false)}
-                />
-                <h2>Pagamento</h2>
+            <div className="payment">
+              <Button
+                isText
+                title="Voltar"
+                icon={CaretLeft}
+                onClick={() => setProceededToPayment(false)}
+              />
+              <h2>Pagamento</h2>
 
-                <div className="payment-container">
-                  <div className="payment-methods">
-                    <button
-                      className={paymentMethod === 'pix' ? 'active' : ''}
-                      onClick={() => handleMethodChange('pix')}
-                    >
-                      <DiamondsFour size={30} />
-                      <span>PIX</span>
-                    </button>
+              <div className="payment-container">
+                <div className="payment-methods">
+                  <button
+                    className={paymentMethod === 'pix' ? 'active' : ''}
+                    onClick={() => handleMethodChange('pix')}
+                  >
+                    <DiamondsFour size={30} />
+                    <span>PIX</span>
+                  </button>
 
-                    <button
-                      className={paymentMethod === 'credit' ? 'active' : ''}
-                      onClick={() => handleMethodChange('credit')}
-                    >
-                      <CreditCard size={30} />
-                      <span>Crédito</span>
-                    </button>
-                  </div>
+                  <button
+                    className={paymentMethod === 'credit' ? 'active' : ''}
+                    onClick={() => handleMethodChange('credit')}
+                  >
+                    <CreditCard size={30} />
+                    <span>Crédito</span>
+                  </button>
+                </div>
 
-                  <div className="payment-info">
-                    {paymentMethod === 'pix' && (
-                      <div className="pix">
-                        <img src={QRcode} alt="QR Code" />
-                      </div>
-                    )}
+                <div className="payment-info">
+                  {paymentMethod === 'pix' && (
+                    <div className="pix">
+                      <img src={QRcode} alt="QR Code" />
+                    </div>
+                  )}
 
-                    {paymentMethod === 'credit' && (
-                      <div className="credit-card">
-                        <Input
-                          type="text"
-                          label="Número do cartão"
-                          placeholder="0000 0000 0000 0000"
-                          onChange={setCardnumber}
-                        />
+                  {paymentMethod === 'credit' && (
+                    <div className="credit-card">
+                      <Input
+                        type="text"
+                        label="Número do cartão"
+                        placeholder="0000 0000 0000 0000"
+                        onChange={setCardnumber}
+                      />
 
-                        <Input
-                          type="text"
-                          label="Validade"
-                          placeholder="04/25"
-                          onChange={setExpireDate}
-                        />
+                      <Input
+                        type="text"
+                        label="Validade"
+                        placeholder="04/25"
+                        onChange={setExpireDate}
+                      />
 
-                        <Input
-                          type="text"
-                          label="CVC"
-                          placeholder="404"
-                          onChange={setCvc}
-                        />
+                      <Input
+                        type="text"
+                        label="CVC"
+                        placeholder="404"
+                        onChange={setCvc}
+                      />
 
-                        <Button
-                          title="Finalizar pagamento"
-                          onClick={handlePayment}
-                        />
-                      </div>
-                    )}
-                  </div>
+                      <Button
+                        title="Finalizar pagamento"
+                        onClick={handlePayment}
+                      />
+                    </div>
+                  )}
                 </div>
               </div>
-            )}
+            </div>
           </>
         )}
       </main>

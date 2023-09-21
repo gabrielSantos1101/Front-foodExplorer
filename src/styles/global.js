@@ -114,7 +114,7 @@ div::-webkit-scrollbar-track, textarea::-webkit-scrollbar-track, section::-webki
   background-clip: padding-box;
 }
 
-div::-webkit-scrollbar-thumb {
+div::-webkit-scrollbar-thumb, ul::-webkit-scrollbar-thumb {
   background-color: #00364d;
   border-radius: 2rem;
 }
