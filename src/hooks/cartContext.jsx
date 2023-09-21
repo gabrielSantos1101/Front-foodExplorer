@@ -14,7 +14,7 @@ export function CartProvider({ children }) {
       setCart(
         cart.map((cartItem) =>
           cartItem.id === item.id
-            ? { ...cartItem, count: cartItem.count + item.count }
+            ? { ...cartItem, count: cartItem.count + 1 }
             : cartItem,
         ),
       )
@@ -27,19 +27,25 @@ export function CartProvider({ children }) {
     return cart.reduce((acc, item) => acc + item.count, 0)
   }
 
+  function getTotalPrice() {
+    return cart.reduce((acc, item) => acc + item.price * item.count, 0)
+  }
+
   function removeItem(id) {
     const isItemInCart = cart.find((cartItem) => cartItem.id === id)
 
-    if (isItemInCart.quantity === 1) {
-      setCart(cart.filter((cartItem) => cartItem.id !== id))
-    } else {
-      setCart(
-        cart.map((cartItem) =>
-          cartItem.id === id
-            ? { ...cartItem, count: cartItem.count - 1 }
-            : cartItem,
-        ),
-      )
+    if (isItemInCart) {
+      if (isItemInCart.count === 1) {
+        setCart(cart.filter((cartItem) => cartItem.id !== id))
+      } else {
+        setCart(
+          cart.map((cartItem) =>
+            cartItem.id === id
+              ? { ...cartItem, count: cartItem.count - 1 }
+              : cartItem,
+          ),
+        )
+      }
     }
   }
 
@@ -71,6 +77,7 @@ export function CartProvider({ children }) {
         removeItem,
         clearCart,
         getCartCount,
+        getTotalPrice,
       }}
     >
       {children}
