@@ -42,7 +42,7 @@ export function Orders() {
   }
 
   return (
-    <Wrapper $proceededToPayment={proceededToPayment}>
+    <Wrapper $proceededToPayment={!!proceededToPayment}>
       <main>
         {cart.length === 0 ? (
           <EmptyCart>
@@ -72,6 +72,7 @@ export function Orders() {
                   ))}
                 </ul>
                 <strong>Total: {totalPrice}</strong>
+
                 <Button onClick={handleProceedToPayment} title="Avançar" />
               </div>
             )}

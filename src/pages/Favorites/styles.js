@@ -8,9 +8,10 @@ export const Wrapper = styled.div`
     font-size: clamp(1.375rem, 1.1089rem + 0.9901vw, 2rem);
     cursor: pointer;
     transition: all 0.2s ease-in-out;
+    width: fit-content;
 
     &:hover {
-      transform: scale(1.01);
+      transform: scale(1.002);
     }
   }
 `

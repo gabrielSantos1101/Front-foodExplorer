@@ -24,9 +24,9 @@ export function SimpleCard({ item, cartItem = false, ...rest }) {
         <div className="buttons">
           {cartItem ? (
             <>
-              <Button isText hasIcon icon={Minus} onClick={handleRemove} />
+              <Button isText icon={Minus} onClick={handleRemove} />
               <span>{item.count}</span>
-              <Button isText hasIcon icon={Plus} onClick={handleAdd} />
+              <Button isText icon={Plus} onClick={handleAdd} />
             </>
           ) : (
             <Button

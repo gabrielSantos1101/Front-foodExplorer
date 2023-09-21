@@ -125,7 +125,6 @@ export function UserPage() {
       <h1>Perfil</h1>
       <Button
         icon={CaretLeft}
-        hasIcon
         title={'voltar'}
         isText
         className="back"

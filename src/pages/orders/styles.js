@@ -17,6 +17,7 @@ export const Wrapper = styled.div`
       font-size: clamp(1.375rem, 1.1089rem + 0.9901vw, 2rem);
       font-weight: 500;
       line-height: 140%;
+      width: fit-content;
 
       margin-bottom: 1.25rem;
       cursor: pointer;
@@ -56,6 +57,10 @@ export const Wrapper = styled.div`
         max-width: 50%;
         align-self: flex-end;
         margin-top: 1.8rem;
+
+        @media (${({ theme }) => theme.SCREENS.LG}) {
+          display: none;
+        }
       }
     }
 

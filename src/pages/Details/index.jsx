@@ -60,7 +60,6 @@ export function Details() {
       <Button
         title={'Voltar'}
         isText
-        hasIcon
         icon={CaretLeft}
         onClick={() => handleBack(navigate)}
       />
@@ -80,7 +79,7 @@ export function Details() {
               <span>{count}</span>
               <Plus onClick={() => handlePlusCount()} />
             </div>
-            <Button title={`pedir ${FormatedPrice}`} hasIcon icon={Receipt} />
+            <Button title={`pedir ${FormatedPrice}`} icon={Receipt} />
           </Amount>
         )}
       </div>

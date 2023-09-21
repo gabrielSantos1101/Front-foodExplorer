@@ -154,7 +154,6 @@ export function UpdateDish() {
       <Button
         title={'Voltar'}
         isText
-        hasIcon
         icon={CaretLeft}
         className="back"
         onClick={() => handleBack(navigate)}
@@ -213,7 +212,6 @@ export function UpdateDish() {
                 <Tag
                   key={String(index)}
                   title={ingredient}
-                  hasIcon
                   onClick={() => handleRemove(ingredient)}
                 />
               ))}
