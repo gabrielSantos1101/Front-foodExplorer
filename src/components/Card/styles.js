@@ -21,6 +21,12 @@ export const Wrap = styled(Link)`
 
   background: ${({ theme }) => theme.DARK.D200};
 
+  &:hover {
+    & img {
+      transform: scale(1.02);
+    }
+  }
+
   & .isNew {
     position: absolute;
     left: 0;
@@ -47,9 +53,6 @@ export const Wrap = styled(Link)`
     object-fit: cover;
     transition: all 0.3s;
     cursor: pointer;
-    &:hover {
-      transform: scale(1.1);
-    }
   }
 
   & .cardIcon {

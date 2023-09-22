@@ -172,11 +172,13 @@ export function Header() {
           <>
             <button
               className="order"
-              onClick={() => navigate('/orders')}
+              onClick={() => {
+                isAdmin ? navigate('/new') : navigate('/orders')
+              }}
               title="pedidos"
             >
               {!!getCartCount() && <span>{getCartCount()}</span>}
-              <p>Pedidos</p>
+              <p>{isAdmin ? 'Criar prato' : 'Pedidos'}</p>
               <Receipt />
             </button>
             <DropMenu className="dropMenu" />

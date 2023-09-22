@@ -46,6 +46,10 @@ export const Wrap = styled.header`
 
       & svg {
         font-size: 28px;
+
+        &:hover {
+          color: white;
+        }
       }
 
       & span {

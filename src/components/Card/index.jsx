@@ -65,7 +65,7 @@ export function Card({
   }, [isFavorite])
 
   return (
-    <Wrap $isAdmin={isAdmin} to={`/dish/${id}`} $noToken={token}>
+    <Wrap $isAdmin={isAdmin} to={`/dish/${id}`} $noToken={token} title={title}>
       {isAdmin ? (
         <Pencil
           onClick={(e) => {
