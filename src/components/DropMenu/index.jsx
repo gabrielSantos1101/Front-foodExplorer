@@ -49,21 +49,12 @@ export function DropMenu({ ...rest }) {
                 )}
               </>
             ) : (
-              <>
-                {page !== '/new' && (
-                  <>
-                    <DropdownMenuItem onClick={() => navigate('/new')}>
-                      Novo
-                    </DropdownMenuItem>
-                    <DropdownMenuSeparator />
-                  </>
-                )}
-              </>
+              <></>
             )}
 
             {token ? (
               <>
-                {page !== '/favorites' && (
+                {page !== '/favorites' && !isAdmin && (
                   <>
                     <DropdownMenuItem onClick={() => navigate('/favorites')}>
                       Favoritos
@@ -71,7 +62,7 @@ export function DropMenu({ ...rest }) {
                     <DropdownMenuSeparator />
                   </>
                 )}
-                {page !== '/orders' && (
+                {page !== '/orders' && !isAdmin && (
                   <>
                     <DropdownMenuItem onClick={() => navigate('/orders')}>
                       Historico

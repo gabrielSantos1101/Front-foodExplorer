@@ -84,6 +84,10 @@ export const Wrap = styled.header`
     @media (${({ theme }) => theme.SCREENS.LG}) {
       gap: 2rem;
 
+      & .dummy {
+        display: none;
+      }
+
       & .order {
         background: ${({ theme }) => theme.COLORS.TOMATO_100};
         gap: 0.5rem;
