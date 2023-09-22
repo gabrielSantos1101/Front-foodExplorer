@@ -14,7 +14,7 @@ export function SimpleCard({ item, cartItem = false, ...rest }) {
 
   return (
     <Wrap {...rest} $redButtons={!!cartItem}>
-      <img src={item.image} alt="imagem do prato" />
+      <img src={item.image} alt="imagem do prato" width={80} height={80} />
 
       <div>
         <div className="texts">

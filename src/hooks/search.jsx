@@ -7,7 +7,7 @@ export function SearchProvider({ children }) {
   const searchQuery = useDeferredValue(search)
 
   return (
-    <SearchContext.Provider value={{ searchQuery, setSearch }}>
+    <SearchContext.Provider value={{ searchQuery, search, setSearch }}>
       {children}
     </SearchContext.Provider>
   )

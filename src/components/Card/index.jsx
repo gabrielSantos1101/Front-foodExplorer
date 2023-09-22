@@ -64,22 +64,6 @@ export function Card({
     }
   }, [isFavorite])
 
-  // async function handleFavoriteAdd() {
-  //   try {
-  //     await api.post(`/favorites/${id}`)
-  //   } catch (err) {
-  //     toast.error(err)
-  //   }
-  // }
-
-  // async function handleFavoriteRemove() {
-  //   try {
-  //     await api.delete(`/favorites/${id}`)
-  //   } catch (err) {
-  //     toast.error(err)
-  //   }
-  // }
-
   return (
     <Wrap $isAdmin={isAdmin} to={`/dish/${id}`} $noToken={token}>
       {isAdmin ? (
@@ -113,6 +97,8 @@ export function Card({
       <img
         src={image}
         alt="imagem macarons caindo junto de algumas frutas vermelhas"
+        width={150}
+        height={150}
       />
       <div className="texts">
         <h2>{title}</h2>

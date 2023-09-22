@@ -1,5 +1,6 @@
 import { SignOut, UserCircle } from '@phosphor-icons/react'
 import * as DropdownMenuPrimitive from '@radix-ui/react-dropdown-menu'
+import { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import {
@@ -13,16 +14,21 @@ import {
 export function DropMenu({ ...rest }) {
   const { signOut, token, isAdmin } = useAuth()
   const navigate = useNavigate()
+  const [avatar, setAvatar] = useState(localStorage.getItem('user'))
+
   const page = useLocation().pathname
-  const userAvatar = localStorage.getItem('user')
+
+  useEffect(() => {
+    setAvatar(localStorage.getItem('user'))
+  }, [])
 
   return (
     <Wrap {...rest}>
       <DropdownMenuPrimitive.Root>
         <DropdownMenuTrigger asChild>
           <button className="IconButton" aria-label="Customise options">
-            {!!userAvatar === true ? (
-              <img src={userAvatar} alt="imagem de perfil" />
+            {avatar ? (
+              <img src={avatar} alt="imagem de perfil" width={42} height={42} />
             ) : (
               <UserCircle />
             )}

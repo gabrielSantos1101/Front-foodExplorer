@@ -17,7 +17,7 @@ export function Header() {
   const navigate = useNavigate()
   const page = useLocation().pathname
   const { signOut, isAdmin, token } = useAuth()
-  const { setSearch } = useSearch()
+  const { setSearch, search } = useSearch()
   const { getCartCount } = useCart()
 
   function handleMenuOpen() {
@@ -46,9 +46,11 @@ export function Header() {
               <Input
                 type="search"
                 placeholder={'Busque por pratos ou ingrediente'}
+                value={search}
                 onKeyDown={(e) => {
                   if (e.key === 'Enter') {
                     setMenuOpen()
+                    page !== '/' && navigate('/')
                   }
                 }}
                 onChange={(e) => setSearch(e.target.value)}

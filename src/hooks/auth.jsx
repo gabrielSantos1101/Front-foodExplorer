@@ -18,7 +18,9 @@ export function AuthProvider({ children }) {
 
       api.defaults.headers.Authorization = `Bearer ${token}`
       localStorage.setItem('token', token)
-      localStorage.setItem('user', user.avatar)
+      if (user.avatar) {
+        localStorage.setItem('user', user.avatar)
+      }
 
       const { isAdmin } = jwtDecode(token)
       setData({ token, isAdmin: !!Number(isAdmin), user })

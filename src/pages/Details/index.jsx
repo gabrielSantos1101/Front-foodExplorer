@@ -1,10 +1,12 @@
 import { CaretLeft, Minus, Plus, Receipt } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import { Button } from '../../components/Button'
 import { Loader } from '../../components/Loader'
 import { Tag } from '../../components/Tag'
 import { useAuth } from '../../hooks/auth'
+import { useCart } from '../../hooks/cartContext'
 import { api } from '../../services/api'
 import { handleBack } from '../../utils/handleBack'
 import { Amount, Wrap } from './styles'
@@ -13,6 +15,7 @@ export function Details() {
   const { handleErrorFetchData, token, isAdmin } = useAuth()
   const navigate = useNavigate()
   const dish = useParams()
+  const { addItem } = useCart()
   const [data, setData] = useState({})
   const [count, setCount] = useState(1)
   const [price, setPrice] = useState(0)
@@ -46,7 +49,7 @@ export function Details() {
     }
 
     getDish()
-  }, [dish])
+  }, [dish, handleErrorFetchData])
 
   if (!data.dish) {
     return (
@@ -63,7 +66,7 @@ export function Details() {
         icon={CaretLeft}
         onClick={() => handleBack(navigate)}
       />
-      <img src={`${data.dish.image}`} alt="Dish" />
+      <img src={`${data.dish.image}`} alt="Dish" width={390} height={390} />
       <div>
         <h1>{data.dish.name}</h1>
         <p>{data.dish.description}</p>
@@ -72,14 +75,31 @@ export function Details() {
             <Tag key={ingredient.id} title={ingredient.name} />
           ))}
         </section>
-        {token && !isAdmin && (
+        {!isAdmin && (
           <Amount>
             <div className="stepper">
               <Minus onClick={() => handleMinusCount()} />
               <span>{count}</span>
               <Plus onClick={() => handlePlusCount()} />
             </div>
-            <Button title={`pedir ${FormatedPrice}`} icon={Receipt} />
+            <Button
+              title={`pedir ${FormatedPrice}`}
+              icon={Receipt}
+              onClick={() => {
+                if (!token) {
+                  toast.info('Por favor, faça login')
+                  navigate('/login')
+                  return
+                }
+                addItem({
+                  id: data.dish.id,
+                  count,
+                  price,
+                  name: data.dish.name,
+                  image: data.dish.image,
+                })
+              }}
+            />
           </Amount>
         )}
       </div>

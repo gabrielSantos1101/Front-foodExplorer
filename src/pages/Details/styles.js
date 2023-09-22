@@ -19,6 +19,7 @@ export const Wrap = styled.div`
   & img {
     position: relative;
     width: clamp(16.5rem, 13.1473rem + 12.4752vw, 24.375rem);
+    height: clamp(16.5rem, 13.1473rem + 12.4752vw, 24.375rem);
     aspect-ratio: 1/1;
     object-fit: cover;
 
