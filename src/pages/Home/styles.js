@@ -61,5 +61,16 @@ export const Wrapper = styled.div`
 
       background: ${({ theme }) => theme.GRADIENTS.G200};
     }
+
+    &::after {
+      content: '';
+      position: absolute;
+      z-index: 1;
+      bottom: 0.3125rem;
+      left: -0.625rem;
+      width: 1.3125rem;
+      height: 1.375rem;
+      background: ${({ theme }) => theme.DARK.D400};
+    }
   }
 `

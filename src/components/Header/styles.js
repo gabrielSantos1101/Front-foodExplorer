@@ -27,7 +27,8 @@ export const Wrap = styled.header`
       cursor: pointer;
 
       &:hover {
-        fill: ${({ theme }) => theme.COLORS.CAKE_200};
+        fill: ${({ theme, $isAdmin }) =>
+          $isAdmin ? 'white' : theme.COLORS.CAKE_200};
       }
     }
 
@@ -84,10 +85,6 @@ export const Wrap = styled.header`
     @media (${({ theme }) => theme.SCREENS.LG}) {
       gap: 2rem;
 
-      & .dummy {
-        display: none;
-      }
-
       & .order {
         background: ${({ theme }) => theme.COLORS.TOMATO_100};
         gap: 0.5rem;
@@ -132,6 +129,10 @@ export const Wrap = styled.header`
     label:has(input[type='search']) {
       display: initial;
       max-width: 56.25rem;
+    }
+
+    & .dummy {
+      display: none;
     }
   }
 `

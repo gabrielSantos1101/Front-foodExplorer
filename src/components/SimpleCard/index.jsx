@@ -13,7 +13,7 @@ export function SimpleCard({ item, cartItem = false, ...rest }) {
   const handleRemove = () => removeItem(item.id)
 
   return (
-    <Wrap {...rest} $redButtons={!!cartItem}>
+    <Wrap {...rest} $redButtons={!!cartItem} title={item.name}>
       <img src={item.image} alt="imagem do prato" width={80} height={80} />
 
       <div>

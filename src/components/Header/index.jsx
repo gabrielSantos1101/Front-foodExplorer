@@ -35,7 +35,7 @@ export function Header() {
   }
 
   return (
-    <Wrap>
+    <Wrap $isAdmin={isAdmin}>
       {menuOpen && (
         <OpenMenu>
           <h1>Menu</h1>
@@ -164,7 +164,15 @@ export function Header() {
         <Input
           type="search"
           placeholder={'Busque por pratos ou ingrediente'}
-          onChange={(e) => setSearch(e.target.value)}
+          onChange={(e) => {
+            setSearch(e.target.value)
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              setMenuOpen()
+              page !== '/' && navigate('/')
+            }
+          }}
         />
       </label>
       <div className="sideMenu">
@@ -177,7 +185,7 @@ export function Header() {
               }}
               title="pedidos"
             >
-              {!!getCartCount() && <span>{getCartCount()}</span>}
+              {!!getCartCount() && isAdmin && <span>{getCartCount()}</span>}
               <p>{isAdmin ? 'Criar prato' : 'Pedidos'}</p>
               <Receipt />
             </button>
