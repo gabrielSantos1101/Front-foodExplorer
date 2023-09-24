@@ -11,13 +11,13 @@ export function CartProvider({ children }) {
     const isItemInCart = cart.find((cartItem) => cartItem.id === item.id)
 
     if (isItemInCart) {
-      setCart(
-        cart.map((cartItem) =>
+      setCart((prevState) => {
+        return prevState.map((cartItem) =>
           cartItem.id === item.id
-            ? { ...cartItem, count: cartItem.count + 1 }
+            ? { ...cartItem, count: cartItem.count + item.count }
             : cartItem,
-        ),
-      )
+        )
+      })
     } else {
       setCart([...cart, { ...item, count: item.count }])
     }

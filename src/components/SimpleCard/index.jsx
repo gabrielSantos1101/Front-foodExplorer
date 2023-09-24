@@ -9,7 +9,7 @@ export function SimpleCard({ item, cartItem = false, ...rest }) {
   const { addItem, removeItem } = useCart()
   const { removeFavorite } = useFavorites()
 
-  const handleAdd = () => addItem(item)
+  const handleAdd = () => addItem({ ...item, count: 1 })
   const handleRemove = () => removeItem(item.id)
 
   return (
