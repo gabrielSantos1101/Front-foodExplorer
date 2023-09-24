@@ -124,6 +124,11 @@ export const Wrap = styled.header`
     }
   }
 
+  & .login {
+    background: none;
+    border: none;
+  }
+
   @media (${({ theme }) => theme.SCREENS.LG}) {
     justify-content: space-evenly;
     label:has(input[type='search']) {

@@ -45,7 +45,7 @@ export function AuthProvider({ children }) {
     }
     toast(`${getGreeting()}`)
     localStorage.removeItem('name')
-    navigate('/')
+    navigate(-1)
   }
 
   async function signUp({ name, email, password }) {

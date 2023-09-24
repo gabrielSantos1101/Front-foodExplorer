@@ -192,7 +192,13 @@ export function Header() {
             <DropMenu className="dropMenu" />
           </>
         ) : (
-          <SignIn size={32} onClick={() => navigate('/login')} />
+          <button
+            className="login"
+            onClick={() => navigate('/login')}
+            title="faça login"
+          >
+            <SignIn size={32} />
+          </button>
         )}
       </div>
     </Wrap>

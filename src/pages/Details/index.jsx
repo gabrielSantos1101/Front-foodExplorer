@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import { Button } from '../../components/Button'
-import { Loader } from '../../components/Loader'
+import { DetailsSkeleton } from '../../components/DetailsSkeleton'
 import { Tag } from '../../components/Tag'
 import { useAuth } from '../../hooks/auth'
 import { useCart } from '../../hooks/cart'
@@ -54,7 +54,8 @@ export function Details() {
   if (!data.dish) {
     return (
       <>
-        <Loader />
+        {/* <Loader /> */}
+        <DetailsSkeleton />
       </>
     )
   }
