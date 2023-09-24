@@ -78,6 +78,10 @@ export const Wrap = styled.div`
       transform: translateX(0);
     }
   }
+
+  & div:has(position) {
+    z-index: 1;
+  }
 `
 
 export const DropdownMenuSeparator = styled(DropdownMenuPrimitive.Separator)`
@@ -98,6 +102,7 @@ export const DropdownMenuContent = styled(DropdownMenuPrimitive.Content)`
   animation-duration: 400ms;
   animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
   will-change: transform, opacity;
+  z-index: 1;
 
   & span:has(> svg) {
     fill: white;
