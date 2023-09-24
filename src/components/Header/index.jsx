@@ -3,7 +3,7 @@ import { useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom'
 
 import { useAuth } from '../../hooks/auth'
-import { useCart } from '../../hooks/cartContext'
+import { useCart } from '../../hooks/cart'
 import { useSearch } from '../../hooks/search'
 import { handleBack } from '../../utils/handleBack'
 import { Button } from '../Button'
@@ -157,7 +157,7 @@ export function Header() {
       ) : (
         <div className="dummy"></div>
       )}
-      <Logo />
+      <Logo onClick={() => navigate('/')} />
       <label className="search">
         <MagnifyingGlass size={28} />
 
@@ -185,7 +185,7 @@ export function Header() {
               }}
               title="pedidos"
             >
-              {!!getCartCount() && isAdmin && <span>{getCartCount()}</span>}
+              {!!getCartCount() && !isAdmin && <span>{getCartCount()}</span>}
               <p>{isAdmin ? 'Criar prato' : 'Pedidos'}</p>
               <Receipt />
             </button>

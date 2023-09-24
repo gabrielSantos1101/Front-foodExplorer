@@ -28,6 +28,7 @@ export function AuthProvider({ children }) {
       setLoading(false)
       console.error(err)
       toast.error('Usuário ou senha inválidos')
+      return
     }
     setLoading(false)
 

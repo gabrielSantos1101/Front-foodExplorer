@@ -6,7 +6,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import { ThemeProvider } from 'styled-components'
 
 import { AuthProvider } from './hooks/auth'
-import { CartProvider } from './hooks/cartContext'
+import { CartProvider } from './hooks/cart'
 import { FavoritesProvider } from './hooks/favorites'
 import { SearchProvider } from './hooks/search'
 import { Routes } from './routes'

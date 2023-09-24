@@ -1,5 +1,5 @@
 import { Minus, Plus } from '@phosphor-icons/react'
-import { useCart } from '../../hooks/cartContext'
+import { useCart } from '../../hooks/cart'
 import { useFavorites } from '../../hooks/favorites'
 import { PriceFormater } from '../../utils/PriceFormater'
 import { Button } from '../Button'

@@ -190,6 +190,7 @@ export function NewDish() {
                 <Tag
                   key={String(index)}
                   title={ingredient}
+                  hasIcon
                   onClick={() => handleRemove(ingredient)}
                 />
               ))}
