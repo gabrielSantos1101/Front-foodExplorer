@@ -19,8 +19,8 @@ export function AppRoutes() {
       <Route path="/" element={<DefaultLayout />}>
         <Route path="/" element={<Home />} />
         <Route path="/dish/:id" element={<Details />} />
-        <Route path="/favorites" element={<Favorites />} />
-        <Route path="/profile" element={<UserPage />} />
+        {token && <Route path="/favorites" element={<Favorites />} />}
+        {token && <Route path="/profile" element={<UserPage />} />}
         {isAdmin && <Route path="/new" element={<NewDish />} />}
         {isAdmin && <Route path="/update/:id" element={<UpdateDish />} />}
         {token && <Route path="/orders" element={<Orders />} />}

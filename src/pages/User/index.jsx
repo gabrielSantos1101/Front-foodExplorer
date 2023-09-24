@@ -1,4 +1,4 @@
-import { CaretLeft, UploadSimple } from '@phosphor-icons/react'
+import { CaretLeft, UploadSimple, UserCircle } from '@phosphor-icons/react'
 import { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
@@ -140,8 +140,10 @@ export function UserPage() {
       <form onSubmit={(e) => e.preventDefault()}>
         <fieldset>
           <div className="preview">
-            {imagePreview && (
+            {imagePreview.length ? (
               <img src={imagePreview} alt={`image de ${name}`} />
+            ) : (
+              <UserCircle size={200} />
             )}
           </div>
           <label htmlFor="image">
