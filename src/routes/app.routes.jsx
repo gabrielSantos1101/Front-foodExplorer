@@ -24,6 +24,7 @@ export function AppRoutes() {
         {isAdmin && <Route path="/new" element={<NewDish />} />}
         {isAdmin && <Route path="/update/:id" element={<UpdateDish />} />}
         {token && <Route path="/orders" element={<Orders />} />}
+        {token && <Route path="*" element={<Home />} />}
       </Route>
       {!token && <Route path="/login" element={<SignIn />} />}
       {!token && <Route path="/register" element={<SignUp />} />}
