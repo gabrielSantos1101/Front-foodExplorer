@@ -28,6 +28,7 @@ export function AppRoutes() {
       </Route>
       {!token && <Route path="/login" element={<SignIn />} />}
       {!token && <Route path="/register" element={<SignUp />} />}
+      {!token && <Route path="*" element={<SignIn />} />}
     </Routes>
   )
 }

@@ -43,13 +43,19 @@ export function Details() {
         setData(response.data)
         setPrice(response.data.dish.price)
       } catch (err) {
-        console.error(err)
+        // console.error(err)
+        if (
+          err.message ===
+          "Cannot read properties of undefined (reading 'price')"
+        ) {
+          navigate('/')
+        }
         handleErrorFetchData(err)
       }
     }
 
     getDish()
-  }, [dish, handleErrorFetchData])
+  }, [dish, handleErrorFetchData, navigate])
 
   if (!data.dish) {
     return (
