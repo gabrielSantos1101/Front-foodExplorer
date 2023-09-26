@@ -59,6 +59,7 @@ export function AuthProvider({ children }) {
   function signOut() {
     localStorage.removeItem('token')
     localStorage.removeItem('cartItems')
+    localStorage.removeItem('user')
     setData({})
     toast.success('Volte sempre! 🫶')
   }
