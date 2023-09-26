@@ -20,8 +20,6 @@ export function Home() {
   useEffect(() => {
     async function getDishs() {
       try {
-        const response = await api.get(`/dishes?search=${searchQuery}`)
-
         if (token) {
           const favResponse = await api.get('/favorites')
 
@@ -30,6 +28,7 @@ export function Home() {
             setFavorites(favorites)
           }
         }
+        const response = await api.get(`/dishes?search=${searchQuery}`)
 
         setCategories(
           response.data.reduce((acc, item) => {

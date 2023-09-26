@@ -1,5 +1,5 @@
 import { Minus, Pencil, Plus } from '@phosphor-icons/react'
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import { useAuth } from '../../hooks/auth'
 import { useCart } from '../../hooks/cart'
@@ -58,11 +58,11 @@ export function Card({
     setCount((prev) => prev - 1)
   }
 
-  useEffect(() => {
-    if (isFavorite) {
-      setLike(isFavorite)
-    }
-  }, [isFavorite])
+  // useEffect(() => {
+  //   if (isFavorite) {
+  //     setLike(isFavorite)
+  //   }
+  // }, [isFavorite])
 
   return (
     <Wrap $isAdmin={isAdmin} to={`/dish/${id}`} $noToken={token} title={title}>
