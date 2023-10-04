@@ -16,6 +16,12 @@ O **Food Explorer** é um Web App que simula um menu interativo de um restaurant
 ![Preview do projeto](https://cdn.discordapp.com/attachments/1135990801948745979/1154859433684381716/Mockups.png)
 [acesse o back end aqui](https://github.com/gabrielSantos1101/backEnd-FoodExplorer)
 
+## Conta de demostração
+```bash
+e-mail: admin@gmail.com
+senha: 123
+```
+
 ## 📦 Pré-requisitos
 
 Liste de pré-requisitos necessários para que o projeto seja executado com sucesso:
