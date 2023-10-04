@@ -216,6 +216,10 @@ export const EmptyCart = styled.div`
     }
   }
 
+  & button {
+    width: 20%;
+  }
+
   @media (${({ theme }) => theme.SCREENS.LG}) {
     & img {
       width: 25rem;
