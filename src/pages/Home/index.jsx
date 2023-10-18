@@ -13,7 +13,7 @@ export function Home() {
   const [desserts, setDesserts] = useState([])
   const [drinks, setDrinks] = useState([])
   const { searchQuery } = useSearch()
-  const { token } = useAuth()
+  const { token, signOut } = useAuth()
   const [favorites, setFavorites] = useState([])
   const [loading, setLoading] = useState(true)
 
@@ -50,6 +50,7 @@ export function Home() {
         )
       } catch (err) {
         console.error(err)
+        if (err.data.message === 'JWT invalid') signOut()
       } finally {
         setLoading(false)
       }
