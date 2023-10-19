@@ -77,7 +77,7 @@ export const Wrap = styled(Link)`
     & h2 {
       text-overflow: ellipsis;
       white-space: nowrap;
-      word-break: break-all;
+      word-break: break-word;
       overflow: hidden;
       cursor: pointer;
     }
