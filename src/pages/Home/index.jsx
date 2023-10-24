@@ -50,13 +50,15 @@ export function Home() {
         )
       } catch (err) {
         console.error(err)
-        if (err.data.message === 'JWT invalid') signOut()
+        if (err.response.status) {
+          signOut()
+        }
       } finally {
         setLoading(false)
       }
     }
     getDishs()
-  }, [searchQuery, token])
+  }, [searchQuery, signOut, token])
 
   return (
     <Wrapper>
