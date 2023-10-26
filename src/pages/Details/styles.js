@@ -48,6 +48,7 @@ export const Wrap = styled.div`
     flex-wrap: wrap;
     gap: 1.25rem;
     margin-top: 1.5rem;
+    justify-content: center;
 
     width: 100%;
     padding: 1rem;
@@ -59,6 +60,10 @@ export const Wrap = styled.div`
 
     & div:has(h1) {
       text-align: left;
+    }
+
+    & section {
+      justify-content: flex-start;
     }
   }
 
