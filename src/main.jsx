@@ -1,4 +1,3 @@
-import { Analytics } from '@vercel/analytics/react'
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { ToastContainer } from 'react-toastify'
@@ -26,7 +25,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
           </CartProvider>
         </SearchProvider>
       </AuthProvider>
-      <Analytics />
       <ToastContainer
         position="top-right"
         autoClose={4000}
